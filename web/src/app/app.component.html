@@ -1,9 +1,22 @@
 <div class="app-container">
-<h1> {{title}} </h1>
-<section>
-    <article *ngFor="let article of articleList" class="article-list-container">
-        <time>{{ article.updateAt | date }}</time>
-        <div class="article-title">{{ article.title }}</div>
-    </article>
-</section>
+    <h1>文章列表</h1>
+    <section class="article-list-container">
+        <article *ngFor="let article of articleList" class="article-list">
+            <time>{{ article.updateAt | date }}</time>
+            <div class="article-container">
+                <div>
+                    <div class="article-title">{{ article.title }}</div>
+                    <div class="article-tag" *ngFor="let tag of article.tags">{{ tag }}</div>
+                </div>
+                <div class="article-desc">{{ article.description }}</div>
+            </div>
+        </article>
+    </section>
+    <div class="divider"></div>
+    <section class="article-detail-container">
+        <article class="article-info">
+            <h3>{{ article.title }}</h3>
+        </article>
+        <article class="article-detail"><p>{{ article.content }}</p></article>
+    </section>
 </div>

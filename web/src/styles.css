@@ -2,8 +2,10 @@
 .out-container {
   background-color: #D5D5D5;
   display: flex;
-  padding: 0 128px;
+  padding: 0 256px;
 }
 .out-container jfb-root {
   width: 100%;
+  background: white;
+  padding: 48px 96px;
 }

@@ -4,18 +4,54 @@
 .app-container section {
     width: 100%;
 }
-.article-list-container {
+
+.article-list-container {    
+  padding-top: 24px;
+  padding-left: 48px;
+  padding-bottom: 48px;
+}
+
+.article-list {
   display: flex;
   flex-direction: row;
   width: 100%;
 }
 
-.article-list-container time {
+.article-list time {
   padding-right: 48px;
   border-right: 10px solid green;
 }
 
-.article-list-container .article-title {
-  padding-left: 48px;
-  border-left: 10px solid green;
+.article-container {
+  margin-left: 48px;
+  background: yellow;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.article-container > div{
+  display: flex;
+  flex-direction: row;
+}
+
+.article-title {
+  margin-right: 4px;
+}
+
+.article-tag {
+  background-color: grey;
+  border-radius: 4px;
+  padding: 0 4px;
+  margin: 0 4px;
+}
+
+.divider {
+  height: 1px;
+  background-color: black;
+}
+
+.article-detail p {
+    padding-left: 48px;
+    padding-right: 48px;
+    margin-bottom: 128px;
 }
