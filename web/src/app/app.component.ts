@@ -1,33 +1,19 @@
 import { Component } from '@angular/core';
-import { Todo } from './todo';
-import { TodoDataService } from './todo-data.service';
 
 @Component({
-  selector: 'app-root',
+  selector: 'jfb-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers: [TodoDataService]
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
-  newTodo: Todo = new Todo();
-
-  constructor(private todoDataService: TodoDataService) {}
-
-  private addTodo() {
-    this.todoDataService.addTodo(this.newTodo);
-    this.newTodo = new Todo();
-  }
-
-  private toggleTodoComplete(todo) {
-    this.todoDataService.toggleTodoComplete(todo);
-  }
-
-  private removeTodo(todo) {
-    this.todoDataService.deleteTodoById(todo.id);
-  }
-
-  private listTodos() {
-    return this.todoDataService.getAllTodos();
-  }
+  title = 'app works!';
+  articleList = [{
+    title: 'hello world ~ 1',
+    updateAt: Date.now(),
+    tags: ['h1', 'h2']
+  }, {
+    title: 'hello world ~ 1',
+    updateAt: Date.now(),
+    tags: ['h1', 'h2']
+  }];
 }

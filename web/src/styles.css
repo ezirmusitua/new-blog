@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+.out-container {
+  background-color: #D5D5D5;
+  display: flex;
+  padding: 0 128px;
+}
+.out-container jfb-root {
+  width: 100%;
+}
