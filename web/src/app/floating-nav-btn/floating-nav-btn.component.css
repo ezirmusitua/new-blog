@@ -1,9 +1,6 @@
 .container {
-  position: fixed;
   width: 100%;
-  left: 50%;
   transform: translateX(-5%);
-  bottom: 80px;
   display: flex;
   flex-direction: row;
 }
