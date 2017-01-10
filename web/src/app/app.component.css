@@ -1,8 +1,9 @@
 .app-container {
-    width: 100%;
+  position: relative;
+  width: 100%;
 }
 .app-container section {
-    width: 100%;
+  width: 100%;
 }
 
 .article-list-container {    
@@ -54,4 +55,15 @@
     padding-left: 48px;
     padding-right: 48px;
     margin-bottom: 128px;
+}
+
+.floating-nav-btn {
+  position: fixed;
+  bottom: 80px;
+  right: 208px;
+}
+.floating-nav-btn div {
+  text-align: center;
+  line-height: 48px;
+  margin: 8px;
 }

@@ -2,19 +2,10 @@
 .out-container {
   background-color: #D5D5D5;
   display: flex;
-  position: relative;
   padding: 0 256px;
 }
 .out-container jfb-root {
   width: 100%;
   background: white;
   padding: 48px 96px;
-}
-
-.out-container jfb-floating-nav-btn {
-  width: 100%;
-  position: absolute;
-  bottom: 80px;
-  left: 0;
-  right: 0;
 }
