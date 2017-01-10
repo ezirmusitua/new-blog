@@ -7,17 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app works!';
-  articleList = [{
-    title: 'hello world ~ 1',
-    updateAt: Date.now(),
-    tags: ['h1', 'h2'],
-    description: 'hello world'
-  }, {
-    title: 'hello world ~ 1',
-    updateAt: Date.now(),
-    tags: ['h1', 'h2'],
-    description: 'hello world'
-  }];
   article = {
     title: 'hello world ~ 1',
     tags: ['h1', 'h2'],

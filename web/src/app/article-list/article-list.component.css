@@ -1,0 +1,43 @@
+.container {
+  width: 100%;
+}
+
+.list-container {    
+  padding-top: 24px;
+  padding-left: 48px;
+  padding-bottom: 48px;
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.list time {
+  padding-right: 48px;
+  border-right: 10px solid green;
+}
+
+.info {
+  margin-left: 48px;
+  background: yellow;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.info > div{
+  display: flex;
+  flex-direction: row;
+}
+
+.title {
+  margin-right: 4px;
+}
+
+.tag {
+  background-color: grey;
+  border-radius: 4px;
+  padding: 0 4px;
+  margin: 0 4px;
+}

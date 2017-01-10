@@ -6,10 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./floating-nav-btn.component.css']
 })
 export class FloatingNavBtnComponent implements OnInit {
-
   constructor() { }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() { }
 }
