@@ -19,7 +19,6 @@ export class ArticleListComponent implements OnInit {
   }];
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {  }
 
 }

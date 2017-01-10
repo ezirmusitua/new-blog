@@ -1,24 +1,6 @@
 <div class="app-container">
     <jfb-article-list class="article-list"></jfb-article-list>
-    <h1>文章列表</h1>
-    <section class="article-list-container">
-        <article *ngFor="let article of articleList" class="article-list">
-            <time>{{ article.updateAt | date }}</time>
-            <div class="article-container">
-                <div>
-                    <div class="article-title">{{ article.title }}</div>
-                    <div class="article-tag" *ngFor="let tag of article.tags">{{ tag }}</div>
-                </div>
-                <div class="article-desc">{{ article.description }}</div>
-            </div>
-        </article>
-    </section>
     <div class="divider"></div>
-    <section class="article-detail-container">
-        <article class="article-info">
-            <h3>{{ article.title }}</h3>
-        </article>
-        <article class="article-detail"><p>{{ article.content }}</p></article>
-    </section>
+    <jfb-article-content class="article-content"></jfb-article-content>
     <jfb-floating-nav-btn class="floating-nav-btn"></jfb-floating-nav-btn>
 </div>
