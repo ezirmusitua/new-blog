@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { FloatingNavBtnComponent } from './floating-nav-btn/floating-nav-btn.component';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { ArticleContentComponent } from './article-content/article-content.component';
+import { ReadingProgressBarComponent } from './reading-progress-bar/reading-progress-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FloatingNavBtnComponent,
     ArticleListComponent,
-    ArticleContentComponent
+    ArticleContentComponent,
+    ReadingProgressBarComponent
   ],
   imports: [
     BrowserModule,
@@ -21,6 +23,6 @@ import { ArticleContentComponent } from './article-content/article-content.compo
     HttpModule
   ],
   providers: [],
-  bootstrap: [AppComponent, FloatingNavBtnComponent, ArticleListComponent, ArticleContentComponent]
+  bootstrap: [AppComponent, FloatingNavBtnComponent, ArticleListComponent, ArticleContentComponent, ReadingProgressBarComponent]
 })
 export class AppModule { }
