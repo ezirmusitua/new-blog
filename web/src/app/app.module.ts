@@ -12,6 +12,8 @@ import { ArticleContentComponent } from './article-content/article-content.compo
 import { ReadingProgressBarComponent } from './reading-progress-bar/reading-progress-bar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
+import { ArticleService } from './article.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,8 +29,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     HttpModule,
     AppRoutingModule
   ],
-  providers: [],
-  bootstrap: [AppComponent, FloatingNavBtnComponent, ArticleListComponent, ArticleContentComponent, ReadingProgressBarComponent, PageNotFoundComponent]
+  providers: [ArticleService],
+  bootstrap: [AppComponent, FloatingNavBtnComponent]
 })
 
 export class AppModule { }

@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 .out-container {
+  position: relative;
   background-color: #D5D5D5;
   display: flex;
   padding: 0 256px;
@@ -8,4 +9,10 @@
   width: 100%;
   background: white;
   padding: 48px 96px;
+}
+
+.out-container .floating-nav-btn {
+  position: fixed;
+  bottom: 80px;
+  right: 192px;
 }

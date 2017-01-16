@@ -6,7 +6,7 @@ import { ArticleContentComponent } from './article-content/article-content.compo
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
-  { path: 'article', component: ArticleListComponent },
+  { path: '', component: ArticleListComponent },
   { path: 'article/:articleId', component: ArticleContentComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
@@ -15,9 +15,7 @@ const appRoutes: Routes = [
     imports: [
         RouterModule.forRoot(appRoutes)
     ],
-    exports: [
-        RouterModule
-    ]
+    exports: [RouterModule]
 })
 
 export class AppRoutingModule { }
