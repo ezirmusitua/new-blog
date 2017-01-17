@@ -9,6 +9,8 @@
   width: 100%;
   background: white;
   padding: 48px 96px;
+  min-height: 840px;
+  box-sizing: border-box;
 }
 
 .out-container .floating-nav-btn {

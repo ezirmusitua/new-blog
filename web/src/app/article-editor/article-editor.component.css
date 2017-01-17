@@ -1,0 +1,41 @@
+.container {
+  height: 100%;
+}
+
+.content-input {
+  display: flex;
+  flex-direction: row;
+  height: inherit;
+}
+
+.title-input {
+  margin-bottom: 24px;
+  border-radius: 4px;
+}
+
+.markdown {
+  width: 50%;
+  height: 100%;
+}
+
+.markdown textarea {
+  box-sizing: border-box;
+  width: 100%;
+  margin-right: 4px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  height: 100%;
+}
+
+.preview {
+  width: 50%;
+}
+
+.preview p { 
+  box-sizing: border-box;
+  width: 100%;
+  margin-left: 4px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  height: 100%;
+}
