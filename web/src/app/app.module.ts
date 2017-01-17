@@ -5,14 +5,16 @@ import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
+import { ArticleService } from './article.service';
+import { MarkdownService } from './markdown.service';
+
 import { AppComponent } from './app.component';
 import { FloatingNavBtnComponent } from './floating-nav-btn/floating-nav-btn.component';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { ArticleContentComponent } from './article-content/article-content.component';
 import { ReadingProgressBarComponent } from './reading-progress-bar/reading-progress-bar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-
-import { ArticleService } from './article.service';
+import { ArticleEditorComponent } from './article-editor/article-editor.component';
 
 @NgModule({
   declarations: [
@@ -21,13 +23,14 @@ import { ArticleService } from './article.service';
     ArticleListComponent,
     ArticleContentComponent,
     ReadingProgressBarComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ArticleEditorComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [ArticleService],
   bootstrap: [AppComponent, FloatingNavBtnComponent]

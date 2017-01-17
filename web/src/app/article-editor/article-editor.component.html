@@ -1,0 +1,7 @@
+<section>
+  <article>
+    <input [(ngModel)]="data" (keyup)="updateHtml()" type="text">
+  </article>
+
+  <article [innerHtml]="htmlContent"></article>
+</section>

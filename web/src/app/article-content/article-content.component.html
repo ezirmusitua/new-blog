@@ -4,7 +4,7 @@
       <h3>{{ article.title }}</h3>
     </article>
     <article class="content">
-      <p>{{ article.content }}</p>
+      <p [innerHtml]="article.content"></p>
     </article>
   </section>
 </div>

@@ -11,25 +11,126 @@ export class ArticleContentComponent implements OnInit {
     title: 'hello world ~ 1',
     tags: ['h1', 'h2'],
     description: 'hello world',
-    content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse neque urna, imperdiet id egestas non, congue at tortor. Quisque et purus eu orci placerat tincidunt eu sed lectus. Morbi ultricies mi at justo aliquet, vitae sollicitudin orci pellentesque. Proin auctor lectus metus, eu maximus neque ullamcorper sit amet. Pellentesque accumsan iaculis libero, quis condimentum est pulvinar at. In aliquam ipsum lectus, nec tincidunt metus tincidunt quis. Suspendisse semper massa vel est tempor, vel volutpat sapien hendrerit. Donec faucibus cursus diam, sit amet semper felis pulvinar non. In et est lectus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque pellentesque felis orci, eu lobortis lectus pharetra at. Nulla nec ligula quis dui accumsan aliquam. Phasellus in libero sit amet enim pharetra scelerisque sed quis lorem. Nullam eget orci a eros tincidunt bibendum vitae a odio.
-
-Praesent nec sagittis nunc. Pellentesque ultricies mi diam, in faucibus arcu pellentesque eu. Donec placerat sollicitudin eros feugiat pretium. Nunc sit amet laoreet mauris. Aliquam quis mi ut massa aliquet aliquam at ac nisl. Nulla semper lorem non euismod eleifend. Nunc luctus orci ut porta tristique. Praesent condimentum tempor elit, et congue metus semper eu. Pellentesque eleifend urna sit amet pharetra fermentum. Curabitur dui mi, pulvinar at blandit non, pretium ac dui. Cras nec condimentum diam. Vestibulum nec ipsum congue, semper quam quis, iaculis odio.
-
-Etiam eget mollis justo, non bibendum tortor. Mauris quis eros a mauris tempus efficitur nec sit amet erat. Quisque blandit mi mauris, in porta tortor fringilla at. Curabitur non nunc a tellus aliquam condimentum sed sed purus. Mauris malesuada, nisl quis rutrum auctor, justo metus accumsan nunc, et porttitor erat justo at turpis. Vestibulum condimentum tellus sit amet ipsum luctus finibus. Suspendisse in ornare arcu. Cras lacinia venenatis leo ac dapibus. Praesent efficitur magna nibh, in convallis lectus sodales vel. Suspendisse pretium mi ut eros lobortis, in aliquam libero interdum. Morbi ut tellus est. Nulla interdum odio sit amet erat pretium, vel aliquet lacus efficitur. Mauris venenatis ultrices tincidunt. Morbi varius, quam lobortis ullamcorper malesuada, enim elit dignissim nibh, id malesuada erat nisl dapibus augue. Nulla posuere odio at ligula blandit mollis. Cras aliquam vel nisi at elementum.
-
-Sed ligula dolor, viverra in scelerisque in, vulputate at nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultrices vulputate lorem quis rhoncus. Phasellus semper scelerisque tortor, vitae commodo sapien feugiat aliquet. Donec urna metus, faucibus vehicula mattis vestibulum, convallis eu justo. Pellentesque quis eleifend mi, id facilisis libero. Vestibulum aliquam leo porttitor dolor dapibus, sed convallis felis lacinia. Nullam fringilla massa tellus, quis sagittis turpis consequat sed. In sit amet diam commodo, lobortis risus ac, convallis ex. Nunc blandit elit quis justo tincidunt, sit amet aliquam libero ornare. Donec ultrices iaculis mauris.
-
-Sed eget est nec nisl mattis volutpat. Aliquam erat volutpat. Maecenas diam tortor, convallis ut risus sit amet, dapibus viverra justo. Ut dapibus mollis risus, in tempor elit efficitur eget. In maximus congue lorem, lacinia gravida lorem fermentum id. Ut fermentum felis quis leo tincidunt vestibulum. Integer consequat eros non nisi consectetur gravida sit amet eu mauris. Aenean nec quam ut mi vehicula faucibus. Aenean magna purus, vestibulum in augue gravida, efficitur ultrices ex. Integer vitae pellentesque mauris, a tincidunt justo. Nullam aliquet nulla non tempor tempor. Donec pharetra, risus feugiat cursus cursus, ipsum leo scelerisque magna, quis finibus massa erat in ex. Mauris at neque lacinia, tempor sem a, feugiat sem. Quisque orci magna, condimentum a ex eget, imperdiet accumsan odio. Donec libero mauris, elementum laoreet luctus a, tincidunt a purus. Proin vel suscipit erat, a placerat ligula.
-
-Vivamus sapien enim, maximus ut eleifend id, faucibus non felis. Vivamus tincidunt, mi ut pretium commodo, lorem lacus suscipit tellus, sit amet ultrices magna nisi sed tortor. Praesent vulputate imperdiet justo, eleifend convallis dui feugiat sed. Aenean cursus, nisi at pulvinar auctor, dolor lectus placerat enim, nec porttitor odio sapien nec neque. Nullam vel tortor a purus venenatis euismod ut sit amet nisl. Fusce mattis leo vitae lectus fermentum, a aliquet metus mollis. Mauris id dapibus magna, at aliquam lacus. Vestibulum interdum turpis nec justo consequat posuere. Morbi quis malesuada ante, eu pretium felis. Duis cursus ipsum quis urna tincidunt, ut blandit sem ornare. Fusce consequat ultricies mauris, eu tristique odio pretium ac. Quisque a quam aliquet, semper lectus quis, sagittis sapien. Nam posuere urna ac erat facilisis elementum. Suspendisse augue massa, accumsan eu pretium a, laoreet aliquet enim. Praesent eleifend dignissim interdum.
-
-Fusce consequat, nunc ut consectetur hendrerit, arcu arcu porttitor tortor, ac varius ipsum purus at ex. Fusce nec nisi vel ex pulvinar pulvinar. Aliquam varius magna quis purus molestie pharetra. Etiam eros tellus, dapibus vitae elit vitae, tristique feugiat metus. Maecenas vehicula dui nunc, ut luctus sem efficitur eu. Aliquam a dui sodales odio sollicitudin ultrices eu vitae lorem. Vivamus nibh purus, sodales in finibus sed, maximus eu ipsum. Nullam luctus, purus a facilisis commodo, orci nunc convallis mi, vitae semper lectus nunc id nunc. Vestibulum quis justo varius, tempus nunc vel, auctor enim. Cras malesuada laoreet blandit. Cras metus erat, aliquet eu blandit a, malesuada quis orci. Mauris vel quam tempus, varius ligula in, tristique purus. Nunc ut nisi interdum, mattis quam at, iaculis turpis. Phasellus pulvinar metus iaculis, blandit elit et, dignissim ligula. Integer laoreet vehicula purus, ac porttitor justo malesuada ac.
-
-Ut eget rutrum risus. Donec posuere elementum maximus. Nullam pulvinar erat et fermentum pharetra. Sed vel purus nec arcu blandit facilisis eget vitae lectus. Etiam ut lectus consequat, convallis leo eget, euismod mi. Nunc elit ante, lobortis sit amet viverra nec, fermentum at lorem. Etiam eleifend mauris eu ipsum porttitor scelerisque. In sit amet vulputate nunc, ut maximus arcu. Praesent ornare purus mattis sem iaculis consectetur. In fringilla dolor mi, quis feugiat sem dapibus vitae. Quisque luctus ullamcorper lectus, at egestas nisi porta vitae. Sed rhoncus viverra neque, et efficitur nibh sodales luctus. Vestibulum leo lacus, egestas sit amet pellentesque vel, posuere in odio. Donec diam urna, eleifend non venenatis ut, feugiat at ligula. Duis nec imperdiet tortor. Etiam auctor tempor dui vitae dictum.
-
-Sed mattis molestie massa in vestibulum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis id iaculis diam. Suspendisse potenti. Duis risus mi, fermentum eu tellus a, convallis commodo massa. Etiam tempus non massa non efficitur. Vestibulum dapibus sapien eu porttitor mattis. Ut vestibulum augue massa, vitae congue neque gravida egestas. Ut pharetra pulvinar ligula non dictum.
-
-Curabitur in arcu nec diam egestas viverra et non ante. Praesent quis sollicitudin arcu. Mauris lacus lacus, venenatis iaculis dignissim id, eleifend at nisl. Proin dictum nibh nibh, sed auctor eros suscipit in. Nunc sit amet est sed ipsum hendrerit condimentum. Quisque sed imperdiet libero, ut auctor ligula. Praesent ullamcorper euismod urna eget commodo. Pellentesque efficitur nisi in sollicitudin ullamcorper. Integer faucibus ligula id eros ornare, non rhoncus felis volutpat. Vestibulum lectus mi, facilisis a dictum non, hendrerit vitae urna. Sed quam nunc, bibendum at sollicitudin id, ultrices sit amet lacus.`
+    content: `
+<h1><a id="Dillinger_0"></a>Dillinger</h1>
+<p><a href="https://nodesource.com/products/nsolid"><img src="https://cldup.com/dTxpPi9lDf.thumb.png" alt="N|Solid"></a></p>
+<p>Dillinger is a cloud-enabled, mobile-ready, offline-storage, AngularJS powered HTML5 Markdown editor.</p>
+<ul>
+<li>Type some Markdown on the left</li>
+<li>See HTML in the right</li>
+<li>Magic</li>
+</ul>
+<p>You can also:</p>
+<ul>
+<li>Import and save files from GitHub, Dropbox, Google Drive and One Drive</li>
+<li>Drag and drop files into Dillinger</li>
+<li>Export documents as Markdown, HTML and PDF</li>
+</ul>
+<p>Markdown is a lightweight markup language based on the formatting conventions that people naturally use in email.  As <a href="http://daringfireball.net">John Gruber</a> writes on the <a href="http://daringfireball.net/projects/markdown/">Markdown site</a></p>
+<blockquote>
+<p>The overriding design goal for Markdown’s<br>
+formatting syntax is to make it as readable<br>
+as possible. The idea is that a<br>
+Markdown-formatted document should be<br>
+publishable as-is, as plain text, without<br>
+looking like it’s been marked up with tags<br>
+or formatting instructions.</p>
+</blockquote>
+<p>This text you see here is <em>actually</em> written in Markdown! To get a feel for Markdown’s syntax, type some text into the left window and watch the results in the right.</p>
+<h3><a id="Tech_27"></a>Tech</h3>
+<p>Dillinger uses a number of open source projects to work properly:</p>
+<ul>
+<li><a href="http://angularjs.org">AngularJS</a> - HTML enhanced for web apps!</li>
+<li><a href="http://ace.ajax.org">Ace Editor</a> - awesome web-based text editor</li>
+<li><a href="https://github.com/markdown-it/markdown-it">markdown-it</a> - Markdown parser done right. Fast and easy to extend.</li>
+<li><a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a> - great UI boilerplate for modern web apps</li>
+<li><a href="http://nodejs.org">node.js</a> - evented I/O for the backend</li>
+<li><a href="http://expressjs.com">Express</a> - fast node.js network app framework <a href="http://twitter.com/tjholowaychuk">@tjholowaychuk</a></li>
+<li><a href="http://gulpjs.com">Gulp</a> - the streaming build system</li>
+<li><a href="https://github.com/madrobby/keymaster">keymaster.js</a> - awesome keyboard handler lib by <a href="http://twitter.com/thomasfuchs">@thomasfuchs</a></li>
+<li><a href="http://jquery.com">jQuery</a> - duh</li>
+</ul>
+<p>And of course Dillinger itself is open source with a <a href="https://github.com/joemccann/dillinger">public repository</a><br>
+on GitHub.</p>
+<h3><a id="Installation_44"></a>Installation</h3>
+<p>Dillinger requires <a href="https://nodejs.org/">Node.js</a> v4+ to run.</p>
+<p>Download and extract the <a href="https://github.com/joemccann/dillinger/releases">latest pre-built release</a>.</p>
+<p>Install the dependencies and devDependencies and start the server.</p>
+<pre><code class="language-sh">$ <span class="hljs-built_in">cd</span> dillinger
+$ npm install <span class="hljs-operator">-d</span>
+$ node app
+</code></pre>
+<p>For production environments…</p>
+<pre><code class="language-sh">$ npm install --production
+$ npm run predeploy
+$ NODE_ENV=production node app
+</code></pre>
+<h3><a id="Plugins_66"></a>Plugins</h3>
+<p>Dillinger is currently extended with the following plugins</p>
+<ul>
+<li>Dropbox</li>
+<li>Github</li>
+<li>Google Drive</li>
+<li>OneDrive</li>
+</ul>
+<p>Readmes, how to use them in your own application can be found here:</p>
+<ul>
+<li><a href="https://github.com/joemccann/dillinger/tree/master/plugins/dropbox/README.md">plugins/dropbox/README.md</a></li>
+<li><a href="https://github.com/joemccann/dillinger/tree/master/plugins/github/README.md">plugins/github/README.md</a></li>
+<li><a href="https://github.com/joemccann/dillinger/tree/master/plugins/googledrive/README.md">plugins/googledrive/README.md</a></li>
+<li><a href="https://github.com/joemccann/dillinger/tree/master/plugins/onedrive/README.md">plugins/onedrive/README.md</a></li>
+</ul>
+<h3><a id="Development_82"></a>Development</h3>
+<p>Want to contribute? Great!</p>
+<p>Dillinger uses Gulp + Webpack for fast developing.<br>
+Make a change in your file and instantanously see your updates!</p>
+<p>Open your favorite Terminal and run these commands.</p>
+<p>First Tab:</p>
+<pre><code class="language-sh">$ node app
+</code></pre>
+<p>Second Tab:</p>
+<pre><code class="language-sh">$ gulp watch
+</code></pre>
+<p>(optional) Third:</p>
+<pre><code class="language-sh">$ karma start
+</code></pre>
+<h4><a id="Building_for_source_105"></a>Building for source</h4>
+<p>For production release:</p>
+<pre><code class="language-sh">$ gulp build --prod
+</code></pre>
+<p>Generating pre-built zip archives for distribution:</p>
+<pre><code class="language-sh">$ gulp build dist --prod
+</code></pre>
+<h3><a id="Docker_114"></a>Docker</h3>
+<p>Dillinger is very easy to install and deploy in a Docker container.</p>
+<p>By default, the Docker will expose port 80, so change this within the Dockerfile if necessary. When ready, simply use the Dockerfile to build the image.</p>
+<pre><code class="language-sh"><span class="hljs-built_in">cd</span> dillinger
+npm run-script build-docker
+</code></pre>
+<p>This will create the dillinger image and pull in the necessary dependencies. Moreover, this uses a <em>hack</em> to get a more optimized <code>npm</code> build by copying the dependencies over and only installing when the <code>package.json</code> itself has changed.  Look inside the <code>package.json</code> and the <code>Dockerfile</code> for more details on how this works.</p>
+<p>Once done, run the Docker image and map the port to whatever you wish on your host. In this example, we simply map port 8000 of the host to port 80 of the Docker (or whatever port was exposed in the Dockerfile):</p>
+<pre><code class="language-sh">docker run <span class="hljs-operator">-d</span> -p <span class="hljs-number">8000</span>:<span class="hljs-number">8080</span> --restart=<span class="hljs-string">"always"</span> &lt;youruser&gt;/dillinger:latest
+</code></pre>
+<p>Verify the deployment by navigating to your server address in your preferred browser.</p>
+<pre><code class="language-sh"><span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">8000</span>
+</code></pre>
+<h4><a id="Kubernetes__Google_Cloud_137"></a>Kubernetes + Google Cloud</h4>
+<p>See <a href="https://github.com/joemccann/dillinger/blob/master/KUBERNETES.md">KUBERNETES.md</a></p>
+<h4><a id="dockercomposeyml_142"></a>docker-compose.yml</h4>
+<p>Change the path for the nginx conf mounting path to your full path, not mine!</p>
+<h3><a id="NSolid_and_NGINX_146"></a>N|Solid and NGINX</h3>
+<p>More details coming soon.</p>
+<h3><a id="Todos_151"></a>Todos</h3>
+<ul>
+<li>Write Tests</li>
+<li>Rethink Github Save</li>
+<li>Add Code Comments</li>
+<li>Add Night Mode</li>
+</ul>
+<h2><a id="License_158"></a>License</h2>
+<p>MIT</p>
+<p><strong>Free Software, Hell Yeah!</strong></p>
+    `
   }
   constructor() { }
 
