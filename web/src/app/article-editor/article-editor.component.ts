@@ -56,4 +56,11 @@ export class ArticleEditorComponent implements OnInit {
     this.markdownContent = this.article.markdownContent;
     this.htmlContent = this.article.htmlContent;
   }
+
+  save() {
+    this.article.markdownContent = this.markdownContent;
+    this.article.htmlContent = this.htmlContent;
+    console.log(this.article)
+    return;
+  }
 }
