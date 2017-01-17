@@ -1,7 +1,9 @@
-<section>
-  <article>
-    <input [(ngModel)]="data" (keyup)="updateHtml()" type="text">
+<section class="container">
+  <article class="markdown-input">
+    <input [(ngModel)]="article.title">
+    <input [(ngModel)]="markdownContent" (keyup)="updatePreview(markdownContent)" type="text">
   </article>
-
-  <article [innerHtml]="htmlContent"></article>
+  <article class="html-preview">
+    <p [innerHtml]="htmlContent"></p>
+  </article>
 </section>
