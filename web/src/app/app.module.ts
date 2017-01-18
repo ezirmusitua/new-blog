@@ -15,6 +15,7 @@ import { ArticleContentComponent } from './article-content/article-content.compo
 import { ReadingProgressBarComponent } from './reading-progress-bar/reading-progress-bar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ArticleEditorComponent } from './article-editor/article-editor.component';
+import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ArticleEditorComponent } from './article-editor/article-editor.componen
     ArticleContentComponent,
     ReadingProgressBarComponent,
     PageNotFoundComponent,
-    ArticleEditorComponent
+    ArticleEditorComponent,
+    ModalDialogComponent
   ],
   imports: [
     BrowserModule,

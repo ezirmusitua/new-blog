@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>文章列表</h1>
+  <h1 (click)="showLoginDialog()">文章列表</h1>
   <section class="list-container">
     <article *ngFor="let article of articleList" class="list">
       <time>{{ article.updateAt | date }}</time>
@@ -12,4 +12,5 @@
       </div>
     </article>
   </section>
+  <jfb-modal-dialog [(visible)]="isShowLoginDialog"></jfb-modal-dialog>
 </div>
