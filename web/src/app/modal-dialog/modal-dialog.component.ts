@@ -7,11 +7,11 @@ import { Component, OnInit, Input, Output, EventEmitter, trigger, state, style, 
   animations: [
     trigger('dialog', [
       transition('void => *', [
-        style({ transform: 'scale3d(.3, .3, .3)' }),
-        animate(100)
+        style({ transform: 'scale3d(0.3, 0.3, 0.3)' }),
+        animate(200) 
       ]),
       transition('* => void', [
-        animate(100, style({ transform: 'scale3d(.0, .0, .0)' }))
+        animate(200, style({ transform: 'scale3d(.3, .3, .3)' }))
       ])
     ])
   ]
