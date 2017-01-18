@@ -9,8 +9,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 const appRoutes: Routes = [
   { path: '', component: ArticleListComponent },
+  { path: 'articles', component: ArticleListComponent },
   { path: 'article', component: ArticleEditorComponent },
   { path: 'article/:articleId', component: ArticleContentComponent },
+  { path: 'article/:articleId/edit', component: ArticleEditorComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -9,11 +9,13 @@ export class ArticleListComponent implements OnInit {
   loginCounter: number = 0;
   isShowLoginDialog: boolean = false;
   articleList = [{
+    id: 1,
     title: 'hello world ~ 1',
     updateAt: Date.now(),
     tags: ['h1', 'h2'],
     description: 'hello world'
   }, {
+    id: 2,
     title: 'hello world ~ 1',
     updateAt: Date.now(),
     tags: ['h1', 'h2'],

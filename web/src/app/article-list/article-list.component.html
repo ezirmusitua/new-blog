@@ -5,8 +5,10 @@
       <time>{{ article.updateAt | date }}</time>
       <div class="info">
         <div>
-          <a routerLink="/article/1" class="title">{{ article.title }}</a>
+          <a [routerLink]="['/article', article.id]" class="title">{{ article.title }}</a>
           <div class="tag" *ngFor="let tag of article.tags">{{ tag }}</div>
+          <!--If login, enable edit button-->
+          <a *ngIf="true" [routerLink]="['/article', article.id, 'edit']">edit</a>
         </div>
         <div class="description">{{ article.description }}</div>
       </div>

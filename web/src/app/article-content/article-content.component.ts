@@ -8,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class ArticleContentComponent implements OnInit {
 
   article = {
+    id: 1,
     title: 'hello world ~ 1',
     tags: ['h1', 'h2'],
     description: 'hello world',
+    catalog: [],
     content: `
 <h1><a id="Dillinger_0"></a>Dillinger</h1>
 <p><a href="https://nodesource.com/products/nsolid"><img src="https://cldup.com/dTxpPi9lDf.thumb.png" alt="N|Solid"></a></p>

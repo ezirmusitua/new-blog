@@ -2,6 +2,7 @@
   <section>
     <article class="info">
       <h3>{{ article.title }}</h3>
+      <a *ngIf="true" [routerLink]="['/article', article.id, 'edit']">edit</a>
     </article>
     <article class="content">
       <p [innerHtml]="article.content"></p>
