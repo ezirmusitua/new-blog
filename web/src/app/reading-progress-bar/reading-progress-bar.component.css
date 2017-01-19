@@ -26,17 +26,37 @@
   z-index: 1;
 }
 
+.reading-progress-bar .sub-pointer {
+  width: 0; 
+  height: 0; 
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 16px solid #eef;
+  margin-top: -8px;
+  z-index: 1;
+}
+
+
 #pointer1 {
   margin-left: 20%;
+}
+
+#sub-pointer1 {
+ margin-left: 2%;
+}
+
+#sub-pointer2 {
+ margin-left: 5%;
 }
 
 #pointer3 {
   margin-left: 3%;
 }
 
-#pointer3 {
+#sub-pointer3 {
   margin-left: 5%;
 }
+
 
 .current-pointer {
   position: relative;
