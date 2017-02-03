@@ -1,32 +1,48 @@
 import mongoose from 'mongoose';
 
-export interface TodoDocument {
+export interface ArticleDocument {
     title: string;
-    isCompleted: boolean;
+    updateAt: number;
+    createBy: string;
+    markdownContent: string;
+    htmlContent: string;
+    catalog: { title: string; progress: number; }[]
+    isShow: boolean;
+    tags: { label: string }[];
 }
 
-const testEnum = {
-    100: 100
-}
-
-const todoSchema = new mongoose.Schema({
+const articleSchema = new mongoose.Schema({
     title: {
         type: String,
         index: true
     },
-    isCompleted: {
+    updateAt: Date,
+    createBy: String,
+    markdownContent: String,
+    htmlContent: String,
+    catalog: {
+        type: {
+            title: String,
+            progress: Number,
+        },
+        default: [],
+    },
+    isShow: {
         type: Boolean,
         index: true,
-        default: false
+        default: false,
+    },
+    tags: {
+        type: [{
+            label: String,
+        }],
+        default: [],
+        index: true,
     }
 });
 
-type MongoTodoDocument = TodoDocument & mongoose.Document;
+type MongoArticleDocument = ArticleDocument & mongoose.Document;
 
-const todoModel = mongoose.model<MongoTodoDocument>('Todo', todoSchema, 'Todo');
+const articleModel = mongoose.model<MongoArticleDocument>('Article', articleSchema, 'Article');
 
-export const TodoModel = Object.assign(todoModel, {
-    StaticEnum: {
-        test: testEnum
-    }
-});
+export const ArticleModel = Object.assign(articleModel, {});
