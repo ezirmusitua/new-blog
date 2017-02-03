@@ -21,13 +21,11 @@ gulp.task('watch', ['compile'], () => {
     const env = {
         NODE_ENV: argv.env || '',
         PORT: argv.port ? parseInt(argv.port) : '',
-        REGION: argv.region || ''
     };
-    if (argv.qp) env.QUEUE_PROCESSOR = true;
     return nodemon({
-        script: 'dist/',
+        script: 'dist/index.js',
         watch: 'app',
-        ext: 'app',
+        ext: 'ts',
         delay: 2,
         tasks: ['compile'],
         env
