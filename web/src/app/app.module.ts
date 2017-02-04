@@ -3,18 +3,39 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { TodoDataService } from './todo-data.service';
+import { AppRoutingModule } from './app-routing.module';
+
+import { ArticleService } from './article.service';
+import { MarkdownService } from './markdown.service';
+
 import { AppComponent } from './app.component';
+import { FloatingNavBtnComponent } from './floating-nav-btn/floating-nav-btn.component';
+import { ArticleListComponent } from './article-list/article-list.component';
+import { ArticleContentComponent } from './article-content/article-content.component';
+import { ReadingProgressBarComponent } from './reading-progress-bar/reading-progress-bar.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ArticleEditorComponent } from './article-editor/article-editor.component';
+import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FloatingNavBtnComponent,
+    ArticleListComponent,
+    ArticleContentComponent,
+    ReadingProgressBarComponent,
+    PageNotFoundComponent,
+    ArticleEditorComponent,
+    ModalDialogComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule,
   ],
-  bootstrap: [AppComponent]
+  providers: [ArticleService],
+  bootstrap: [AppComponent, FloatingNavBtnComponent]
 })
+
 export class AppModule { }

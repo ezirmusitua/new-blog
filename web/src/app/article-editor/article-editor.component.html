@@ -1,0 +1,14 @@
+<form #articleEditor="ngForm" (ngSubmit)="save()" class="container">
+  <article class="title-save-container">
+    <input class="title-input" [(ngModel)]="article.title" name="title">
+    <button type="submit" class="save-btn"> 保存 </button>
+  </article>
+  <article class="content-input">
+    <div class="markdown">
+      <textarea [(ngModel)]="markdownContent" (keyup)="updatePreview(markdownContent)" name="markdown" type="text"></textarea>
+    </div>
+    <div class="preview">
+      <p [innerHtml]="htmlContent"></p>
+    </div>
+  </article>
+</form>

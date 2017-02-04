@@ -1,33 +1,10 @@
 import { Component } from '@angular/core';
-import { Todo } from './todo';
-import { TodoDataService } from './todo-data.service';
+import { MarkdownService } from './markdown.service';
 
 @Component({
-  selector: 'app-root',
+  selector: 'jfb-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [TodoDataService]
+  providers: [MarkdownService]
 })
-export class AppComponent {
-
-  newTodo: Todo = new Todo();
-
-  constructor(private todoDataService: TodoDataService) {}
-
-  private addTodo() {
-    this.todoDataService.addTodo(this.newTodo);
-    this.newTodo = new Todo();
-  }
-
-  private toggleTodoComplete(todo) {
-    this.todoDataService.toggleTodoComplete(todo);
-  }
-
-  private removeTodo(todo) {
-    this.todoDataService.deleteTodoById(todo.id);
-  }
-
-  private listTodos() {
-    return this.todoDataService.getAllTodos();
-  }
-}
+export class AppComponent {}
