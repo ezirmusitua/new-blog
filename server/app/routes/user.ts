@@ -10,9 +10,12 @@ router.post('login', '/login', async (ctx, next) => {
   const user = await UserModel.findUserByEmailAndPassword(email, password);
   if (!user) throw { status: 404, message: 'invalid email or password!' };
   // TODO: update User Session after login
+  const session = await SessionModel.updateOrCreateSession(user._id.toString())
+  console.log(session);
+  ctx.body = session;
   await next();
 });
-router.get('fetchOne', '/:articleId', async (ctx, next) => {
+router.get('activate', '/activate', async (ctx, next) => {
   const _id = ctx.params.id;
   ctx.body = await UserModel.findOne({ _id }).lean();
   await next();

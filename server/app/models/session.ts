@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import { Utils } from '../utils';
+import { omit } from 'lodash';
 
 export interface SessionDocument {
   _id: any;
@@ -30,7 +32,22 @@ const findOneByUserId = async (userId: string): Promise<SessionDocument> => {
   return sessions.length ? sessions[0] : null;
 };
 
+const updateOrCreateSession = async (userId: string): Promise<SessionDocument> => {
+  if (!userId) return null;
+  const clientCategory = 100;
+  const token = Utils.generateRandomBytes();
+  const sessionBody = {
+    userId, token, clientCategory, updateAt: Date.now()
+  } as SessionDocument;
+  const session = await sessionModel.findOneAndUpdate(
+    { userId }, sessionBody,
+    { upsert: true, setDefaultsOnInsert: true }
+  );
+  return sessionBody;
+}
+
 const sessionModel = mongoose.model<MongoSessionDocument>('Session', sessionSchema, 'Session');
 
-export const SessionModel = Object.assign(sessionModel, {findOneByUserId});
-
+export const SessionModel = Object.assign(sessionModel, {
+  findOneByUserId, updateOrCreateSession,
+});
