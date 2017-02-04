@@ -47,9 +47,13 @@ const updateOrCreateSession = async (userId: string): Promise<SessionDocument> =
 
 const activateSession = async (token: string, userId: string): Promise<any> => {
   if (!userId || !token) return null;
-  await sessionModel.findOneAndUpdate(
-    { userId, token },
-    { updateAt: Date.now(), clientCategory: 100 }).exec();
+  const now = Date.now();
+  const sessions = await sessionModel.find({ userId, token })
+    .limit(1).exec() as MongoSessionDocument[];
+  if (!sessions || !sessions.length) return;
+  if (sessions[0].updateAt < now - 24 * 60 * 60 * 1000) return;
+  sessions[0].updateAt = now;
+  await sessions[0].save();
 };
 
 const sessionModel = mongoose.model<MongoSessionDocument>('Session', sessionSchema, 'Session');
