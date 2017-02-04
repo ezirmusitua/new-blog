@@ -26,8 +26,9 @@ type MongoSessionDocument = SessionDocument & mongoose.Document;
 
 const findOneByUserId = async (userId: string): Promise<SessionDocument> => {
   if (!userId) return null;
-  const sessions = await sessionModel.find({ userId })
+  const sessions = await sessionModel.find({ userId, updateAt: {$gt: Date.now() - 24 * 60 * 60 * 1000} })
     .limit(1).lean().exec() as SessionDocument[];
+  console.log(sessions);
   return sessions.length ? sessions[0] : null;
 };
 

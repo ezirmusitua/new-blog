@@ -15,11 +15,9 @@ router.post('login', '/login', async (ctx, next) => {
   ctx.body = session;
   await next();
 });
-router.put('activate', '/activate', async (ctx, next) => {
-  console.log(ctx.headers);
-  const authHeader = ctx.headers.authorization;
-  const matchRes = authHeader.match(/token="(\w{48})"&user="(\w{24})"/);
-  await SessionModel.activateSession(matchRes[1], matchRes[2]);
+router.put('activate', '/activate', async (ctx: any, next) => {
+  console.log(ctx.session);
+  await SessionModel.activateSession(ctx.session.token, ctx.session.userId);
   await next();
 });
 router.post('create', '/', async (ctx, next) => {

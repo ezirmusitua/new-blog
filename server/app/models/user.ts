@@ -34,7 +34,6 @@ const findOneByEmail = async (email: string): Promise<UserDocument> => {
 const findUserByEmailAndPassword = async (email: string, password: string): Promise<UserDocument> => {
   if (!email || !password) return null;
   const passwordHash = Utils.generateHash(password);
-  console.log(email, passwordHash);
   return await userModel.findOneAndUpdate({
     email, password: passwordHash
   }, {
