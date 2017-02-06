@@ -4,6 +4,12 @@ import { SessionModel } from '../models/session';
 
 const router = new Router({ prefix: '/user' });
 
+router.post('alive', '/alive', async (ctx, next) => {
+  const token = ctx.request.body.token as string;
+  const userId = ctx.request.body.userId as string;
+  ctx.body = await SessionModel.activateSession(token, userId);
+  await next();
+});
 router.post('login', '/login', async (ctx, next) => {
   const email = ctx.request.body.email as string;
   const password = ctx.request.body.password as string;

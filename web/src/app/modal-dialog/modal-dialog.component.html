@@ -1,5 +1,5 @@
 <div [@dialog] *ngIf="visible" class="dialog">
-  <form #loginForm="ngForm" (ngSubmit)="login(password)">
+  <form #loginForm="ngForm" (ngSubmit)="login()">
     <label for="passwordInput">密码</label>
     <input name="passwordInput" placeholder="Please input password to login" type="password">
     <button type="submit">Sumbit</button>

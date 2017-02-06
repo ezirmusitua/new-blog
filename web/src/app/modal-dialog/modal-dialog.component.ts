@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, trigger, state, style, animate, transition } from '@angular/core';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'jfb-modal-dialog',
@@ -21,7 +22,7 @@ export class ModalDialogComponent implements OnInit {
   @Input() visible: boolean;
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   password: string = '';
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
   }
@@ -31,8 +32,11 @@ export class ModalDialogComponent implements OnInit {
     this.visibleChange.emit(this.visible);
   }
 
-  login(password: string) {
-    console.log('login successful');
+  login() {
+    const email = 'jferroal@gmail.com';
+    const password = '123456';
+    this.userService.login(email, password).subscribe((res) => {
+    });
     this.password = '';
     this.visible = false;
     this.visibleChange.emit(this.visible);

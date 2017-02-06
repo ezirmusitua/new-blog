@@ -4,6 +4,7 @@
   "description": "Blog server",
   "main": "index.js",
   "dependencies": {
+    "@types/kcors": "^2.2.0",
     "@types/koa": "^2.0.37",
     "@types/koa-bodyparser": "^3.0.22",
     "@types/koa-router": "^7.0.21",

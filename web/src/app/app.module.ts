@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { ArticleService } from './article.service';
-import { MarkdownService } from './markdown.service';
+import { UserService } from './user.service';
 
 import { AppComponent } from './app.component';
 import { FloatingNavBtnComponent } from './floating-nav-btn/floating-nav-btn.component';
@@ -34,7 +34,7 @@ import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
     HttpModule,
     AppRoutingModule,
   ],
-  providers: [ArticleService],
+  providers: [ArticleService, UserService],
   bootstrap: [AppComponent, FloatingNavBtnComponent]
 })
 
