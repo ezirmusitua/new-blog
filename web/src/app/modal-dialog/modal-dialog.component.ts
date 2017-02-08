@@ -9,7 +9,7 @@ import { UserService } from '../user.service';
     trigger('dialog', [
       transition('void => *', [
         style({ transform: 'scale3d(0.3, 0.3, 0.3)' }),
-        animate(200) 
+        animate(200)
       ]),
       transition('* => void', [
         animate(200, style({ transform: 'scale3d(.3, .3, .3)' }))
@@ -35,10 +35,9 @@ export class ModalDialogComponent implements OnInit {
   login() {
     const email = 'jferroal@gmail.com';
     const password = '123456';
-    this.userService.login(email, password).subscribe((res) => {
-    });
+    this.userService.uniqLogin(email, password);
     this.password = '';
     this.visible = false;
     this.visibleChange.emit(this.visible);
-  }  
+  }
 }

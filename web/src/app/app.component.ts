@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { UserService } from './user.service';
+import { UserService, Session } from './user.service';
 import { MarkdownService } from './markdown.service';
 
 const SESSION_KEY = 'ngkoa.blog.session';
@@ -15,12 +15,13 @@ export class AppComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    const sessionStr = localStorage.getItem(SESSION_KEY);
-    console.log(sessionStr)
-    if (sessionStr) {
-      const [token, userId] = sessionStr.match(/(\w+);(\w+)/).slice(1, 3);
-      console.log(token, userId);
-      this.userService.validateSession(userId, token);
+    const authStr = localStorage.getItem(SESSION_KEY);
+    if (authStr) {
+      const start = Date.now();
+      this.userService.validateSession(Session.constructFromLcStr(authStr)).subscribe((res) => {
+        const end = Date.now();
+        this.userService.setNetWorkFromDelay(end - start);
+      });
     }
   }
 }

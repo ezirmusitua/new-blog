@@ -20,6 +20,7 @@ app.use(bodyParser({
 app.use(async (ctx: any, next) => {
     const authHeader = ctx.headers.authorization;
     ctx.session = { isVisitor: true };
+    console.log(authHeader);
     if (authHeader) {
         console.log(authHeader);
         const matchRes = authHeader.match(/token="(\w+)"&user="(\w+)"/).slice(1, 3) as string[];
