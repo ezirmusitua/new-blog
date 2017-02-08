@@ -135,6 +135,18 @@ export class UserService {
     }
   }
 
+  public logout() {
+    this.http.delete(
+      resourcePath + '/user/logout',
+      { headers: new Headers(this.defaultHeaders) }
+    ).subscribe(() => {
+      delete this.defaultHeaders.Authorization;
+      localStorage.removeItem(SESSION_KEY);
+      this.isVisitor = true;
+      clearInterval(this.sessionActivateInterval);
+    })
+  }
+
   public setNetWorkFromDelay(delay: number): void {
     if (delay > NetWorkCondition.GPRS) {
       this.netWork = 100;
