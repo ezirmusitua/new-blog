@@ -5,10 +5,10 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 class Session {
-  userId: string;
-  token: string;
-  clientCategory: string;
-  updateAt: number;
+  private userId: string;
+  private token: string;
+  private clientCategory: string;
+  private updateAt: number;
 
   constructor(body: any) {
     this.userId = body.userId;
@@ -22,7 +22,8 @@ class Session {
   }
 
   public toAuthString(): string {
-    return 'token="' + this.token + '"&user="' + this.userId;
+    console.log(this.token, this.userId);
+    return 'token="' + this.token + '"&user="' + this.userId + '"';
   }
 }
 
@@ -60,7 +61,7 @@ export class UserService {
           '',
           { headers: new Headers(this.defaultHeaders) }
         ).subscribe((res) => console.log('activated'));
-      }, 1000);
+      }, intervalSeconds);
     }, 1000)
   }
 
@@ -69,9 +70,10 @@ export class UserService {
       resourcePath + '/user/alive',
       JSON.stringify({ userId, token }),
       { headers: new Headers(this.defaultHeaders) }
-    ).subscribe((res: any) => {
+    ).subscribe((res: Response) => {
+      console.log(res);
       if (res) {
-        this.setAuthHeaders(new Session(res));
+        this.setAuthHeaders(new Session(res.json()));
         this.setSessionActivateInterval();
       } else {
         // User not login

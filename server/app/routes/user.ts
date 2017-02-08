@@ -17,12 +17,10 @@ router.post('login', '/login', async (ctx, next) => {
   if (!user) throw { status: 404, message: 'invalid email or password!' };
   // TODO: update User Session after login
   const session = await SessionModel.updateOrCreateSession(user._id.toString())
-  console.log(session);
   ctx.body = session;
   await next();
 });
 router.put('activate', '/activate', async (ctx: any, next) => {
-  console.log(ctx.session);
   await SessionModel.activateSession(ctx.session.token, ctx.session.userId);
   await next();
 });

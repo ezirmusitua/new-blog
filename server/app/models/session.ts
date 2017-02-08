@@ -26,7 +26,7 @@ type MongoSessionDocument = SessionDocument & mongoose.Document;
 
 const findOneByUserId = async (userId: string): Promise<SessionDocument> => {
   if (!userId) return null;
-  const sessions = await sessionModel.find({ userId, updateAt: {$gt: Date.now() - 24 * 60 * 60 * 1000} })
+  const sessions = await sessionModel.find({ userId, updateAt: { $gt: Date.now() - 24 * 60 * 60 * 1000 } })
     .limit(1).lean().exec() as SessionDocument[];
   console.log(sessions);
   return sessions.length ? sessions[0] : null;
@@ -46,7 +46,7 @@ const updateOrCreateSession = async (userId: string): Promise<SessionDocument> =
   return sessionBody;
 };
 
-const activateSession = async (token: string, userId: string): Promise<any> => {
+const activateSession = async (token: string, userId: string): Promise<MongoSessionDocument> => {
   if (!userId || !token) return null;
   const now = Date.now();
   const sessions = await sessionModel.find({ userId, token })
@@ -54,7 +54,7 @@ const activateSession = async (token: string, userId: string): Promise<any> => {
   if (!sessions || !sessions.length) return;
   if (sessions[0].updateAt < now - 24 * 60 * 60 * 1000) return;
   sessions[0].updateAt = now;
-  await sessions[0].save();
+  return await sessions[0].save() as MongoSessionDocument;
 };
 
 const sessionModel = mongoose.model<MongoSessionDocument>('Session', sessionSchema, 'Session');

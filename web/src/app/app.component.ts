@@ -16,7 +16,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     const sessionStr = localStorage.getItem(SESSION_KEY);
-    const [token, userId] = sessionStr.match(/(\w+);(\w+)/).slice(1, 3);
-    this.userService.validateSession(userId, token);
+    console.log(sessionStr)
+    if (sessionStr) {
+      const [token, userId] = sessionStr.match(/(\w+);(\w+)/).slice(1, 3);
+      console.log(token, userId);
+      this.userService.validateSession(userId, token);
+    }
   }
 }
