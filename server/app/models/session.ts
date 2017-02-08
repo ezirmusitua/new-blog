@@ -57,8 +57,12 @@ const activateSession = async (token: string, userId: string): Promise<MongoSess
   return await sessions[0].save() as MongoSessionDocument;
 };
 
+const removeSession = async (token: string, userId: string): Promise<void> => {
+  await sessionModel.remove({ userId, token });
+}
+
 const sessionModel = mongoose.model<MongoSessionDocument>('Session', sessionSchema, 'Session');
 
 export const SessionModel = Object.assign(sessionModel, {
-  findOneByUserId, updateOrCreateSession, activateSession,
+  findOneByUserId, updateOrCreateSession, activateSession, removeSession
 });

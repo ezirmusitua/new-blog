@@ -7,9 +7,7 @@ const router = new Router({ prefix: '/user' });
 router.post('alive', '/alive', async (ctx, next) => {
   const token = ctx.request.body.token as string;
   const userId = ctx.request.body.userId as string;
-  console.log(token, userId);
   ctx.body = await SessionModel.activateSession(token, userId);
-  console.log(ctx.body);
   await next();
 });
 router.post('login', '/login', async (ctx, next) => {
@@ -21,6 +19,12 @@ router.post('login', '/login', async (ctx, next) => {
   const session = await SessionModel.updateOrCreateSession(user._id.toString())
   ctx.body = session;
   await next();
+});
+router.delete('logout', '/logout', async (ctx: any, next) => {
+  if (!ctx.session) {
+    console.log('no session, can not logout');
+  }
+  await SessionModel.removeSession(ctx.session.token, ctx.session.userId);
 });
 router.put('activate', '/activate', async (ctx: any, next) => {
   await SessionModel.activateSession(ctx.session.token, ctx.session.userId);
