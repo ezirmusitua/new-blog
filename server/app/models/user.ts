@@ -37,8 +37,8 @@ const findUserByEmailAndPassword = async (email: string, password: string): Prom
   return await userModel.findOneAndUpdate({
     email, password: passwordHash
   }, {
-    $set: { lastActiveAt: Date.now() }
-  }).exec() as UserDocument;
+      $set: { lastActiveAt: Date.now() }
+    }).exec() as UserDocument;
 }
 
 const userModel = mongoose.model<MongoUserDocument>('User', userSchema, 'User');
