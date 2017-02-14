@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ArticleService } from './article.service';
 import { UserService } from './user.service';
 import { ResourceService } from './resource.service';
+import { LocalStorage } from './localStorage.service';
 
 import { AppComponent } from './app.component';
 import { FloatingNavBtnComponent } from './floating-nav-btn/floating-nav-btn.component';
@@ -35,7 +36,7 @@ import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
     HttpModule,
     AppRoutingModule,
   ],
-  providers: [ArticleService, UserService, ResourceService],
+  providers: [ArticleService, UserService, ResourceService, LocalStorage],
   bootstrap: [AppComponent, FloatingNavBtnComponent]
 })
 

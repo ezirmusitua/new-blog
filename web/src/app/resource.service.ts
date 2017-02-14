@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { ResourceBase, DefaultHeaders, NetworkDelay, NetworkCondition } from './shared/constant';
 
@@ -12,6 +12,10 @@ export class ResourceService {
 
   set customHeaders(headers: Object) {
     this._customHeaders = new Headers(Object.assign(DefaultHeaders, headers));
+  }
+
+  public getHeadersField(name: string): string {
+    return this._customHeaders.get(name);
   }
 
   public get(path, options: Object = {}): Observable<any> {
@@ -27,7 +31,7 @@ export class ResourceService {
       this.resourceBase + path,
       JSON.stringify(body),
       Object.assign({ headers: this._customHeaders }, {})
-    );
+    ).map((res: Response) => res.json());
   }
 
   public put(path: string, body: Object = {}, options: Object = {}): Observable<any> {

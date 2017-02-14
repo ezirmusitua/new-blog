@@ -23,11 +23,7 @@ export class AppComponent implements OnInit {
     // TODO: https://trello.com/c/uXWnUSOJ
     let authStr = this.ls.getSession();
     if (authStr) {
-      const start = Date.now();
-      this.userService.validateSession(Session.constructFromLcStr(authStr)).subscribe((res) => {
-        const end = Date.now();
-        this.resource.network = end - start;
-      });
+      this.userService.validateSession(Session.constructFromLcStr(authStr));
     }
   }
 }

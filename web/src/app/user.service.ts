@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
-import { Observable, Subscription } from 'rxjs';
+import { Subject, Observable, Subscription } from 'rxjs';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { ResourceService } from './resource.service';
@@ -12,12 +12,7 @@ const SESSION_KEY = 'ngkoa.blog.session';
 
 @Injectable()
 export class UserService {
-  defaultHeaders: any = {
-    'Content-Type': 'application/json; charset=UTF-8',
-    Accept: 'application/json',
-  };
   _isVisitor: boolean = true;
-  netWork: number;
   sessionActivateInterval: any;
   constructor(private resouce: ResourceService, private ls: LocalStorage) {
   }
@@ -37,32 +32,29 @@ export class UserService {
     }, 1000)
   }
 
-  public validateSession(session: Session): Observable<{ isAlive: boolean }> {
-    return this.resouce.post(
+  public validateSession(session: Session): void {
+    this.resouce.post(
       '/user/alive',
-      JSON.stringify(session.constructAuthBody())
-    ).map((res: Response) => {
+      session.constructAuthBody()
+    ).subscribe((res) => {
       const auth = { Authorization: null } as any;
       if (res) {
-        const session = new Session(res.json());
+        const session = new Session(res);
         auth.Authorization = session.toAuthString();
         this.resouce.customHeaders = auth;
         this.setSessionActivateInterval();
-        this._isVisitor = false;
       } else {
         localStorage.removeItem(SESSION_KEY);
         this.resouce.customHeaders = auth;
         this._isVisitor = true;
       }
-      return { isAlive: !this._isVisitor };
     });
   }
 
   public login(email: string, password: string): Observable<void> {
     return this.resouce.post(
       '/user/login',
-      JSON.stringify({ email, password }),
-      { headers: new Headers(this.defaultHeaders) }
+      { email, password }
     ).map((data) => {
       const session = new Session(data.json());
       this.resouce.customHeaders = { Authorization: session.toAuthString() };
@@ -73,7 +65,7 @@ export class UserService {
   }
 
   public uniqLogin(email: string, password: string): Subscription {
-    const currentAuthHeader = this.defaultHeaders.Authorization;
+    const currentAuthHeader = this.resouce.getHeadersField('Authorization');
     if (!this._isVisitor) {
       return this.validateSession(Session.constructFromHeader(currentAuthHeader)).subscribe((res) => {
         if (!res.isAlive) {
