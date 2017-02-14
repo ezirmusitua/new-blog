@@ -31,4 +31,12 @@ router.delete('delete', '/:articleId', async (ctx, next) => {
   await next();
 });
 
+router.post('test', '/', async (ctx, next) => {
+  const body = ctx.request.body;
+  console.log(body);
+  ctx.body = JSON.stringify(await ArticleModel.generateCatalog(body.text));
+  await next();
+
+});
+
 export default router;
