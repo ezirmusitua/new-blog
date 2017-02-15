@@ -35,7 +35,9 @@
       true,
       "single"
     ],
-    "semicolon": true,
+    "semicolon": [
+      false
+    ],
     "triple-equals": [
       true,
       "allow-null-check"
@@ -93,7 +95,7 @@
     "eofline": true,
     "max-file-line-count": [
       true,
-      400
+      180
     ],
     "max-line-length": [
       true,

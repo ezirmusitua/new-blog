@@ -1,6 +1,13 @@
 import mongoose from 'mongoose';
 import { APIError } from '../error';
 
+type Callback = (err: any, res: any) => void
+
+interface FindOptions {
+  limit?: number;
+  sort?: { [key: string]: number };
+}
+
 const CatalogCategory = {
   H1: 100,
   H2: 200,
@@ -71,16 +78,21 @@ const specialChar = {
   L: '['
 }
 
-const isLineEnd = (markdownContent: string, currentIndex: number): boolean => {
-  const currentAndNext = markdownContent.slice(currentIndex, 2);
-  return currentAndNext === '  ' || currentAndNext === '/n/n';
+export const calcLineEndSkip = (markdownContent: string, currentIndex: number): number => {
+  const curChar = markdownContent[currentIndex];
+  if (curChar === ' ' && markdownContent.slice(currentIndex, 2) === '  ') {
+    return 2;
+  }
+  if (curChar === '/' && markdownContent.slice(currentIndex, 4)) {
+    return 4;
+  }
+  return 0;
 }
 
-const createCategoryItem = (markdownContent: string, currentIndex: number): [CatalogItem, number] => {
+export const createCategoryItem = (markdownContent: string, currentIndex: number): [CatalogItem, number] => {
   const catalogItem = {} as CatalogItem;
   let hashTagCount = 1;
   let index = currentIndex + 1;
-  console.log(markdownContent.charAt(index) === ' ');
   while (markdownContent.charAt(index) !== ' ') {
     if (markdownContent.charAt(index) === specialChar.H) {
       hashTagCount += 1;
@@ -104,22 +116,24 @@ const createCategoryItem = (markdownContent: string, currentIndex: number): [Cat
     catalogItem.category = CatalogCategory.H5;
   }
   let content = '';
-  while (isLineEnd(markdownContent, index)) {
+  let skipCount = calcLineEndSkip(markdownContent, index);
+  while (!skipCount) {
     content += markdownContent.charAt(index);
     index += 1;
+    skipCount = calcLineEndSkip(markdownContent, index);
   }
-  index += 2;
+  index += skipCount;
   return [catalogItem, index];
 }
 
-const crossImageAndLink = (markdownContent: string, currentIndex: number): number => {
+export const crossImageAndLink = (markdownContent: string, currentIndex: number): number => {
   while (markdownContent.charAt(currentIndex + 1) !== ')') {
     currentIndex += 1;
   }
   return currentIndex + 1;
 }
 
-const generateCatalog = (markdownContent: string): CatalogItem[] => {
+export const generateCatalog = (markdownContent: string): CatalogItem[] => {
   const catalog = [];
   let effectiveLength = 0;
   const totalCharLength = markdownContent.length;
@@ -140,7 +154,6 @@ const generateCatalog = (markdownContent: string): CatalogItem[] => {
       index += 1;
     }
   }
-  console.log(catalog);
   return catalog.map(catalogItem => Object.assign({}, catalogItem, {
     progress: catalogItem.progress / effectiveLength,
   }));
@@ -177,14 +190,41 @@ const constructBody = (_id: string, body: any, createBy?: string): ArticleDocume
   return articleBody;
 }
 
-const create = async (createBy: string, body: any) => {
+const createNew = async (createBy: string, body: any) => {
   await articleModel.create(constructBody(null, body, createBy));
 }
 
-const update = async (_id: string, body: any) => {
+const updateOld = async (_id: string, body: any) => {
   await articleModel.update({ _id }, { $set: constructBody(_id, body) });
+}
+
+const updateAndExec = async (condition: Object, doc: Object, callback?: Callback, execCallback?: Callback): Promise<MongoArticleDocument> => {
+  return await articleModel.update(condition, doc, callback).exec(execCallback);
+}
+
+const listImmutableDocs = async (condition?: Object, projection?: Object, options?: FindOptions, callback?: Callback, execCallback?: Callback): Promise<ArticleDocument[]> => {
+  const {limit, sort} = options || { limit: null, sort: { _id: -1 } };
+  console.log('1111');
+  return await articleModel.find(condition, projection, callback).limit(limit).sort(sort).lean(true).exec(execCallback) as ArticleDocument[];
+}
+
+const findImmutableOne = async (condition: Object, projection?: Object, callback?: Callback, execCallback?: Callback): Promise<ArticleDocument> => {
+  const docs = await listImmutableDocs(condition, projection, { limit: 1 }, callback, execCallback);
+  return ((docs && docs.length) ? docs[0] : null) as ArticleDocument;
+}
+
+const findImmutableById = async (_id: string, projection?: Object, callback?: Callback, execCallback?: Callback): Promise<ArticleDocument> => {
+  return await findImmutableOne({ _id }, projection, callback, execCallback);
 }
 
 const articleModel = mongoose.model<MongoArticleDocument>('Article', articleSchema, 'Article');
 
-export const ArticleModel = Object.assign(articleModel, { generateCatalog, create, update });
+export const ArticleModel = Object.assign(articleModel, {
+  update: updateAndExec,
+  list: listImmutableDocs,
+  fetch: findImmutableOne,
+  fetchById: findImmutableById,
+  generateCatalog,
+  createNew,
+  updateOld,
+});
