@@ -19,6 +19,7 @@ export class ResourceService {
   }
 
   public get(path, options: Object = {}): Observable<any> {
+    console.log(this.resourceBase + path);
     return this.http.get(
       this.resourceBase + path,
       Object.assign({ headers: this._customHeaders }, {})

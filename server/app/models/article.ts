@@ -42,11 +42,21 @@ export interface ArticleDocument {
 const articleSchema = new mongoose.Schema({
   title: {
     type: String,
-    index: true
+    index: true,
+    required: true,
   },
-  updateAt: Date,
-  markdownContent: String,
-  htmlContent: String,
+  updateAt: {
+    type: Number,
+    index: true,
+  },
+  markdownContent: {
+    type: String,
+    required: true,
+  },
+  htmlContent: {
+    type: String,
+    required: true,
+  },
   catalog: {
     type: {
       content: String,
@@ -83,7 +93,7 @@ export const calcLineEndSkip = (markdownContent: string, currentIndex: number): 
   if (curChar === ' ' && markdownContent.slice(currentIndex, 2) === '  ') {
     return 2;
   }
-  if (curChar === '/' && markdownContent.slice(currentIndex, 4)) {
+  if (curChar === '\\' && markdownContent.slice(currentIndex, 4) === '\\n\\n') {
     return 4;
   }
   return 0;

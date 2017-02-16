@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
+import { ResourceService } from './resource.service';
+
+import { Article } from './models/article';
 
 @Injectable()
 export class ArticleService {
-  constructor() { }
-  
-  getArticleById (id: any) {
-    return {data: {title: 'hello world', markdownContent: '__i__', htmlContent: '<i>i</i>', createBy: 'jferroal', createAt: 1484653482441}};
+  base: string = '/article'
+  constructor(private resource: ResourceService) { }
+
+  getArticleById(id: string) {
+    return this.resource.get(this.base + '/' + id).map((res) => new Article(res.json()));
   }
 }

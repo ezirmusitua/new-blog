@@ -10,8 +10,9 @@ router.get('listAllForVisitor', '/', async (ctx, next) => {
 });
 
 router.get('fetchOne', '/:articleId', async (ctx, next) => {
-  const _id = ctx.params.id;
-  ctx.body = await ArticleModel.findOne({ _id }).lean();
+  const _id = ctx.params.articleId;
+  const article = await ArticleModel.fetchById(_id)
+  ctx.body = JSON.stringify(article);
   await next();
 })
 

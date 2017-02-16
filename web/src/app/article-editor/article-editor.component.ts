@@ -1,36 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+
+import { Article } from '../models/article';
 
 import { ArticleService } from '../article.service';
 import { MarkdownService } from '../markdown.service';
-
-class Article {
-  title: string;
-  markdownContent: string;
-  htmlContent: string;
-  createAt: number;
-  updateAt?: number;
-  createBy: any;
-  constructor (body?: any) {
-    this.title = body ? body.title : '';
-    this.markdownContent = body ? body.markdownContent : '';
-    this.htmlContent = body ? body.htmlContent : '';
-    this.createAt = body ? body.createAt : Date.now();
-    if (body && body.updateAt) {
-      this.updateAt = body.updateAt
-    }
-    this.createBy = body ? body.createBy : '';
-  }
-  copy (body: any) {
-    this.title = body.title;
-    this.markdownContent = body.markdownContent;
-    this.htmlContent = body.htmlContent;
-    this.createAt = body.createAt;
-    if (body.updateAt) {
-      this.updateAt = body.updateAt
-    }
-    this.createBy = body.createBy;
-  }
-}
 
 @Component({
   selector: 'jfb-article-editor',
@@ -42,19 +16,28 @@ export class ArticleEditorComponent implements OnInit {
   htmlContent: string = '';
   article: Article = new Article();
 
-  constructor(private MarkdownService: MarkdownService, private ArticleService: ArticleService) { }
+  constructor(
+    private markdownService: MarkdownService,
+    private articleService: ArticleService,
+    private route: ActivatedRoute
+  ) { }
 
-  updatePreview (markdownContent: string) {
-    this.htmlContent = this.MarkdownService.convert(markdownContent);
+  updatePreview(markdownContent: string) {
+    this.htmlContent = this.markdownService.convert(markdownContent);
   }
 
   ngOnInit() {
-    const articleFromServer = this.ArticleService.getArticleById(1);
-    if (articleFromServer.data) {
-      this.article.copy(articleFromServer.data);
-    }
-    this.markdownContent = this.article.markdownContent;
-    this.htmlContent = this.article.htmlContent;
+    this.route.params.subscribe((params) => {
+      const articleId = params['articleId'];
+      if (articleId) {
+        console.log('debug: ', articleId);
+        this.articleService.getArticleById(articleId).subscribe(article => {
+          this.article = article
+          this.markdownContent = this.article.markdownContent;
+          this.htmlContent = this.article.htmlContent;
+        });
+      }
+    });
   }
 
   save() {

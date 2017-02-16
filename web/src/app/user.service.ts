@@ -64,16 +64,12 @@ export class UserService {
     });
   }
 
-  public uniqLogin(email: string, password: string): Subscription {
+  public uniqLogin(email: string, password: string) {
     const currentAuthHeader = this.resouce.getHeadersField('Authorization');
-    if (!this._isVisitor) {
-      return this.validateSession(Session.constructFromHeader(currentAuthHeader)).subscribe((res) => {
-        if (!res.isAlive) {
-          this.login(email, password).subscribe();
-        }
-      });
+    if (this._isVisitor) {
+      this.login(email, password).subscribe();
     } else {
-      return this.login(email, password).subscribe();
+      console.error('already logined');
     }
   }
 
