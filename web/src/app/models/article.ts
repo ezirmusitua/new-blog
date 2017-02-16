@@ -1,4 +1,5 @@
 export class Article {
+  _id?: string;
   title: string;
   updateAt?: number;
   markdownContent: string;
@@ -12,6 +13,7 @@ export class Article {
   viewCategory: number;
   createBy: any;
   constructor(body?: any) {
+    this._id = body ? body._id.toString() : '';
     this.title = body ? body.title : '';
     if (body && body.updateAt) {
       this.updateAt = body.updateAt
@@ -21,7 +23,7 @@ export class Article {
     this.catalog = [];
     if (body && body.catalog && body.catalog.length) {
       this.catalog = body.catalog.map(catalogItem => ({
-        content: catalogItem.content.trim(),
+        content: catalogItem.content ? catalogItem.content.trim() : '',
         category: parseInt(catalogItem.category, 10),
         progress: parseInt(catalogItem.progress, 10),
       })).filter(item => !!item);

@@ -5,7 +5,7 @@ import { ResourceBase, DefaultHeaders, NetworkDelay, NetworkCondition } from './
 
 @Injectable()
 export class ResourceService {
-  _customHeaders: Headers = new Headers();
+  _customHeaders: Headers = new Headers(DefaultHeaders);
   resourceBase: string = ResourceBase;
   _network: number;
   constructor(private http: Http) { }
@@ -18,15 +18,14 @@ export class ResourceService {
     return this._customHeaders.get(name);
   }
 
-  public get(path, options: Object = {}): Observable<any> {
-    console.log(this.resourceBase + path);
+  public get(path, options: Object = {}) {
     return this.http.get(
       this.resourceBase + path,
       Object.assign({ headers: this._customHeaders }, {})
     );
   }
 
-  public post(path: string, body: Object = {}, options: Object = {}): Observable<any> {
+  public post(path: string, body: Object = {}, options: Object = {}) {
     // may be do some validation
     return this.http.post(
       this.resourceBase + path,
@@ -35,16 +34,18 @@ export class ResourceService {
     ).map((res: Response) => res.json());
   }
 
-  public put(path: string, body: Object = {}, options: Object = {}): Observable<any> {
+  public put(path: string, body: Object = {}, options: Object = {}) {
     // may be do some validation
-    return this.http.post(
+    console.log(JSON.stringify(body));
+    console.log(Object.assign({ headers: this._customHeaders }, {}));
+    return this.http.put(
       this.resourceBase + path,
       JSON.stringify(body),
       Object.assign({ headers: this._customHeaders }, {})
     );
   }
 
-  public delete(path: string, options: Object = {}): Observable<any> {
+  public delete(path: string, options: Object = {}) {
     return this.http.delete(
       this.resourceBase + path,
       Object.assign({ headers: this._customHeaders }, {})

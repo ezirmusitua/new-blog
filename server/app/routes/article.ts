@@ -1,5 +1,5 @@
 import Router from 'koa-router';
-import { ArticleModel } from '../models/article';
+import { ArticleModel, generateCatalog } from '../models/article';
 
 const router = new Router({ prefix: '/article' });
 
@@ -19,16 +19,16 @@ router.get('fetchOne', '/:articleId', async (ctx, next) => {
 router.post('create', '/', async (ctx: any, next) => {
   const userId = ctx.session.userId;
   const body = ctx.request.body;
-  await ArticleModel.createNew(userId, body);
-  ctx.body = JSON.stringify({ status: 200, message: 'create success' })
+  const article = await ArticleModel.createNew(userId, body);
+  ctx.body = JSON.stringify(article);
   await next();
 })
 
 router.put('update', '/:articleId', async (ctx, next) => {
   const _id = ctx.params.articleId;
   const body = ctx.request.body;
-  await ArticleModel.updateOld(_id, body);
-  ctx.body = JSON.stringify({ status: 200, message: 'update success' })
+  const article = await ArticleModel.updateOldById(_id, body);
+  ctx.body = JSON.stringify(article);
   await next();
 })
 
@@ -46,6 +46,11 @@ router.delete('hideArticle', '/:articleId', async (ctx, next) => {
   await ArticleModel.update({ _id }, { $set: { viewCategory: 100 } }).exec();
   ctx.body = JSON.stringify({ status: 200, message: 'disable article view for visitor ' })
   await next();
+})
+
+router.get('test', '/test/generateCatalog', (ctx, next) => {
+  const targetStr = "## Test article\n\nthis is an test article\n\nyou want to know test for what?\n\ni wont't tell you ~ \n\n### look at me\n\nfunk you !";
+  ctx.body = generateCatalog(targetStr);
 })
 
 export default router;

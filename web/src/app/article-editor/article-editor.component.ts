@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Article } from '../models/article';
 
@@ -14,27 +14,34 @@ import { MarkdownService } from '../markdown.service';
 export class ArticleEditorComponent implements OnInit {
   markdownContent: string = '';
   htmlContent: string = '';
+  articleId: string;
   article: Article = new Article();
 
   constructor(
     private markdownService: MarkdownService,
     private articleService: ArticleService,
-    private route: ActivatedRoute
+    private currentRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   updatePreview(markdownContent: string) {
     this.htmlContent = this.markdownService.convert(markdownContent);
   }
 
+  private initArticle(article: Article) {
+    this.articleId = article._id;
+    this.article = article;
+    this.markdownContent = this.article.markdownContent;
+    this.htmlContent = this.article.htmlContent;
+  }
+
   ngOnInit() {
-    this.route.params.subscribe((params) => {
+    this.currentRoute.params.subscribe((params) => {
       const articleId = params['articleId'];
       if (articleId) {
-        console.log('debug: ', articleId);
         this.articleService.getArticleById(articleId).subscribe(article => {
-          this.article = article
-          this.markdownContent = this.article.markdownContent;
-          this.htmlContent = this.article.htmlContent;
+          console.log(article);
+          this.initArticle(article);
         });
       }
     });
@@ -43,7 +50,14 @@ export class ArticleEditorComponent implements OnInit {
   save() {
     this.article.markdownContent = this.markdownContent;
     this.article.htmlContent = this.htmlContent;
-    console.log(this.article)
+    this.articleService.save(this.articleId, this.article).subscribe((article) => {
+      if (article && this.articleId && this.articleId === article._id) {
+        this.initArticle(article);
+      }
+      if (article && !this.articleId && article._id) {
+        this.router.navigate(['/article', article._id, '/edit']);
+      }
+    })
     return;
   }
 }
