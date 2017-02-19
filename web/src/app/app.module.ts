@@ -18,6 +18,7 @@ import { ReadingProgressBarComponent } from './reading-progress-bar/reading-prog
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ArticleEditorComponent } from './article-editor/article-editor.component';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
+import { ScrollListeningLoaderDirective } from './scroll-listening-loader.directive';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
     ReadingProgressBarComponent,
     PageNotFoundComponent,
     ArticleEditorComponent,
-    ModalDialogComponent
+    ModalDialogComponent,
+    ScrollListeningLoaderDirective
   ],
   imports: [
     BrowserModule,
