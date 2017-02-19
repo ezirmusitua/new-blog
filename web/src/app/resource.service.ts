@@ -39,7 +39,7 @@ export class ResourceService {
         search: this._constructParams(params),
         headers: this._customHeaders
       }, {})
-    );
+    ).map((res: Response) => res.json());
   }
 
   public post(path: string, body: Object = {}, options: Object = {}) {
@@ -57,14 +57,14 @@ export class ResourceService {
       this.resourceBase + path,
       JSON.stringify(body),
       Object.assign({ headers: this._customHeaders }, {})
-    );
+    ).map((res: Response) => res.json());
   }
 
   public delete(path: string, options: Object = {}) {
     return this.http.delete(
       this.resourceBase + path,
       Object.assign({ headers: this._customHeaders }, {})
-    );
+    ).map((res: Response) => res.json());
   }
 
   get network(): number {

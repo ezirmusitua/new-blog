@@ -23,12 +23,15 @@ export class ArticleService {
   }
 
   getArticleById(id: string) {
-    return this.resource.get('/article/' + id).map(res => new Article(res.json()));
+    return this.resource.get('/article/' + id).map(res => new Article(res));
   }
 
   save(id: string, article: Article) {
     if (id) {
-      return this.resource.put('/admin/article' + '/' + id, article).map(res => new Article(res));
+      return this.resource.put('/admin/article' + '/' + id, article).map(res => {
+        console.log(res);
+        return new Article(res)
+      });
     } else {
       return this.resource.post('/admin/article', article).map(res => new Article(res));
     }

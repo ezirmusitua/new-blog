@@ -206,7 +206,6 @@ const createNew = async (createBy: string, body: any) => {
 }
 
 const updateOldById = async (_id: string, body: any) => {
-  console.log(constructBody(_id, body).viewCategory);
   return await articleModel.update({ _id }, { $set: constructBody(_id, body) }).exec();
 }
 
