@@ -202,7 +202,7 @@ const constructBody = (_id: string, body: any, createBy?: string): ArticleDocume
 }
 
 const createNew = async (createBy: string, body: any) => {
-  await articleModel.create(constructBody(null, body, createBy));
+  return await articleModel.create(constructBody(null, body, createBy));
 }
 
 const updateOldById = async (_id: string, body: any) => {
