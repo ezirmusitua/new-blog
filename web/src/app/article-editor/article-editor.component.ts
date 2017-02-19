@@ -55,7 +55,7 @@ export class ArticleEditorComponent implements OnInit {
         this.initArticle(article);
       }
       if (article && !this.articleId && article._id) {
-        this.router.navigate(['/article', article._id, '/edit']);
+        this.router.navigate(['/article', article._id, 'edit']);
       }
     })
     return;
