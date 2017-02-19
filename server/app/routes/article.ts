@@ -4,8 +4,19 @@ import { ArticleModel, generateCatalog } from '../models/article';
 const router = new Router({ prefix: '/article' });
 
 router.get('listAllForVisitor', '/', async (ctx, next) => {
-  const articles = await ArticleModel.list({ viewCategory: 300 });
-  ctx.body = JSON.stringify(articles);
+  const articles = await ArticleModel.list({ viewCategory: 300 }, {
+    catalog: false,
+    htmlContent: false,
+  });
+  ctx.body = JSON.stringify({
+    count: articles.length,
+    items: articles.map(article => {
+      return Object.assign(article, {
+        description: article.markdownContent.substr(0, 100),
+        markdownContent: ''
+      });
+    })
+  });
   await next();
 })
 

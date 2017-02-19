@@ -1,14 +1,14 @@
 <div class="container">
   <h1 (click)="showLoginDialog()">文章列表</h1>
   <section class="list-container">
-    <article *ngFor="let article of articleList" class="list">
+    <article *ngFor="let article of articles" class="list">
       <time>{{ article.updateAt | date }}</time>
       <div class="info">
         <div>
-          <a [routerLink]="['/article', article.id]" class="title">{{ article.title }}</a>
+          <a [routerLink]="['/article', article._id]" class="title">{{ article.title }}</a>
           <div class="tag" *ngFor="let tag of article.tags">{{ tag }}</div>
           <!--If login, enable edit button-->
-          <a *ngIf="true" [routerLink]="['/article', article.id, 'edit']">edit</a>
+          <a *ngIf="true" [routerLink]="['/article', article._id, 'edit']">edit</a>
         </div>
         <div class="description">{{ article.description }}</div>
       </div>

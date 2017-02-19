@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Article } from '../models/article';
+import { ArticleService } from '../article.service';
 
 @Component({
   selector: 'app-article-list',
@@ -8,22 +10,16 @@ import { Component, OnInit } from '@angular/core';
 export class ArticleListComponent implements OnInit {
   loginCounter: number = 0;
   isShowLoginDialog: boolean = false;
-  articleList = [{
-    id: 1,
-    title: 'hello world ~ 1',
-    updateAt: Date.now(),
-    tags: ['h1', 'h2'],
-    description: 'hello world'
-  }, {
-    id: 2,
-    title: 'hello world ~ 1',
-    updateAt: Date.now(),
-    tags: ['h1', 'h2'],
-    description: 'hello world'
-  }];
-  constructor() { }
+  totalArticleCount: number = 0;
+  articles: Article[] = [];
+  constructor(private articleService: ArticleService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.articleService.listArticleForVisitor().subscribe(res => {
+      this.articles = res.articles;
+      this.totalArticleCount = res.totalCount;
+    });
+  }
 
   private showLoginDialog() {
     if (this.loginCounter < 5) {

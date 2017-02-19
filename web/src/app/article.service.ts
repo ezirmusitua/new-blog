@@ -9,14 +9,17 @@ export class ArticleService {
   constructor(private resource: ResourceService) { }
 
   listArticleForVisitor() {
-    return this.resource.get('/article').map(res => res.json()).map(res => ({
-      totalCount: res.count,
-      articles: res.items.map(article => new Article(article)),
-    }));
+    return this.resource.get('/article').map(res => {
+      console.log(res);
+      return {
+        totalCount: res.count,
+        articles: res.items.map(article => new Article(article)),
+      }
+    });
   }
 
   listArticleForAdmin(query) {
-    return this.resource.get('/article', query).map(res => res.json()).map(res => ({
+    return this.resource.get('/article', query).map(res => ({
       totalCount: res.count,
       articles: res.items.map(article => new Article(article)),
     }));

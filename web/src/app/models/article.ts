@@ -4,6 +4,7 @@ export class Article {
   updateAt?: number;
   markdownContent: string;
   htmlContent: string;
+  description: string;
   catalog: {
     content: string;
     category: number;
@@ -20,6 +21,7 @@ export class Article {
     }
     this.markdownContent = body ? body.markdownContent : '';
     this.htmlContent = body ? body.htmlContent : '';
+    this.description = body ? body.description : '';
     this.catalog = [];
     if (body && body.catalog && body.catalog.length) {
       this.catalog = body.catalog.map(catalogItem => ({
