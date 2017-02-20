@@ -1,10 +1,13 @@
-import { Directive } from '@angular/core';
+import { Directive, HostListener, Input, ElementRef } from '@angular/core';
 
 @Directive({
-  selector: '[appScrollListeningLoader]'
+  selector: '[jfbScrollListeningLoader]'
 })
 export class ScrollListeningLoaderDirective {
-
-  constructor() { }
-
+  @Input() loadMore: () => void;
+  constructor(private el: ElementRef) { }
+  @HostListener('scroll') onscroll() {
+    console.log(this.el.nativeElement.scrollHeight)
+    this.loadMore();
+  }
 }
