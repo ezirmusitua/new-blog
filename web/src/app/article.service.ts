@@ -15,9 +15,10 @@ export class ArticleService {
     return this._loaderListMethod;
   }
 
-  listArticleForVisitor() {
-    return this.resource.get('/article').map(res => {
+  listArticleForVisitor(query: Object = {}) {
+    return this.resource.get('/article', query).map(res => {
       return {
+        marker: res.marker,
         totalCount: res.count,
         articles: res.items.map(article => new Article(article)),
       }

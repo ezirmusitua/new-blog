@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Article } from '../models/article';
 import { ArticleService } from '../article.service';
+import { Subject } from 'rxjs';
 
 import { Loader } from '../shared/loader';
 
@@ -13,24 +14,26 @@ export class ArticleListComponent implements OnInit {
   loginCounter: number = 0;
   isShowLoginDialog: boolean = false;
   totalArticleCount: number = 0;
-  articleLoader: Loader<Article> = new Loader<Article>();
   articles: Article[] = [];
+  needToLoad: boolean = true;
+  loadMoreObservable = new Subject();
+
+  loadMoreQuery: any = { pageSize: 10, marker: null, sortBy: '_id', sortOrder: 1 };
   constructor(private articleService: ArticleService) {
-    this.articleLoader.listMethod = this.articleService.loaderListMethod;
-    console.log(this.articleLoader)
   }
 
   private listArticle() {
-    var articlesObservable = this.articleLoader.load(true);
-    if (articlesObservable) {
-      articlesObservable.subscribe(res => {
-        console.log(res);
-      })
-    }
+    console.log(this.loadMoreQuery);
+    this.articleService.listArticleForVisitor(this.loadMoreQuery).subscribe((res) => {
+      this.articles = this.articles.concat(res.articles);
+      console.log(this.articles, this.articles.length);
+      this.loadMoreQuery.marker = res.marker;
+      this.totalArticleCount = res.totalCount;
+      console.log(this.loadMoreQuery)
+    });
   }
 
   ngOnInit() {
-    console.log(this.articleLoader, this.listArticle);
     this.listArticle();
   }
 
@@ -44,6 +47,10 @@ export class ArticleListComponent implements OnInit {
   }
 
   private loadMore() {
-    console.log(123123);
+    this.loadMoreObservable.subscribe(res => {
+      if (res) {
+        this.listArticle();
+      }
+    });
   }
 }
