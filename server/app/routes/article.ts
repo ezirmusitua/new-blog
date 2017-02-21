@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import Router from 'koa-router';
 import { ArticleModel, generateCatalog } from '../models/article';
 
@@ -6,32 +7,37 @@ const router = new Router({ prefix: '/article' });
 router.get('listAllForVisitor', '/', async (ctx, next) => {
   console.log(ctx.query);
   const pageSize = parseInt(ctx.query.pageSize, 10) || 10;
-  const marker = ctx.query.marker;
+  let marker = ctx.query.marker;
   const sortBy = ctx.query.sortBy || '_id';
   const sortOrder = parseInt(ctx.query.sortOrder, 10) || -1
   const query = { viewCategory: 300 } as any;
-  if (query.sortOrder === -1 && marker) {
-    query[sortBy] = { $gt: marker };
+  const countQuery = { viewCategory: 300 } as any;
+  if (sortBy === '_id' && marker) {
+    marker = mongoose.Types.ObjectId(marker);
   }
-  if (query.sortOrder === 1 && marker) {
+  if (sortOrder === -1 && marker) {
     query[sortBy] = { $lt: marker };
   }
+  if (sortOrder === 1 && marker) {
+    query[sortBy] = { $gt: marker };
+  }
   const options = { limit: pageSize, sort: { [sortBy]: sortOrder } };
-
-  const articles = await ArticleModel.list(query, {
-    catalog: false,
-    htmlContent: false,
-  }, options);
-
+  const [totalCount, articles] = await Promise.all([
+    await ArticleModel.count(countQuery).exec(),
+    await ArticleModel.list(query, {
+      catalog: false,
+      htmlContent: false,
+    }, options)
+  ]);
   ctx.body = JSON.stringify({
-    count: articles.length,
+    count: totalCount,
     items: articles.map(article => {
       return Object.assign(article, {
         description: article.markdownContent.substr(0, 100),
         markdownContent: ''
       });
     }),
-    marker: articles[pageSize - 1][sortBy]
+    marker: articles && articles.length && articles[articles.length - 1][sortBy]
   });
   await next();
 })
