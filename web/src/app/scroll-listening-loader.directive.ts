@@ -1,14 +1,15 @@
-import { Directive, HostListener, Input, ElementRef, EventEmitter } from '@angular/core';
+import { Directive, HostListener, Input, ElementRef, EventEmitter, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 @Directive({
   selector: '[jfbScrollListeningLoader]'
 })
 export class ScrollListeningLoaderDirective {
-  @Input() observable: BehaSubject<any>;
+  @Output('scrolled') divScrolled: EventEmitter<any> = new EventEmitter<any>();
   constructor(private el: ElementRef) { }
-  @HostListener('scroll') onscroll() {
-    console.log(this.el.nativeElement.scrollHeight);
-    // FIXME: check scroll height to set need to load
-    this.observable.onNex
+  @HostListener('scroll')
+  onScroll() {
+    const nativeEl = this.el.nativeElement;
+    const bottomDistance = nativeEl.scrollHeight - nativeEl.scrollTop - nativeEl.offsetHeight;
+    this.divScrolled.emit({ shouldLoad: bottomDistance <= 100 && bottomDistance > 50 });
   }
 }

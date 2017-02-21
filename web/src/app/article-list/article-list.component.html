@@ -1,4 +1,5 @@
-<div class="container" jfbScrollListeningLoader (needToLoad)="needToLoad">
+<div class="container" jfbScrollListeningLoader (scrolled)="scrollLoad($event)">
+  {{ needToLoad }}
   <h1 (click)="showLoginDialog()">文章列表</h1>
   <section class="list-container">
     <article *ngFor="let article of articles" class="list">
