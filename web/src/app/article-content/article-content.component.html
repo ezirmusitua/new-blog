@@ -1,11 +1,12 @@
 <div class="container">
-  <section>
+  <section *ngIf="!isPageLoaded">hello world</section>
+  <section *ngIf="isPageLoaded">
     <article class="info">
       <h3>{{ article.title }}</h3>
-      <a *ngIf="true" [routerLink]="['/article', article.id, 'edit']">edit</a>
+      <a *ngIf="true" [routerLink]="['/article', article._id, 'edit']">edit</a>
     </article>
     <article class="content">
-      <p [innerHtml]="article.content"></p>
+      <p [innerHtml]="article.htmlContent"></p>
     </article>
   </section>
 </div>

@@ -13,12 +13,17 @@ const SESSION_KEY = 'ngkoa.blog.session';
 @Injectable()
 export class UserService {
   _isVisitor: boolean = true;
+  _sessionValidated: Observable<boolean> = new Observable(observer => observer.next(false));
   sessionActivateInterval: any;
-  constructor(private resouce: ResourceService, private ls: LocalStorage) {
+  constructor(private resource: ResourceService, private ls: LocalStorage) {
   }
 
   get isVisitor(): boolean {
     return this._isVisitor;
+  }
+
+  get sessionValidated() {
+    return this._sessionValidated;
   }
 
   private setSessionActivateInterval(): void {
@@ -27,13 +32,13 @@ export class UserService {
     }
     setTimeout(() => {
       this.sessionActivateInterval = setInterval(() => {
-        this.resouce.put('/user/activate').subscribe((res) => console.log('activated'));
+        this.resource.put('/user/activate').subscribe((res) => console.log('activated'));
       }, 15 * TIME.MINUTE);
     }, 1000)
   }
 
   public validateSession(session: Session): void {
-    this.resouce.post(
+    this.resource.post(
       '/user/alive',
       session.constructAuthBody()
     ).subscribe((res) => {
@@ -41,23 +46,27 @@ export class UserService {
       if (res) {
         const session = new Session(res);
         auth.Authorization = session.toAuthString();
-        this.resouce.customHeaders = auth;
+        this.resource.customHeaders = auth;
+        console.log('set header: ', this.resource._customHeaders);
         this.setSessionActivateInterval();
       } else {
         localStorage.removeItem(SESSION_KEY);
-        this.resouce.customHeaders = auth;
+        this.resource.customHeaders = auth;
         this._isVisitor = true;
       }
+      this._sessionValidated = new Observable<boolean>(observer => {
+        observer.next(true);
+      })
     });
   }
 
   public login(email: string, password: string): Observable<void> {
-    return this.resouce.post(
+    return this.resource.post(
       '/user/login',
       { email, password }
     ).map((data) => {
-      const session = new Session(data.json());
-      this.resouce.customHeaders = { Authorization: session.toAuthString() };
+      const session = new Session(data);
+      this.resource.customHeaders = { Authorization: session.toAuthString() };
       this.ls.setSession(session);
       this.setSessionActivateInterval();
       this._isVisitor = false;
@@ -65,7 +74,7 @@ export class UserService {
   }
 
   public uniqLogin(email: string, password: string) {
-    const currentAuthHeader = this.resouce.getHeadersField('Authorization');
+    const currentAuthHeader = this.resource.getHeadersField('Authorization');
     if (this._isVisitor) {
       this.login(email, password).subscribe();
     } else {
@@ -74,8 +83,8 @@ export class UserService {
   }
 
   public logout() {
-    this.resouce.delete('/user/logout').subscribe(() => {
-      this.resouce.customHeaders = { Authorization: null };
+    this.resource.delete('/user/logout').subscribe(() => {
+      this.resource.customHeaders = { Authorization: null };
       this.ls.removeSession();
       this._isVisitor = true;
       clearInterval(this.sessionActivateInterval);

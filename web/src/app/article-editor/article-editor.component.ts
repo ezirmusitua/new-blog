@@ -40,7 +40,6 @@ export class ArticleEditorComponent implements OnInit {
       const articleId = params['articleId'];
       if (articleId) {
         this.articleService.getArticleById(articleId).subscribe(article => {
-          console.log(article);
           this.initArticle(article);
         });
       }

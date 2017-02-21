@@ -31,7 +31,6 @@ export class ArticleListComponent implements OnInit {
   }
 
   private listArticle() {
-    console.log(this.isLoading, this.hasMore);
     if (!this.isLoading && this.hasMore) {
       this.isLoading = true;
       this.articleService.listArticleForVisitor(this.loadMoreQuery).subscribe((res) => {

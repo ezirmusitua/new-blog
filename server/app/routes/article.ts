@@ -42,13 +42,17 @@ router.get('listAllForVisitor', '/', async (ctx, next) => {
   await next();
 })
 
-router.get('fetchOne', '/:articleId', async (ctx, next) => {
+router.get('fetchOne', '/:articleId', async (ctx: any, next) => {
+  let projection = { markdownContent: false } as any;
+  console.log(ctx.session);
+  if (ctx.session && ctx.session.userId) {
+    projection = {};
+  }
   const _id = ctx.params.articleId;
-  const article = await ArticleModel.fetchById(_id)
+  const article = await ArticleModel.fetchById(_id, projection);
   ctx.body = JSON.stringify(article);
   await next();
 })
-
 
 router.get('test', '/test/generateCatalog', (ctx, next) => {
   const targetStr = "## Test article\n\nthis is an test article\n\nyou want to know test for what?\n\ni wont't tell you ~ \n\n### look at me\n\nfunk you !";

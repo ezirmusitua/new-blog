@@ -33,6 +33,7 @@ export class ResourceService {
   }
 
   public get(path, params: Object = {}, options: Object = {}) {
+    console.log('custom headers: ', this._customHeaders);
     return this.http.get(
       this.resourceBase + path,
       Object.assign({

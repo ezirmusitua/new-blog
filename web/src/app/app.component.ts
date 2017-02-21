@@ -15,6 +15,7 @@ const SESSION_KEY = 'ngkoa.blog.session';
   providers: [MarkdownService]
 })
 export class AppComponent implements OnInit {
+  isSessionValidated: boolean = false;
   constructor(private userService: UserService, private resource: ResourceService, private ls: LocalStorage) { }
 
   ngOnInit() {
@@ -23,6 +24,9 @@ export class AppComponent implements OnInit {
     // TODO: https://trello.com/c/uXWnUSOJ
     let authStr = this.ls.getSession();
     if (authStr) {
+      const subscription = this.userService.sessionValidated.subscribe(isValidated => {
+        this.isSessionValidated = isValidated;
+      });
       this.userService.validateSession(Session.constructFromLcStr(authStr));
     }
   }
