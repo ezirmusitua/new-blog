@@ -19,6 +19,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ArticleEditorComponent } from './article-editor/article-editor.component';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 import { ScrollListeningLoaderDirective } from './scroll-listening-loader.directive';
+import { RxSubjectService } from './shared/rx-subject.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { ScrollListeningLoaderDirective } from './scroll-listening-loader.direct
     HttpModule,
     AppRoutingModule,
   ],
-  providers: [ArticleService, UserService, ResourceService, LocalStorage],
+  providers: [ArticleService, UserService, ResourceService, LocalStorage, RxSubjectService],
   bootstrap: [AppComponent, FloatingNavBtnComponent]
 })
 

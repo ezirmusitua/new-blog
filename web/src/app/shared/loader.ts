@@ -34,7 +34,6 @@ export class Loader<T> {
 
   public load(forceLoad: boolean = false) {
     if (this._items.length !== this._count || forceLoad) {
-      console.log(this._listMethod);
       return this._listMethod(this.loaderQuery).map((res) => {
         if (res.marker) {
           this.loaderQuery.marker = res.marker;

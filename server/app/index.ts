@@ -29,6 +29,6 @@ app.use(async (ctx: any, next) => {
 });
 app.use(router.routes());
 app.use(router.allowedMethods());
-app.listen(port, () => console.log('hello world'));
+app.listen(port, () => console.log('listening on port 3000'));
 
 export default app;

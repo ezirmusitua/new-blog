@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Session } from './models/session';
 import { LocalStorageKeyEnum } from './shared/constant';
 
+@Injectable()
 export class LocalStorage {
   constructor() { };
 

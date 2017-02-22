@@ -21,7 +21,6 @@ export class ArticleContentComponent implements OnInit {
       const articleId = params['articleId'];
       if (articleId) {
         this.articleService.getArticleById(articleId).subscribe(article => {
-          console.log('article: ', article);
           this.article = article;
           this.isPageLoaded = true;
         });

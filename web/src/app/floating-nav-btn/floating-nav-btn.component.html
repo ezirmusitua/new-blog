@@ -1,5 +1,3 @@
 <section class="container">
-  <div>nav1</div>
-  <div>nav2</div>
-  <div>nav3</div>
+  <div *ngFor="let button of buttons" (click)="act(button.action)">{{button.label}}</div>
 </section>

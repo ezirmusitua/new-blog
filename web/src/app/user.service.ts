@@ -47,7 +47,6 @@ export class UserService {
         const session = new Session(res);
         auth.Authorization = session.toAuthString();
         this.resource.customHeaders = auth;
-        console.log('set header: ', this.resource._customHeaders);
         this.setSessionActivateInterval();
       } else {
         localStorage.removeItem(SESSION_KEY);

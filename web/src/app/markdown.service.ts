@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as marked from 'marked';
+
 interface IMarkdownConfig {
   sanitize?: boolean,
   gfm?: boolean,
@@ -20,7 +21,7 @@ export class MarkdownService {
   }
 
   convert(markdown: string): string {
-    if(!markdown) {
+    if (!markdown) {
       return '';
     }
     return this.md.parse(markdown);

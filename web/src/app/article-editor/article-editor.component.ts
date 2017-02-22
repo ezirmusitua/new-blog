@@ -51,7 +51,6 @@ export class ArticleEditorComponent implements OnInit {
     this.article.htmlContent = this.htmlContent;
     this.articleService.save(this.articleId, this.article).subscribe((article) => {
       if (article && this.articleId && this.articleId === article._id) {
-        console.log('after edit: ', article)
         this.initArticle(article);
       }
       if (article && !this.articleId && article._id) {

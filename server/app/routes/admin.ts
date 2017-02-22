@@ -25,7 +25,6 @@ router.post('create', '/article', async (ctx: any, next) => {
   const body = ctx.request.body;
   const article = await ArticleModel.createNew(userId, body);
   ctx.body = JSON.stringify(article);
-  console.log(article);
   await next();
 })
 
