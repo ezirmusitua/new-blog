@@ -1,15 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.64);
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 300;
+  color: rgba(0, 0, 0, 0.64);
+}
+
+a {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.64)
+}
+
+p {
+  color: rgba(0, 0, 0, 0.64);
+  cursor: default;
+}
+
 .out-container {
   position: relative;
   background-color: #D5D5D5;
   display: flex;
-  padding: 0 256px;
+  padding: 0 368px;
+  background-color: rgba(0, 0, 0, 0.06);
 }
 .out-container jfb-root {
   width: 100%;
-  background: white;
-  padding: 48px 96px;
-  min-height: 840px;
+  padding-left: 96px;
+  padding-right: 96px;
+  min-height: 901px;
   box-sizing: border-box;
 }
 
@@ -17,4 +44,24 @@
   position: fixed;
   bottom: 80px;
   right: 192px;
+}
+
+.color-out-container-bg {
+  background-color: rgb(41, 107, 98);
+}
+
+.color-container-bg {
+  background-color: rgba(152, 231, 198, 0.7)
+}
+
+.color-main-text {
+  color: rgb(188, 181, 169);
+}
+
+.out- {
+  background-color: rgba(205, 114, 41, 0.47);
+}
+
+.color-coffee-2 {
+  color: rgb(128, 53, 23);
 }
