@@ -7,12 +7,24 @@ h1 {
   font-size: 32px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.64);
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.32);;
 }
 
 h2 {
   font-size: 24px;
-  font-weight: 300;
+  font-weight: 500;
   color: rgba(0, 0, 0, 0.64);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.32);;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.64);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.32);;
 }
 
 a {
@@ -25,17 +37,23 @@ p {
   cursor: default;
 }
 
+.article-content p {
+  margin-top: 1em;
+  line-height: 108%;
+  margin-left: 0.8em;
+  font-size: 18px;
+}
+
 .out-container {
   position: relative;
   background-color: #D5D5D5;
   display: flex;
-  padding: 0 368px;
+  padding: 0 436px;
   background-color: rgba(0, 0, 0, 0.06);
 }
 .out-container jfb-root {
   width: 100%;
-  padding-left: 96px;
-  padding-right: 96px;
+  padding: 0 138px;
   min-height: 901px;
   box-sizing: border-box;
 }

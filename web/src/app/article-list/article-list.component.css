@@ -10,7 +10,6 @@
 
 .list-container {    
   padding-top: 96px;
-  padding-left: 48px;
   padding-bottom: 48px;
 }
 
@@ -24,18 +23,9 @@
   padding-right: 36px;
   font-size: 24px;
   color: rgba(0, 0, 0, 0.64);
+  min-width: 178px;
+  border-right: 4px solid rgba(128, 53, 23, 0.65);
 }
-
-.list .line {
-  width: 4px;
-  background-color:  rgba(205, 114, 41, 0.47);
-}
-
-.list .line {
-  width: 4px;
-  background-color:  rgba(128, 53, 23, 0.65);
-}
-
 
 .info {
   margin-left: 48px;
