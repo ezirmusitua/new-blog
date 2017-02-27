@@ -1,4 +1,22 @@
+:host {
+  display: flex;
+  flex: 1;
+}
+
 .container {
-  width: 100%;
+  display: flex;
+  flex: 1;
+}
+
+.article-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.article-content .content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
 

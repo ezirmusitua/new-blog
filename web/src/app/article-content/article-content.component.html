@@ -1,10 +1,10 @@
 <div class="container">
   <section *ngIf="!isPageLoaded">hello world</section>
-  <section *ngIf="isPageLoaded">
+  <section class="article-content" *ngIf="isPageLoaded">
     <article class="info">
       <h1>{{ article.title }}</h1>
     </article>
-    <article class="article-content" [innerHtml]="article.htmlContent">
+    <article class="content" [innerHtml]="article.htmlContent">
     </article>
   </section>
 </div>

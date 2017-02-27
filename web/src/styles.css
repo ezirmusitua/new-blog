@@ -8,6 +8,7 @@ h1 {
   font-weight: 500;
   color: rgba(0, 0, 0, 0.64);
   padding-bottom: 24px;
+  margin: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.32);;
 }
 
@@ -16,7 +17,7 @@ h2 {
   font-weight: 500;
   color: rgba(0, 0, 0, 0.64);
   padding-bottom: 8px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.32);;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.32);
 }
 
 h3 {
@@ -50,12 +51,7 @@ p {
   display: flex;
   padding: 0 436px;
   background-color: rgba(0, 0, 0, 0.06);
-}
-.out-container jfb-root {
-  width: 100%;
-  padding: 0 138px;
-  min-height: 901px;
-  box-sizing: border-box;
+  height: 100vh;
 }
 
 .out-container .floating-nav-btn {

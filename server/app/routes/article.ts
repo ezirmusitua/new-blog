@@ -5,7 +5,6 @@ import { ArticleModel, generateCatalog } from '../models/article';
 const router = new Router({ prefix: '/article' });
 
 router.get('listAllForVisitor', '/', async (ctx, next) => {
-  console.log(ctx.query);
   const pageSize = parseInt(ctx.query.pageSize, 10) || 10;
   let marker = ctx.query.marker;
   const sortBy = ctx.query.sortBy || '_id';
@@ -43,13 +42,8 @@ router.get('listAllForVisitor', '/', async (ctx, next) => {
 })
 
 router.get('fetchOne', '/:articleId', async (ctx: any, next) => {
-  let projection = { markdownContent: false } as any;
-  console.log(ctx.session);
-  if (ctx.session && ctx.session.userId) {
-    projection = {};
-  }
   const _id = ctx.params.articleId;
-  const article = await ArticleModel.fetchById(_id, projection);
+  const article = await ArticleModel.fetchById(_id);
   ctx.body = JSON.stringify(article);
   await next();
 })
