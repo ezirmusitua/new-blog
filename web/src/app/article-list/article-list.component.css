@@ -1,10 +1,14 @@
 :host {
+  display: flex;
+  flex: 1;
+}
+.container {
   overflow-y: scroll;
   display: flex;
   flex: 1;
 }
 
-:host::-webkit-scrollbar {
+.container::-webkit-scrollbar {
   width: 0;
 }
 

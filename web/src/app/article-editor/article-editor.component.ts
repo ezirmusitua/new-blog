@@ -50,11 +50,10 @@ export class ArticleEditorComponent implements OnInit {
     this.article.markdownContent = this.markdownContent;
     this.article.htmlContent = this.htmlContent;
     this.articleService.save(this.articleId, this.article).subscribe((article) => {
-      if (article && this.articleId && this.articleId === article._id) {
-        this.initArticle(article);
-      }
-      if (article && !this.articleId && article._id) {
+      if (!this.articleId) {
         this.router.navigate(['/article', article._id, 'edit']);
+      } else {
+        this.router.navigate(['/article', this.articleId, 'edit']);
       }
     })
     return;

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as marked from 'marked';
+import * as highlight from 'highlight.js';
 
 interface IMarkdownConfig {
   sanitize?: boolean,
@@ -13,7 +14,11 @@ export class MarkdownService {
   private md: MarkedStatic;
 
   constructor() {
-    this.md = marked.setOptions({});
+    this.md = marked.setOptions({
+      highlight: (code, lang) => {
+        return highlight.highlightAuto(code, [lang]).value;
+      }
+    });
   }
 
   setConfig(config: IMarkdownConfig) {

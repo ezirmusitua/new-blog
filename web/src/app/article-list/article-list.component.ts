@@ -25,6 +25,7 @@ export class ArticleListComponent implements OnInit {
   }
 
   private scrollLoad(event) {
+    console.log(event);
     if (event.shouldLoad) {
       this.listArticle();
     }
