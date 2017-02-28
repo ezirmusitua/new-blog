@@ -120,12 +120,6 @@ pre {
   height: 100vh;
 }
 
-.out-container .floating-nav-btn {
-  position: fixed;
-  bottom: 80px;
-  right: 192px;
-}
-
 .color-out-container-bg {
   background-color: rgb(41, 107, 98);
 }
