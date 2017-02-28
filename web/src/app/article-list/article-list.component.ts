@@ -44,13 +44,4 @@ export class ArticleListComponent implements OnInit {
       });
     }
   }
-
-  private showLoginDialog() {
-    if (this.loginCounter < 5) {
-      this.loginCounter += 1;
-    } else {
-      this.isShowLoginDialog = true;
-      this.loginCounter = 0;
-    }
-  }
 }

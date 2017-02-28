@@ -31,7 +31,7 @@ import { RxSubjectService } from './shared/rx-subject.service';
     PageNotFoundComponent,
     ArticleEditorComponent,
     ModalDialogComponent,
-    ScrollListeningLoaderDirective
+    ScrollListeningLoaderDirective,
   ],
   imports: [
     BrowserModule,

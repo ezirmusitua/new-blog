@@ -76,6 +76,7 @@ export class FloatingNavBtnComponent implements OnInit {
   }
   ngOnInit() {
     this._subject = this.subjects.floatingNavBtnSubject;
+    console.log(this.subjects.floatingNavBtnSubject);
   }
 
   private initHomePage() {

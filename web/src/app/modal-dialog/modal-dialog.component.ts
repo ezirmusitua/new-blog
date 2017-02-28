@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, trigger, state, style, animate, transition } from '@angular/core';
 import { UserService } from '../user.service';
-
+import { RxSubjectService } from '../shared/rx-subject.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'jfb-modal-dialog',
   templateUrl: './modal-dialog.component.html',
@@ -18,18 +19,22 @@ import { UserService } from '../user.service';
   ]
 })
 export class ModalDialogComponent implements OnInit {
-  @Input() closable: boolean = true;
-  @Input() visible: boolean;
-  @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  visible: boolean = false;
+  floatingNavSubscription: Subscription;
   password: string = '';
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private subjects: RxSubjectService,
+  ) { }
 
   ngOnInit() {
+    this.floatingNavSubscription = this.subjects.floatingNavBtnSubject.subscribe(() => {
+      this.visible = true;
+    });
   }
 
   close() {
     this.visible = false;
-    this.visibleChange.emit(this.visible);
   }
 
   login() {
@@ -38,6 +43,5 @@ export class ModalDialogComponent implements OnInit {
     this.userService.uniqLogin(email, password);
     this.password = '';
     this.visible = false;
-    this.visibleChange.emit(this.visible);
   }
 }
