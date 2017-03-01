@@ -7,6 +7,7 @@ import { ResourceService } from './resource.service';
 import { LocalStorage } from './localStorage.service';
 import { Session } from './models/session';
 import { TIME } from './shared/constant';
+import { Md5 } from 'ts-md5/dist/md5';
 
 const SESSION_KEY = 'ngkoa.blog.session';
 
@@ -62,7 +63,7 @@ export class UserService {
   public login(email: string, password: string): Observable<void> {
     return this.resource.post(
       '/user/login',
-      { email, password }
+      { email, password: Md5.hashStr(password) }
     ).map((data) => {
       const session = new Session(data);
       this.resource.customHeaders = { Authorization: session.toAuthString() };

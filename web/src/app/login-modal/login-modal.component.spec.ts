@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { ModalDialogComponent } from './modal-dialog.component';
+import { ModalDialogComponent } from './login-modal.component';
 
 describe('ModalDialogComponent', () => {
   let component: ModalDialogComponent;
@@ -11,9 +11,9 @@ describe('ModalDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalDialogComponent ]
+      declarations: [ModalDialogComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

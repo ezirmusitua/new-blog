@@ -14,7 +14,6 @@ export class Article {
   viewCategory: number;
   createBy: any;
   constructor(body?: any) {
-    console.log('new body: ', body);
     this._id = body ? body._id.toString() : '';
     this.title = body ? body.title : '';
     if (body && body.updateAt) {

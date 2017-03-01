@@ -3,9 +3,9 @@ import { UserService } from '../user.service';
 import { RxSubjectService } from '../shared/rx-subject.service';
 import { Subscription } from 'rxjs';
 @Component({
-  selector: 'jfb-modal-dialog',
-  templateUrl: './modal-dialog.component.html',
-  styleUrls: ['./modal-dialog.component.css'],
+  selector: 'jfb-login-modal',
+  templateUrl: './login-modal.component.html',
+  styleUrls: ['./login-modal.component.css'],
   animations: [
     trigger('dialog', [
       transition('void => *', [
@@ -18,7 +18,7 @@ import { Subscription } from 'rxjs';
     ])
   ]
 })
-export class ModalDialogComponent implements OnInit {
+export class LoginModalComponent implements OnInit {
   visible: boolean = false;
   floatingNavSubscription: Subscription;
   email: string = '';

@@ -17,9 +17,10 @@ import { ArticleContentComponent } from './article-content/article-content.compo
 import { ReadingProgressBarComponent } from './reading-progress-bar/reading-progress-bar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ArticleEditorComponent } from './article-editor/article-editor.component';
-import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
+import { LoginModalComponent } from './login-modal/login-modal.component';
 import { ScrollListeningLoaderDirective } from './scroll-listening-loader.directive';
 import { RxSubjectService } from './shared/rx-subject.service';
+import { ObjectSvgComponent } from './shared/object-svg/object-svg.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +31,9 @@ import { RxSubjectService } from './shared/rx-subject.service';
     ReadingProgressBarComponent,
     PageNotFoundComponent,
     ArticleEditorComponent,
-    ModalDialogComponent,
+    LoginModalComponent,
     ScrollListeningLoaderDirective,
+    ObjectSvgComponent,
   ],
   imports: [
     BrowserModule,

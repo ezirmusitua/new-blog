@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { Subject } from 'rxjs';
 
+import { UserService } from '../user.service';
 import { RxSubjectService } from '../shared/rx-subject.service';
 
 const homePageUrlPattern = /\//;
@@ -12,9 +13,12 @@ const articleEditUrlPattern = /\/article\/(\w{24})\/edit/;
 const articleCreateUrlPattern = /\/article/;
 
 interface NavButton {
+  in: string[];
   label?: string;
-  iconHref: string;
+  iconSrc: string;
   action: any;
+  isShow?: boolean;
+  needLogin?: boolean;
 }
 
 const matchCurrentRouteUrl = (target: string): any => {
@@ -49,58 +53,124 @@ const matchCurrentRouteUrl = (target: string): any => {
 })
 export class FloatingNavBtnComponent implements OnInit {
   _subject: Subject<any>;
+  currentState: string;
+  currentId: string;
   buttons: NavButton[] = [];
   constructor(
     private router: Router,
-    private subjects: RxSubjectService) {
+    private subjects: RxSubjectService,
+    private userService: UserService
+  ) {
     this.router.events.subscribe(change => {
-      console.log(change);
       const matchRes = matchCurrentRouteUrl(change.url);
-      if (matchRes.type === 'home') {
-        this.initHomePage();
-        console.log('in home page/list');
-      }
-      if (matchRes.type === 'article-view') {
-        this.initArticleView(matchRes.id)
-        console.log('in article view');
-      }
-      if (matchRes.type === 'article-edit') {
-        this.initArticleCreateAndEdit(matchRes.id);
-        console.log('in article edit');
-      }
-      if (matchRes.type === 'article-create') {
-        this.initArticleCreateAndEdit();
-        console.log('in article create');
-      }
+      this.currentState = matchRes.type;
+      this.currentId = matchRes.id;
     })
   }
   ngOnInit() {
     this._subject = this.subjects.floatingNavBtnSubject;
-    console.log(this.subjects.floatingNavBtnSubject);
-  }
-
-  private initHomePage() {
     this.buttons = [
-      { label: 'Login', iconHref: '/', action: { next: { type: 'dialog', dialogType: 'login' } } },
-      { label: 'About me', iconHref: '/', action: { redirect: '/about-me', params: [] } },
-      { label: 'Friend links', iconHref: '/', action: { redirect: '/friend-link' } },
-    ];
-  }
-
-  private initArticleView(articleId?: string) {
-    this.buttons = [
-      { label: 'Home', iconHref: '/', action: { redirect: '/', params: [] } },
-      { label: 'Resources', iconHref: '/', action: { redirect: '/resources', params: [articleId] } },
-      { label: 'Reading', iconHref: '/', action: { redirect: '/article', params: [articleId, 'zen'] } },
+      {
+        in: ['home', 'article-view'],
+        label: '登录',
+        iconSrc: 'assets/icons/ic_account_circle_white_24px.svg',
+        isShow: true,
+        action: {
+          next: {
+            type: 'dialog', dialogType: 'login'
+          }
+        }
+      },
+      {
+        in: ['home'],
+        label: '关于我',
+        iconSrc: 'assets/icons/ic_assignment_ind_white_24px.svg',
+        action: {
+          redirect: '/about-me', params: []
+        }
+      },
+      {
+        in: ['home'],
+        label: '友链',
+        iconSrc: 'assets/icons/ic_group_white_24px.svg',
+        isShow: false,
+        action: {
+          redirect: '/friend-link'
+        }
+      },
+      {
+        in: ['article-create', 'article-edit'],
+        label: '预览',
+        iconSrc: 'assets/icons/ic_pageview_white_24px.svg',
+        isShow: true,
+        needLogin: true,
+        action: {
+          next: { type: 'articleEdit', editType: 'preview', id: this.currentId }
+        }
+      },
+      {
+        in: ['article-create', 'article-edit'],
+        label: '保存',
+        iconSrc: 'assets/icons/ic_save_white_24px.svg',
+        isShow: true,
+        needLogin: true,
+        action: {
+          next: {
+            type: 'articleEdit', editType: 'save', id: this.currentId
+          }
+        }
+      },
+      {
+        in: ['article-create', 'article-edit'],
+        label: '发布',
+        iconSrc: 'assets/icons/ic_publish_white_24px.svg',
+        isShow: true,
+        needLogin: true,
+        action: {
+          next: {
+            type: 'articleEdit', editType: 'publish', id: this.currentId
+          }
+        }
+      },
+      {
+        in: ['article-view'],
+        label: '主页',
+        iconSrc: 'assets/icons/ic_home_white_24px.svg',
+        isShow: true,
+        action: {
+          redirect: '/', params: []
+        }
+      },
+      {
+        in: ['article-view'],
+        label: '资源',
+        iconSrc: 'assets/icons/ic_file_download_white_24px.svg',
+        needLogin: true,
+        action: {
+          redirect: '/resources', params: [this.currentId]
+        }
+      },
+      {
+        in: ['article-view'],
+        label: '阅读模式',
+        iconSrc: 'assets/icons/ic_chrome_reader_mode_white_24px.svg',
+        needLogin: true,
+        action: {
+          redirect: '/article', params: [this.currentId, 'zen']
+        }
+      },
     ]
   }
 
-  private initArticleCreateAndEdit(articleId?: string) {
-    this.buttons = [
-      { label: 'Preview', iconHref: '/', action: { next: { type: 'articleEdit', editType: 'preview', id: articleId } } },
-      { label: 'Save', iconHref: '/', action: { next: { type: 'articleEdit', editType: 'save', id: articleId } } },
-      { label: 'Publish', iconHref: '/', action: { next: { type: 'articleEdit', editType: 'publish', id: articleId } } },
-    ]
+  private filteredButtons() {
+    const tmp = this.buttons.filter((button) => {
+      const isVisitor = this.userService.isVisitor;
+      if (!button.isShow) return false;
+      if (isVisitor && button.needLogin) return false;
+      return button.in.indexOf(this.currentState) > -1;
+    });
+    console.log('buttons: ', tmp);
+    return tmp;
   }
 
   private act(action) {
