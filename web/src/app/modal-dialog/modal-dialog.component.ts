@@ -21,6 +21,7 @@ import { Subscription } from 'rxjs';
 export class ModalDialogComponent implements OnInit {
   visible: boolean = false;
   floatingNavSubscription: Subscription;
+  email: string = '';
   password: string = '';
   constructor(
     private userService: UserService,
@@ -38,9 +39,7 @@ export class ModalDialogComponent implements OnInit {
   }
 
   login() {
-    const email = 'jferroal@gmail.com';
-    const password = '123456';
-    this.userService.uniqLogin(email, password);
+    this.userService.uniqLogin(this.email, this.password);
     this.password = '';
     this.visible = false;
   }

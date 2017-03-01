@@ -1,15 +1,20 @@
 <div [@dialog] *ngIf="visible" class="dialog">
-  <div class="close-icon-container"><span>Close</span></div>
-  <div class="login-img">
+  <div class="close-icon-container" (click)="close()">
+    <object type="image/svg+xml" data="assets/icons/ic_close_white_24px.svg" class="close-icon">
+      关闭
+    </object>
+    <span>Close</span>
+  </div>
+  <div class="login-img-container">
     <img width="96" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=hello-world&w=96&h=96">
   </div>
   <form #loginForm="ngForm" (ngSubmit)="login()">
     <div class="email-input-container">
-      <input name="emailInput" placeholder="Email" type="email">
+      <input [(ngModel)]="email" name="emailInput" placeholder="Email" type="email">
     </div>
     <div class="password-input-container">
-      <input name="passwordInput" placeholder="Password" type="password">
+      <input [(ngModel)]="password" name="passwordInput" placeholder="Password" type="password">
     </div>
-    <button type="submit">Sumbit</button>
+    <button type="submit">登陆</button>
   </form>
 </div>

@@ -1,13 +1,14 @@
 .dialog {
   width: 320px;
-  height: 340px;
+  height: 360px;
   position: absolute;
-  right: 50%;
+  right: 50vw;
+  bottom: 50vh;
   background-color: rgb(152, 231, 198);
   transform: translateX(128px);
   border: 1px solid grey;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
+  border-radius: 8px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -18,18 +19,35 @@
 .dialog form {
   display: flex;
   flex-direction: column;
-  flex: 1;
 }
 
 .close-icon-container {
-  flex: 1;
+  display: flex;
+  width: 272px;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.85);
+  border-radius: 8px;
+  background-color: rgba(255, 65, 0, 0.86);
+  cursor: pointer;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
 }
 
-.login-img {
-  flex: 1;
-  padding-top: 64px;
+.close-icon-container:hover {
+  color: rgba(255, 65, 0, 0.86);
+  background-color: rgba(255, 255, 255, 0.85);
 }
 
+.close-icon-container span {
+  line-height: 32px;
+}
+
+.close-icon {
+  fill: rgba(255, 255, 255, 0.85);
+}
+
+.login-img-container {
+  margin-top: 64px;
+}
 
 input {
   height: 32px;
@@ -50,11 +68,17 @@ input {
 }
 
 button {
-  background-color: seagreen;
-  font-size: 14px;
-  color: white;
-  height: 32px;
+  background-color: rgba(0, 105, 255, 1);
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 32px;
   width: 272px;
   border: none;
   border-radius: 8px;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  color: rgba(0, 105, 255, 1);
+  background-color: rgba(255, 255, 255, 0.85);
 }
