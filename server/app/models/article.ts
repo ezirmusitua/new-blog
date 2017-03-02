@@ -206,7 +206,7 @@ const createNew = async (createBy: string, body: any) => {
 }
 
 const updateOldById = async (_id: string, body: any) => {
-  return await articleModel.update({ _id }, { $set: constructBody(_id, body) }).exec();
+  return await articleModel.findOneAndUpdate({ _id }, { $set: constructBody(_id, body) }, { new: true }).exec();
 }
 
 const listImmutableDocs = async (condition?: Object, projection?: Object, options?: FindOptions, callback?: Callback, execCallback?: Callback): Promise<ArticleDocument[]> => {

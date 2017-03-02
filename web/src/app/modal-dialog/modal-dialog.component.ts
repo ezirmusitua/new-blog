@@ -29,8 +29,10 @@ export class ModalDialogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.floatingNavSubscription = this.subjects.floatingNavBtnSubject.subscribe(() => {
-      this.visible = true;
+    this.floatingNavSubscription = this.subjects.floatingNavBtnSubject.subscribe((res) => {
+      if (res.category === 400) {
+        this.visible = true;
+      }
     });
   }
 

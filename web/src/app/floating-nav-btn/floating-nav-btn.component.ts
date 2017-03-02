@@ -81,7 +81,7 @@ export class FloatingNavBtnComponent implements OnInit {
 
   private initHomePage() {
     this.buttons = [
-      { label: 'Login', iconHref: '/', action: { next: { type: 'dialog', dialogType: 'login' } } },
+      { label: 'Login', iconHref: '/', action: { next: { category: 400 } } },
       { label: 'About me', iconHref: '/', action: { redirect: '/about-me', params: [] } },
       { label: 'Friend links', iconHref: '/', action: { redirect: '/friend-link' } },
     ];
@@ -97,9 +97,9 @@ export class FloatingNavBtnComponent implements OnInit {
 
   private initArticleCreateAndEdit(articleId?: string) {
     this.buttons = [
-      { label: 'Preview', iconHref: '/', action: { next: { type: 'articleEdit', editType: 'preview', id: articleId } } },
-      { label: 'Save', iconHref: '/', action: { next: { type: 'articleEdit', editType: 'save', id: articleId } } },
-      { label: 'Publish', iconHref: '/', action: { next: { type: 'articleEdit', editType: 'publish', id: articleId } } },
+      { label: 'Preview', iconHref: '/', action: { next: { category: 200 } } },
+      { label: 'Save', iconHref: '/', action: { next: { category: 100 } } },
+      { label: 'Publish', iconHref: '/', action: { next: { category: 300 } } },
     ]
   }
 
