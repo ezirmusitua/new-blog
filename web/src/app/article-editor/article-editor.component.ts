@@ -3,8 +3,10 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Article } from '../models/article';
 
+import { RxSubjectService } from '../shared/rx-subject.service';
 import { ArticleService } from '../article.service';
 import { MarkdownService } from '../markdown.service';
+import { Subject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'jfb-article-editor',
@@ -15,11 +17,13 @@ export class ArticleEditorComponent implements OnInit {
   markdownContent: string = '';
   htmlContent: string = '';
   articleId: string;
+  floatingNavSubject: Subscription;
   article: Article = new Article();
 
   constructor(
     private markdownService: MarkdownService,
     private articleService: ArticleService,
+    private subjects: RxSubjectService,
     private currentRoute: ActivatedRoute,
     private router: Router
   ) { }
@@ -44,18 +48,44 @@ export class ArticleEditorComponent implements OnInit {
         });
       }
     });
+    this.floatingNavSubject = this.subjects.floatingNavBtnSubject.subscribe((res) => {
+      if (res.category === 100) {
+        this.save();
+      }
+      if (res.category === 200) {
+        this.preview();
+      }
+      if (res.category === 300) {
+        this.publish();
+      }
+    })
+  }
+
+  _update() {
+    this.article.markdownContent = this.markdownContent;
+    this.article.htmlContent = this.htmlContent;
+    return this.articleService.save(this.articleId, this.article);
   }
 
   save() {
-    this.article.markdownContent = this.markdownContent;
-    this.article.htmlContent = this.htmlContent;
-    this.articleService.save(this.articleId, this.article).subscribe((article) => {
-      if (!this.articleId) {
-        this.router.navigate(['/article', article._id, 'edit']);
-      } else {
-        this.router.navigate(['/article', this.articleId, 'edit']);
-      }
-    })
-    return;
+    this.article.viewCategory = 100;
+    this._update().subscribe((article) => {
+      this.router.navigate(['/']);
+    });
+  }
+
+  preview() {
+    this.article.viewCategory = 200;
+    this._update().subscribe((article) => {
+      this.router.navigate(['/article', article._id, 'preview']);
+    });
+  }
+
+  publish() {
+    this.article.viewCategory = 300;
+    this._update().subscribe((article) => {
+      console.log()
+      this.router.navigate(['/article', article._id]);
+    });;
   }
 }

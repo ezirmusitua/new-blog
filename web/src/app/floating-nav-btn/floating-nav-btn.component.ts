@@ -75,11 +75,7 @@ export class FloatingNavBtnComponent implements OnInit {
         label: '登录',
         iconSrc: 'assets/icons/ic_account_circle_white_24px.svg',
         isShow: true,
-        action: {
-          next: {
-            type: 'dialog', dialogType: 'login'
-          }
-        }
+        action: { next: { category: 400 } }
       },
       {
         in: ['home'],
@@ -104,9 +100,7 @@ export class FloatingNavBtnComponent implements OnInit {
         iconSrc: 'assets/icons/ic_pageview_white_24px.svg',
         isShow: true,
         needLogin: true,
-        action: {
-          next: { type: 'articleEdit', editType: 'preview', id: this.currentId }
-        }
+        action: { next: { category: 200 } }
       },
       {
         in: ['article-create', 'article-edit'],
@@ -114,11 +108,7 @@ export class FloatingNavBtnComponent implements OnInit {
         iconSrc: 'assets/icons/ic_save_white_24px.svg',
         isShow: true,
         needLogin: true,
-        action: {
-          next: {
-            type: 'articleEdit', editType: 'save', id: this.currentId
-          }
-        }
+        action: { next: { category: 100 } }
       },
       {
         in: ['article-create', 'article-edit'],
@@ -126,11 +116,7 @@ export class FloatingNavBtnComponent implements OnInit {
         iconSrc: 'assets/icons/ic_publish_white_24px.svg',
         isShow: true,
         needLogin: true,
-        action: {
-          next: {
-            type: 'articleEdit', editType: 'publish', id: this.currentId
-          }
-        }
+        action: { next: { category: 300 } }
       },
       {
         in: ['article-view'],
@@ -163,14 +149,12 @@ export class FloatingNavBtnComponent implements OnInit {
   }
 
   private filteredButtons() {
-    const tmp = this.buttons.filter((button) => {
+    return this.buttons.filter((button) => {
       const isVisitor = this.userService.isVisitor;
       if (!button.isShow) return false;
       if (isVisitor && button.needLogin) return false;
       return button.in.indexOf(this.currentState) > -1;
     });
-    console.log('buttons: ', tmp);
-    return tmp;
   }
 
   private act(action) {
