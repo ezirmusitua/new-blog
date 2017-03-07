@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from '../models/article';
 import { ArticleService } from '../article.service';
+import { RxSubjectService } from '../shared/rx-subject.service';
 
 @Component({
   selector: 'jfb-article-content',
@@ -10,21 +11,29 @@ import { ArticleService } from '../article.service';
 })
 export class ArticleContentComponent implements OnInit {
   isPageLoaded: boolean = false;
+  articleId: string;
   article: Article;
   constructor(
     private articleService: ArticleService,
     private currentRoute: ActivatedRoute,
+    private subjects: RxSubjectService,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.currentRoute.params.subscribe((params) => {
-      const articleId = params['articleId'];
-      if (articleId) {
-        this.articleService.getArticleById(articleId).subscribe(article => {
+      this.articleId = params['articleId'];
+      if (this.articleId) {
+        this.articleService.getArticleById(this.articleId).subscribe(article => {
           this.article = article;
           this.isPageLoaded = true;
         });
       }
     });
+    this.subjects.floatingNavBtnSubject.subscribe((res) => {
+      if (res.category === 500) {
+        this.router.navigate(['article', this.articleId, 'edit']);
+      }
+    })
   }
 }

@@ -96,6 +96,14 @@ export class FloatingNavBtnComponent implements OnInit {
         }
       },
       {
+        in: ['article-view'],
+        label: '编辑',
+        iconSrc: 'assets/icons/ic_mode_edit_white_24px.svg',
+        isShow: true,
+        needLogin: true,
+        action: { next: { category: 500 } }
+      },
+      {
         in: ['article-create', 'article-edit'],
         label: '预览',
         iconSrc: 'assets/icons/ic_pageview_white_24px.svg',

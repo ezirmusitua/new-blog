@@ -63,7 +63,6 @@ export class ArticleEditorComponent implements OnInit {
   }
 
   _update() {
-    console.log(this.article)
     this.article.markdownContent = this.markdownContent;
     this.article.htmlContent = this.htmlContent;
     return this.articleService.save(this.articleId, this.article);

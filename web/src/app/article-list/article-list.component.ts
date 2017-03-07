@@ -12,7 +12,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./article-list.component.css']
 })
 export class ArticleListComponent implements OnInit {
-  loginCounter: number = 0;
+  isVisitor: boolean = true;
   isShowLoginDialog: boolean = false;
   articles: Article[] = [];
   isLoading: boolean = false;
