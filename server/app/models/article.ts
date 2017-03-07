@@ -134,7 +134,7 @@ export const createCategoryItem = (markdownContent: string, currentIndex: number
     skipCount = calcLineEndSkip(markdownContent, index);
   }
   index += skipCount;
-  catalogItem.content;
+  catalogItem.content = content.replace(/<.*?>.*<\/.*?> /, '');
   return [catalogItem, index];
 }
 
@@ -166,6 +166,7 @@ export const generateCatalog = (markdownContent: string): CatalogItem[] => {
       index += 1;
     };
   }
+  console.log(catalog);
   return catalog.map(catalogItem => Object.assign({}, catalogItem, {
     progress: catalogItem.progress / effectiveLength,
   }));
