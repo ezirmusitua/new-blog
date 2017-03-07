@@ -1,11 +1,13 @@
 <section class="reading-progress-bar">
-  <article class="alreday-progress"></article>
-  <article id="pointer1" class="pointer" [ngStyle]="{ 'marginLeft.%': 50 }"></article>
-  <article id="sub-pointer1" class="sub-pointer"></article>
+  <!--TODO: Use anchor to get current progress-->
+  <!--<article class="alreday-progress"></article>-->
+  <article *ngFor="let catalogItem of catalog" class="pointer" 
+    [ngStyle]="{ 'marginLeft.%': catalogItem.progress }"></article>
+  <!--<article id="sub-pointer1" class="sub-pointer"></article>
   <article id="sub-pointer2" class="sub-pointer"></article>
   <article class="current-pointer">hello world</article>
   <article id="sub-pointer1" class="sub-pointer"></article>
   <article id="sub-pointer2" class="sub-pointer"></article>
   <article id="sub-pointer3" class="sub-pointer"></article>
-  <article id="pointer3" class="pointer"></article>
+  <article id="pointer3" class="pointer"></article>-->
 </section>

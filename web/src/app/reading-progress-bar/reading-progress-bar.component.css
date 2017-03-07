@@ -1,7 +1,7 @@
 .reading-progress-bar {
   position: fixed;
-  background-color: darkviolet;
-  height: 24px;
+  background-color: rgb(205, 114, 41);
+  height: 4px;
   bottom: 0;
   left: 0;
   right: 0;
@@ -13,16 +13,16 @@
   left: 0;
   background-color: mistyrose;
   width: 25%;
-  height: 24px;
+  height: 4;
 }
 
 .reading-progress-bar .pointer {
   width: 0; 
   height: 0; 
-  border-left: 12px solid transparent;
-  border-right: 12px solid transparent;
-  border-top: 24px solid #f00;
-  margin-top: -16px;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 16px solid rgb(163, 53, 23);
+  margin-top: -14px;
   z-index: 1;
 }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'jfb-reading-progress-bar',
@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reading-progress-bar.component.css']
 })
 export class ReadingProgressBarComponent implements OnInit {
-
+  @Input('catalog') catalog: any[];
   constructor() { }
 
   ngOnInit() {
   }
+
+
 
 }

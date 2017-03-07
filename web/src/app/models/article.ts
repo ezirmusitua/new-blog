@@ -27,7 +27,7 @@ export class Article {
       this.catalog = body.catalog.map(catalogItem => ({
         content: catalogItem.content ? catalogItem.content.trim() : '',
         category: parseInt(catalogItem.category, 10),
-        progress: parseInt(catalogItem.progress, 10),
+        progress: Math.ceil(catalogItem.progress * 100),
       })).filter(item => !!item);
     }
     this.tags = [];
