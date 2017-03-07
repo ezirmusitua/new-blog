@@ -44,7 +44,7 @@ import { ToastComponent } from './toast/toast.component';
     AppRoutingModule,
   ],
   providers: [ArticleService, UserService, ResourceService, LocalStorage, RxSubjectService],
-  bootstrap: [AppComponent, FloatingNavBtnComponent]
+  bootstrap: [AppComponent, FloatingNavBtnComponent, ToastComponent]
 })
 
 export class AppModule { }

@@ -16,3 +16,18 @@ export class APIError extends Error {
     this.message = error.message;
   }
 }
+
+export const AdminError = {
+  notAdmin: { id: 1000, status: 400, message: 'visitor can not do this action' },
+}
+
+export const MongoError = {
+  notFound: { id: 2000, status: 404, message: 'document not found' },
+}
+
+export const ArticleError = {
+  needTitle: { id: 3000, status: 400, message: 'article must have title' },
+  needContent: { id: 3000, status: 400, message: 'article must have content' },
+}
+
+

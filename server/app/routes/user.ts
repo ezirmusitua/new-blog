@@ -15,8 +15,6 @@ router.post('login', '/login', async (ctx, next) => {
   const email = ctx.request.body.email as string;
   const password = ctx.request.body.password as string;
   const user = await UserModel.findUserByEmailAndPassword(email, password);
-  if (!user) throw { status: 404, message: 'invalid email or password!' };
-  // TODO: update User Session after login
   const session = await SessionModel.updateOrCreateSession(user._id.toString())
   ctx.body = session;
   await next();

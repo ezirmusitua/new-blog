@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response, URLSearchParams, QueryEncoder } from '@angular/http';
 import { Observable } from 'rxjs';
-import { ResourceBase, DefaultHeaders, NetworkDelay, NetworkCondition } from './shared/constant';
+import { ResourceBase, DefaultHeaders, NetworkDelay, NetworkCondition, ErrorMessage } from './shared/constant';
+import { RxSubjectService } from './shared/rx-subject.service';
 
 @Injectable()
 export class ResourceService {
@@ -9,10 +10,17 @@ export class ResourceService {
   resourceBase: string = ResourceBase;
   _network: number;
   queryEncoder: QueryEncoder = new QueryEncoder();
-  constructor(private http: Http) { }
+  constructor(
+    private http: Http,
+    private subjects: RxSubjectService
+  ) { }
 
   set customHeaders(headers: Object) {
     this._customHeaders = new Headers(Object.assign(DefaultHeaders, headers));
+  }
+
+  private handleServerError(error: Response) {
+    return Observable.throw(error.json() || 'Server error'); // Observable.throw() is undefined at runtime using Webpack
   }
 
   private _constructParams(query: Object = {}) {
@@ -39,7 +47,7 @@ export class ResourceService {
         search: this._constructParams(params),
         headers: this._customHeaders
       }, {})
-    ).map((res: Response) => res.json());
+    ).map((res: Response) => res.json()).catch(this.handleServerError);
   }
 
   public post(path: string, body: Object = {}, options: Object = {}) {
@@ -48,7 +56,10 @@ export class ResourceService {
       this.resourceBase + path,
       JSON.stringify(body),
       Object.assign({ headers: this._customHeaders }, {})
-    ).map((res: Response) => res.json());
+    ).map((res: Response) => {
+      console.log('post response: ', res.json());
+      return res.json()
+    }).catch(this.handleServerError);
   }
 
   public put(path: string, body: Object = {}, options: Object = {}) {
@@ -57,14 +68,14 @@ export class ResourceService {
       this.resourceBase + path,
       JSON.stringify(body),
       Object.assign({ headers: this._customHeaders }, {})
-    ).map((res: Response) => res.json());
+    ).map((res: Response) => res.json()).catch(this.handleServerError);
   }
 
   public delete(path: string, options: Object = {}) {
     return this.http.delete(
       this.resourceBase + path,
       Object.assign({ headers: this._customHeaders }, {})
-    ).map((res: Response) => res.json());
+    ).map((res: Response) => res.json()).catch(this.handleServerError);
   }
 
   get network(): number {

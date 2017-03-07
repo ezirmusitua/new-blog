@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { APIError } from '../error';
+import { APIError, ArticleError, MongoError } from '../error';
 
 type Callback = (err: any, res: any) => void
 
@@ -175,11 +175,11 @@ export const generateCatalog = (markdownContent: string): CatalogItem[] => {
 const constructBody = (_id: string, body: any, createBy?: string): ArticleDocument => {
   const articleBody = {} as ArticleDocument;
   if (!body.title) {
-    throw new APIError({ id: 1000, status: 400, message: 'article must have title' });
+    throw new APIError(ArticleError.needTitle);
   }
   articleBody.title = body.title.trim();
   if (!body.htmlContent || !body.markdownContent) {
-    throw new APIError({ id: 1001, status: 400, message: 'article must have content' });
+    throw new APIError(ArticleError.needContent);
   }
   articleBody.htmlContent = body.htmlContent.trim();
   articleBody.markdownContent = body.markdownContent.trim();
@@ -217,7 +217,9 @@ const findImmutableOne = async (condition: Object, projection?: Object, callback
 }
 
 const findImmutableById = async (_id: string, projection?: Object, callback?: Callback, execCallback?: Callback): Promise<ArticleDocument> => {
-  return await findImmutableOne({ _id }, projection, callback, execCallback);
+  const doc = await findImmutableOne({ _id }, projection, callback, execCallback);
+  if (!doc) throw new APIError(MongoError.notFound);
+  return doc;
 }
 
 const articleModel = mongoose.model<MongoArticleDocument>('Article', articleSchema, 'Article');

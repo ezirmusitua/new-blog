@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import Router from 'koa-router';
+import { APIError } from '../error';
 import { ArticleModel, generateCatalog } from '../models/article';
 
 const router = new Router({ prefix: '/article' });
@@ -36,7 +37,7 @@ router.get('listAllForVisitor', '/', async (ctx: any, next) => {
     count: totalCount,
     items: articles.map(article => {
       return Object.assign(article, {
-        description: article.markdownContent.substr(0, 100),
+        description: article.markdownContent.split('  ')[0],
         markdownContent: ''
       });
     }),
@@ -52,9 +53,8 @@ router.get('fetchOne', '/:articleId', async (ctx: any, next) => {
   await next();
 })
 
-router.get('test', '/test/generateCatalog', (ctx, next) => {
-  const targetStr = "## Test article\n\nthis is an test article\n\nyou want to know test for what?\n\ni wont't tell you ~ \n\n### look at me\n\nfunk you !";
-  ctx.body = generateCatalog(targetStr);
+router.get('test', '/test/error', (ctx, next) => {
+  throw new APIError({ id: 0, status: 400, message: 'hell' });
 })
 
 export default router;

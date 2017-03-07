@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { Utils } from '../utils';
+import { APIError, MongoError } from '../error';
 
 export interface UserDocument {
   _id: string | any;
@@ -34,11 +35,10 @@ const findOneByEmail = async (email: string): Promise<UserDocument> => {
 const findUserByEmailAndPassword = async (email: string, password: string): Promise<UserDocument> => {
   if (!email || !password) return null;
   const passwordHash = Utils.generateHash(password);
-  console.log(passwordHash);
   const user = await userModel.findOneAndUpdate({
     email, password: passwordHash
   }, { $set: { lastActiveAt: Date.now() } }, { new: true }).exec() as UserDocument;
-  if (!user) return null;
+  if (!user) throw new APIError(MongoError.notFound);
   return user;
 }
 

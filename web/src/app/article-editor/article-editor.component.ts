@@ -86,6 +86,6 @@ export class ArticleEditorComponent implements OnInit {
     this.article.viewCategory = 300;
     this._update().subscribe((article) => {
       this.router.navigate(['/article', article._id]);
-    });;
+    });
   }
 }

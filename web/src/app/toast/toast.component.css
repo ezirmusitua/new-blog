@@ -1,0 +1,28 @@
+:host {
+  position: fixed;
+  bottom: 50vh;
+  right: 50vw;
+}
+
+.content-container {
+  background: rgba(0, 0, 0, 0.54);
+  border-radius: 4px;
+  min-width: 128px;
+  min-height: 48px;
+  display: flex;
+  padding: 4px 8px;
+  justify-content: start;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.toast-content {
+  display: flex;
+  flex: 1;
+  color: white;
+  font-size: 18px;
+  font-weight: 300;
+  margin: 0;
+}
+
+
