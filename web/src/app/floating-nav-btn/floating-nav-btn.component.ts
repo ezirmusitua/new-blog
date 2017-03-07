@@ -23,23 +23,21 @@ interface NavButton {
 }
 
 const matchCurrentRouteUrl = (target: string): any => {
-  console.log(articleEditUrlPattern.exec(target))
-  let matchRes = target.match(articleEditUrlPattern);
+  let matchRes = target.match(articleListUrlPattern);
+  if (matchRes) {
+    return { type: 'home' };
+  }
+  matchRes = target.match(articleEditUrlPattern);
   if (matchRes) {
     return { type: 'article-edit', id: matchRes[1] };
   }
   matchRes = target.match(articleViewUrlPattern);
-  console.log(matchRes);
   if (matchRes) {
     return { type: 'article-view', id: matchRes[1] };
   }
   matchRes = target.match(articleCreateUrlPattern);
   if (matchRes) {
     return { type: 'article-create' };
-  }
-  matchRes = target.match(articleListUrlPattern);
-  if (matchRes) {
-    return { type: 'home' };
   }
   matchRes = target.match(homePageUrlPattern);
   if (matchRes) {
@@ -154,7 +152,6 @@ export class FloatingNavBtnComponent implements OnInit {
   private filteredButtons() {
     return this.buttons.filter((button) => {
       const isVisitor = this.userService.isVisitor;
-      console.log(isVisitor);
       if (!button.isShow) return false;
       if (isVisitor && button.needLogin) return false;
       if (!isVisitor && button.hideLogin) return false;
