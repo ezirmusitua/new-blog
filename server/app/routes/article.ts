@@ -4,14 +4,18 @@ import { ArticleModel, generateCatalog } from '../models/article';
 
 const router = new Router({ prefix: '/article' });
 
-router.get('listAllForVisitor', '/', async (ctx, next) => {
+router.get('listAllForVisitor', '/', async (ctx: any, next) => {
+  const query = {} as any;
+  const countQuery = {} as any;
+  if (ctx.session.isVisitor) {
+    query.viewCategory = countQuery.viewCategory = 300;
+  }
   const pageSize = parseInt(ctx.query.pageSize, 10) || 10;
   let marker = ctx.query.marker;
   const sortBy = ctx.query.sortBy || '_id';
   const sortOrder = parseInt(ctx.query.sortOrder, 10) || -1
-  const query = { viewCategory: 300 } as any;
-  const countQuery = { viewCategory: 300 } as any;
-  if (sortBy === '_id' && marker) {
+  console.log('marker', marker);
+  if (sortBy === '_id' && marker && typeof marker == 'string') {
     marker = mongoose.Types.ObjectId(marker);
   }
   if (sortOrder === -1 && marker) {

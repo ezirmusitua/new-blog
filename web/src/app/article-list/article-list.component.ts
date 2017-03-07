@@ -35,13 +35,9 @@ export class ArticleListComponent implements OnInit {
   }
 
   private listArticle() {
-    let listPromise = this.articleService.listArticleForVisitor(this.loadMoreQuery);
-    if (!this.userService.isVisitor) {
-      listPromise = this.articleService.listArticleForAdmin(this.loadMoreQuery);
-    }
     if (!this.isLoading && this.hasMore) {
       this.isLoading = true;
-      listPromise.subscribe((res) => {
+      this.articleService.listArticle(this.loadMoreQuery).subscribe((res) => {
         this.articles = this.articles.concat(res.articles);
         this.loadMoreQuery.marker = res.marker;
         this.isLoading = false;

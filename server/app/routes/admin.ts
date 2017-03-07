@@ -1,9 +1,13 @@
 import Router from 'koa-router';
 import { ArticleModel } from '../models/article';
+import { APIError } from '../error';
 
 const router = new Router({ prefix: '/admin' });
 
-router.get('/listArticlesForAdmin', '/article', async (ctx, next) => {
+router.get('/listArticlesForAdmin', '/article', async (ctx: any, next) => {
+  if (ctx.session.isVisitor) {
+    throw new APIError({ id: 100, status: 400, message: 'visitor can not do this action' });
+  }
   const query = {} as any;
   const options = {} as any;
   if (ctx.params.viewCategory) {
@@ -21,6 +25,9 @@ router.get('/listArticlesForAdmin', '/article', async (ctx, next) => {
 });
 
 router.post('create', '/article', async (ctx: any, next) => {
+  if (ctx.session.isVisitor) {
+    throw new APIError({ id: 100, status: 400, message: 'visitor can not do this action' });
+  }
   const userId = ctx.session.userId;
   const body = ctx.request.body;
   const article = await ArticleModel.createNew(userId, body);
@@ -28,7 +35,10 @@ router.post('create', '/article', async (ctx: any, next) => {
   await next();
 })
 
-router.put('update', '/article/:articleId', async (ctx, next) => {
+router.put('update', '/article/:articleId', async (ctx: any, next) => {
+  if (ctx.session.isVisitor) {
+    throw new APIError({ id: 100, status: 400, message: 'visitor can not do this action' });
+  }
   const _id = ctx.params.articleId;
   const body = ctx.request.body;
   const article = await ArticleModel.updateOldById(_id, body);
@@ -36,7 +46,10 @@ router.put('update', '/article/:articleId', async (ctx, next) => {
   await next();
 })
 
-router.put('updateViewCategory', '/article/:articleId/viewCategory', async (ctx, next) => {
+router.put('updateViewCategory', '/article/:articleId/viewCategory', async (ctx: any, next) => {
+  if (ctx.session.isVisitor) {
+    throw new APIError({ id: 100, status: 400, message: 'visitor can not do this action' });
+  }
   const _id = ctx.params.articleId
   const viewCategory = ctx.params.category
   // Add validation
@@ -45,7 +58,10 @@ router.put('updateViewCategory', '/article/:articleId/viewCategory', async (ctx,
   await next();
 })
 
-router.delete('hideArticle', '/article/:articleId/viewCategory', async (ctx, next) => {
+router.delete('hideArticle', '/article/:articleId/viewCategory', async (ctx: any, next) => {
+  if (ctx.session.isVisitor) {
+    throw new APIError({ id: 100, status: 400, message: 'visitor can not do this action' });
+  }
   const _id = ctx.params.id;
   await ArticleModel.update({ _id }, { $set: { viewCategory: 100 } }).exec();
   ctx.body = JSON.stringify({ status: 200, message: 'disable article view for visitor ' })

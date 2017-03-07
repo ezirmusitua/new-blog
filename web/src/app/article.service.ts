@@ -15,21 +15,14 @@ export class ArticleService {
     return this._loaderListMethod;
   }
 
-  listArticleForVisitor(query: Object = {}) {
+  listArticle(query: Object = {}) {
     return this.resource.get('/article', query).map(res => {
       return {
-        marker: res.marker,
+        marker: res.marker || null,
         totalCount: res.count,
         articles: res.items.map(article => new Article(article)),
       }
     });
-  }
-
-  listArticleForAdmin(query) {
-    return this.resource.get('/article', query).map(res => ({
-      totalCount: res.count,
-      articles: res.items.map(article => new Article(article)),
-    }));
   }
 
   getArticleById(id: string) {
