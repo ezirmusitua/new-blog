@@ -7,11 +7,18 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ReadingProgressBarComponent implements OnInit {
   @Input('catalog') catalog: any[];
-  _catalog: any[];
+  _catalog: any[] = [];
   constructor() { }
 
   ngOnInit() {
-    this._catalog = this.catalog.map((catalogItem) => Object.assign({ shouldShowContent: false }, catalogItem));
+    for (let index = 0; index < this.catalog.length; index += 1) {
+      const catalogItem = this.catalog[index];
+      let progress = catalogItem.progress;
+      if (index > 0) {
+        progress -= this.catalog[index - 1].progress
+      }
+      this._catalog.push(Object.assign({ shouldShowContent: false }, catalogItem, { progress }));
+    }
   }
 
   private onMouseEnterCatalog(content: string) {
