@@ -7,6 +7,7 @@ const router = new Router({ prefix: '/user' });
 router.post('alive', '/alive', async (ctx, next) => {
   const token = ctx.request.body.token as string;
   const userId = ctx.request.body.userId as string;
+  console.log(token, userId);
   ctx.body = await SessionModel.activateSession(token, userId);
   await next();
 });

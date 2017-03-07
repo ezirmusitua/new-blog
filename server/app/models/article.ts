@@ -191,13 +191,9 @@ const constructBody = (_id: string, body: any, createBy?: string): ArticleDocume
     articleBody.tags = body.tags.map(tag => ({ label: tag.label && tag.label.trim() })).filter(tag => !!tag.label);
   }
   articleBody.catalog = generateCatalog(articleBody.markdownContent);
-  articleBody.viewCategory = 100;
   articleBody.createBy = 'no-name';
-  if (_id) {
-    articleBody.viewCategory = parseInt(body.viewCategory, 10);
-  } else {
-    articleBody.createBy = createBy;
-  }
+  articleBody.viewCategory = parseInt(body.viewCategory, 10);
+  articleBody.createBy = createBy;
   return articleBody;
 }
 

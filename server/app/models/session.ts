@@ -41,9 +41,9 @@ const updateOrCreateSession = async (userId: string): Promise<SessionDocument> =
   } as SessionDocument;
   const session = await sessionModel.findOneAndUpdate(
     { userId }, sessionBody,
-    { upsert: true, setDefaultsOnInsert: true }
+    { upsert: true, setDefaultsOnInsert: true, new: true },
   );
-  return sessionBody;
+  return session;
 };
 
 const activateSession = async (token: string, userId: string): Promise<MongoSessionDocument> => {
