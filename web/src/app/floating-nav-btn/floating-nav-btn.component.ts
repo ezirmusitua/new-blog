@@ -19,6 +19,7 @@ interface NavButton {
   action: any;
   isShow?: boolean;
   needLogin?: boolean;
+  hideLogin?: boolean;
 }
 
 const matchCurrentRouteUrl = (target: string): any => {
@@ -75,12 +76,14 @@ export class FloatingNavBtnComponent implements OnInit {
         label: '登录',
         iconSrc: 'assets/icons/ic_account_circle_white_24px.svg',
         isShow: true,
+        hideLogin: true,
         action: { next: { category: 400 } }
       },
       {
         in: ['home'],
         label: '关于我',
         iconSrc: 'assets/icons/ic_assignment_ind_white_24px.svg',
+        isShow: false,
         action: {
           redirect: '/about-me', params: []
         }
@@ -151,8 +154,10 @@ export class FloatingNavBtnComponent implements OnInit {
   private filteredButtons() {
     return this.buttons.filter((button) => {
       const isVisitor = this.userService.isVisitor;
+      console.log(isVisitor);
       if (!button.isShow) return false;
       if (isVisitor && button.needLogin) return false;
+      if (!isVisitor && button.hideLogin) return false;
       return button.in.indexOf(this.currentState) > -1;
     });
   }

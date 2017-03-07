@@ -4,6 +4,7 @@ import { ArticleService } from '../article.service';
 import { Subject } from 'rxjs';
 
 import { Loader } from '../shared/loader';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-article-list',
@@ -17,7 +18,10 @@ export class ArticleListComponent implements OnInit {
   isLoading: boolean = false;
   hasMore: boolean = true;
   loadMoreQuery: any = { pageSize: 10, sortBy: '_id', sortOrder: -1 };
-  constructor(private articleService: ArticleService) {
+  constructor(
+    private articleService: ArticleService,
+    private userService: UserService,
+  ) {
   }
 
   ngOnInit() {
@@ -25,16 +29,19 @@ export class ArticleListComponent implements OnInit {
   }
 
   private scrollLoad(event) {
-    console.log(event);
     if (event.shouldLoad) {
       this.listArticle();
     }
   }
 
   private listArticle() {
+    let listPromise = this.articleService.listArticleForVisitor(this.loadMoreQuery);
+    if (!this.userService.isVisitor) {
+      listPromise = this.articleService.listArticleForAdmin(this.loadMoreQuery);
+    }
     if (!this.isLoading && this.hasMore) {
       this.isLoading = true;
-      this.articleService.listArticleForVisitor(this.loadMoreQuery).subscribe((res) => {
+      listPromise.subscribe((res) => {
         this.articles = this.articles.concat(res.articles);
         this.loadMoreQuery.marker = res.marker;
         this.isLoading = false;

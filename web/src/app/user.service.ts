@@ -43,12 +43,14 @@ export class UserService {
       '/user/alive',
       session.constructAuthBody()
     ).subscribe((res) => {
+      console.log(res);
       const auth = { Authorization: null } as any;
       if (res) {
         const session = new Session(res);
         auth.Authorization = session.toAuthString();
         this.resource.customHeaders = auth;
         this.setSessionActivateInterval();
+        this._isVisitor = false;
       } else {
         localStorage.removeItem(SESSION_KEY);
         this.resource.customHeaders = auth;
