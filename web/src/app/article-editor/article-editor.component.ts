@@ -49,6 +49,7 @@ export class ArticleEditorComponent implements OnInit {
       }
     });
     this.floatingNavSubject = this.subjects.floatingNavBtnSubject.subscribe((res) => {
+      console.log(res.category);
       if (res.category === 100) {
         this.save();
       }
@@ -62,6 +63,7 @@ export class ArticleEditorComponent implements OnInit {
   }
 
   _update() {
+    console.log(this.article)
     this.article.markdownContent = this.markdownContent;
     this.article.htmlContent = this.htmlContent;
     return this.articleService.save(this.articleId, this.article);
@@ -84,7 +86,6 @@ export class ArticleEditorComponent implements OnInit {
   publish() {
     this.article.viewCategory = 300;
     this._update().subscribe((article) => {
-      console.log()
       this.router.navigate(['/article', article._id]);
     });;
   }
