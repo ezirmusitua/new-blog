@@ -1,12 +1,9 @@
 <section class="reading-progress-bar">
   <!--TODO: Use anchor to get current progress-->
   <!--<article class="alreday-progress"></article>-->
-  <div *ngFor="let catalogItem of _catalog" 
-      (mouseenter)="onMouseEnterCatalog(catalogItem.content)"
-      (mouseleave)="onMouseLeaveCatalog(catalogItem.content)"
-      [ngStyle]="{ 'marginLeft.%': catalogItem.progress }">
+  <div *ngFor="let catalogItem of _catalog" (mouseenter)="onMouseEnterCatalog(catalogItem.content)" (mouseleave)="onMouseLeaveCatalog(catalogItem.content)"
+    [ngStyle]="{ 'marginLeft.%': catalogItem.progress }">
     <article class="pointer"></article>
-    <article *ngIf="catalogItem.shouldShowContent"
-      class="current-pointer">{{ catalogItem.content }}</article>
-  </div>
+    <article *ngIf="catalogItem.shouldShowContent" class="current-pointer">{{ catalogItem.content || '' }}</article>
+    </div>
 </section>

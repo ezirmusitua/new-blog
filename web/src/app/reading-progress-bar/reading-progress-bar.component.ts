@@ -24,7 +24,7 @@ export class ReadingProgressBarComponent implements OnInit {
   private onMouseEnterCatalog(content: string) {
     const index = this._catalog.findIndex((item) => item.content === content);
     console.log(123123);
-    if (index > -1) {
+    if (index > -1 && this._catalog[index].content) {
       this._catalog[index].shouldShowContent = true;
     }
   }

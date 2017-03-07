@@ -39,5 +39,12 @@ export const LocalStorageKeyEnum = {
   SESSION: 'ngkoa.blog.session',
 }
 
+export const ErrorMessage = {
+  1000: '你没有操作的权限',
+  2000: '没有找到你想要的内容',
+  3000: '文章必须有标题',
+  3001: '文章必须有内容',
+}
+
 
 
