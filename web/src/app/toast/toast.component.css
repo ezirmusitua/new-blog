@@ -7,10 +7,10 @@
 .content-container {
   background: rgba(0, 0, 0, 0.54);
   border-radius: 4px;
-  min-width: 128px;
+  min-width: 196px;
   min-height: 48px;
   display: flex;
-  padding: 4px 8px;
+  padding: 8px 24px;
   justify-content: start;
   align-items: center;
   box-sizing: border-box;

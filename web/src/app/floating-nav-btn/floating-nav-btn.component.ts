@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 
 import { UserService } from '../user.service';
 import { RxSubjectService } from '../shared/rx-subject.service';
+import { FloatingNavCategory } from '../shared/enums';
 
 const homePageUrlPattern = /\//;
 const articleListUrlPattern = /\/articles/;
@@ -75,7 +76,7 @@ export class FloatingNavBtnComponent implements OnInit {
         iconSrc: 'assets/icons/ic_account_circle_white_24px.svg',
         isShow: true,
         hideLogin: true,
-        action: { next: { category: 400 } }
+        action: { next: { category: FloatingNavCategory.LOGIN } }
       },
       {
         in: ['home'],
@@ -101,7 +102,7 @@ export class FloatingNavBtnComponent implements OnInit {
         iconSrc: 'assets/icons/ic_mode_edit_white_24px.svg',
         isShow: true,
         needLogin: true,
-        action: { next: { category: 500 } }
+        action: { next: { category: FloatingNavCategory.EDIT } }
       },
       {
         in: ['article-create', 'article-edit'],
@@ -109,7 +110,7 @@ export class FloatingNavBtnComponent implements OnInit {
         iconSrc: 'assets/icons/ic_pageview_white_24px.svg',
         isShow: true,
         needLogin: true,
-        action: { next: { category: 200 } }
+        action: { next: { category: FloatingNavCategory.PREVIEW } }
       },
       {
         in: ['article-create', 'article-edit'],
@@ -117,7 +118,7 @@ export class FloatingNavBtnComponent implements OnInit {
         iconSrc: 'assets/icons/ic_save_white_24px.svg',
         isShow: true,
         needLogin: true,
-        action: { next: { category: 100 } }
+        action: { next: { category: FloatingNavCategory.SAVE } }
       },
       {
         in: ['article-create', 'article-edit'],
@@ -125,7 +126,7 @@ export class FloatingNavBtnComponent implements OnInit {
         iconSrc: 'assets/icons/ic_publish_white_24px.svg',
         isShow: true,
         needLogin: true,
-        action: { next: { category: 300 } }
+        action: { next: { category: FloatingNavCategory.PUBLISH } }
       },
       {
         in: ['article-view'],

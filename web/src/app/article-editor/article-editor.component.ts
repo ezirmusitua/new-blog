@@ -1,12 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-
-import { Article } from '../models/article';
+import { Subject, Subscription, Observable } from 'rxjs';
 
 import { RxSubjectService } from '../shared/rx-subject.service';
 import { ArticleService } from '../article.service';
 import { MarkdownService } from '../markdown.service';
-import { Subject, Subscription } from 'rxjs';
+import { Article } from '../models/article';
+import { FloatingNavCategory, ValidErrorIdRange, ArticleViewCategory } from '../shared/enums';
 
 @Component({
   selector: 'jfb-article-editor',
@@ -17,7 +17,8 @@ export class ArticleEditorComponent implements OnInit {
   markdownContent: string = '';
   htmlContent: string = '';
   articleId: string;
-  floatingNavSubject: Subscription;
+  floatingNavSubscription: Subscription;
+  toastSubject: Subject<any>;
   article: Article = new Article();
 
   constructor(
@@ -48,44 +49,58 @@ export class ArticleEditorComponent implements OnInit {
         });
       }
     });
-    this.floatingNavSubject = this.subjects.floatingNavBtnSubject.subscribe((res) => {
-      console.log(res.category);
-      if (res.category === 100) {
+    this.floatingNavSubscription = this.subjects.floatingNavBtnSubject.subscribe((res) => {
+      if (res.category === FloatingNavCategory.SAVE) {
         this.save();
       }
-      if (res.category === 200) {
+      if (res.category === FloatingNavCategory.PREVIEW) {
         this.preview();
       }
-      if (res.category === 300) {
+      if (res.category === FloatingNavCategory.PUBLISH) {
         this.publish();
       }
-    })
+    });
+    this.toastSubject = this.subjects.toastSubject;
+  }
+
+  private getNextContentByError(error: any) {
+    const errorId = parseInt(error, 10);
+    if (ValidErrorIdRange.ARTICLE.indexOf(errorId) > -1) {
+      return { id: errorId };
+    }
   }
 
   _update() {
     this.article.markdownContent = this.markdownContent;
     this.article.htmlContent = this.htmlContent;
+    console.log(this.article.viewCategory);
     return this.articleService.save(this.articleId, this.article);
   }
 
   save() {
-    this.article.viewCategory = 100;
+    this.article.viewCategory = ArticleViewCategory.DRAFT;
     this._update().subscribe((article) => {
       this.router.navigate(['/']);
+    }, (error) => {
+      this.toastSubject.next(this.getNextContentByError(error));
     });
   }
 
   preview() {
-    this.article.viewCategory = 200;
+    this.article.viewCategory = ArticleViewCategory.PREVIEW;
     this._update().subscribe((article) => {
       this.router.navigate(['/article', article._id, 'preview']);
+    }, (error) => {
+      this.toastSubject.next(this.getNextContentByError(error));
     });
   }
 
   publish() {
-    this.article.viewCategory = 300;
+    this.article.viewCategory = ArticleViewCategory.PUBLISHED;
     this._update().subscribe((article) => {
       this.router.navigate(['/article', article._id]);
+    }, (error) => {
+      this.toastSubject.next(this.getNextContentByError(error));
     });
   }
 }
