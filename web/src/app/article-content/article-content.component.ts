@@ -35,6 +35,6 @@ export class ArticleContentComponent implements OnInit {
       if (res.category === FloatingNavCategory.EDIT) {
         this.router.navigate(['article', this.articleId, 'edit']);
       }
-    })
+    });
   }
 }
