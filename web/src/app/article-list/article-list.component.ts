@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 
 import { Loader } from '../shared/loader';
 import { UserService } from '../user.service';
+import { RxSubjectService } from '../shared/rx-subject.service';
 
 @Component({
   selector: 'app-article-list',
@@ -16,16 +17,19 @@ export class ArticleListComponent implements OnInit {
   isShowLoginDialog: boolean = false;
   articles: Article[] = [];
   isLoading: boolean = false;
+  toastSubject: Subject<any>;
   hasMore: boolean = true;
   loadMoreQuery: any = { pageSize: 10, sortBy: '_id', sortOrder: -1 };
   constructor(
     private articleService: ArticleService,
     private userService: UserService,
+    private subjects: RxSubjectService
   ) {
   }
 
   ngOnInit() {
     this.listArticle();
+    this.toastSubject = this.subjects.toastSubject;
   }
 
   private scrollLoad(event) {
@@ -44,6 +48,8 @@ export class ArticleListComponent implements OnInit {
         if (this.articles.length === res.totalCount) {
           this.hasMore = false;
         }
+      }, (error) => {
+        this.toastSubject.next({ id: 2000 });
       });
     }
   }

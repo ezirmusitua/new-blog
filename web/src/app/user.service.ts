@@ -78,9 +78,9 @@ export class UserService {
   public uniqLogin(email: string, password: string) {
     const currentAuthHeader = this.resource.getHeadersField('Authorization');
     if (this._isVisitor) {
-      this.login(email, password).subscribe();
+      return this.login(email, password);
     } else {
-      console.error('already logined');
+      return Observable.throw(1001);
     }
   }
 
