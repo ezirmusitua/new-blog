@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter, trigger, state, style, 
 import { UserService } from '../user.service';
 import { RxSubjectService } from '../shared/rx-subject.service';
 import { Subscription, Subject } from 'rxjs';
+import { FloatingNavCategory } from '../shared/enums';
+import { ErrorCategory } from '../shared/error';
 @Component({
   selector: 'jfb-login-modal',
   templateUrl: './login-modal.component.html',
@@ -31,7 +33,7 @@ export class LoginModalComponent implements OnInit {
 
   ngOnInit() {
     this.floatingNavSubscription = this.subjects.floatingNavBtnSubject.subscribe((res) => {
-      if (res.category === 400) {
+      if (res.category === FloatingNavCategory.LOGIN) {
         this.visible = true;
       }
     });
@@ -47,7 +49,7 @@ export class LoginModalComponent implements OnInit {
       this.password = '';
       this.visible = false;
     }, (error) => {
-      this.toastSubject.next({ id: 1001 });
+      this.toastSubject.next({ id: ErrorCategory.ALREADY_LOGIN });
     });
   }
 }

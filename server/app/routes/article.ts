@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import Router from 'koa-router';
 import { APIError } from '../error';
-import { ArticleModel, generateCatalog } from '../models/article';
+import { ArticleModel } from '../models/article';
 
 const router = new Router({ prefix: '/article' });
 

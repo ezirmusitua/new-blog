@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { Utils } from '../utils';
+import { Utils } from '../utils/index';
 import { APIError, MongoError } from '../error';
 
 export interface UserDocument {

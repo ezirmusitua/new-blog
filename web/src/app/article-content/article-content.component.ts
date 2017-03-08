@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from '../models/article';
 import { ArticleService } from '../article.service';
 import { RxSubjectService } from '../shared/rx-subject.service';
+import { FloatingNavCategory } from '../shared/enums';
 
 @Component({
   selector: 'jfb-article-content',
@@ -26,13 +27,12 @@ export class ArticleContentComponent implements OnInit {
       if (this.articleId) {
         this.articleService.getArticleById(this.articleId).subscribe(article => {
           this.article = article;
-          console.log(this.article);
           this.isPageLoaded = true;
         });
       }
     });
     this.subjects.floatingNavBtnSubject.subscribe((res) => {
-      if (res.category === 500) {
+      if (res.category === FloatingNavCategory.EDIT) {
         this.router.navigate(['article', this.articleId, 'edit']);
       }
     })

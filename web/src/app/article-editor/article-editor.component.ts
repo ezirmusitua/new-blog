@@ -1,12 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-
-import { Article } from '../models/article';
+import { Subject, Subscription, Observable } from 'rxjs';
 
 import { RxSubjectService } from '../shared/rx-subject.service';
 import { ArticleService } from '../article.service';
 import { MarkdownService } from '../markdown.service';
-import { Subject, Subscription, Observable } from 'rxjs';
+import { Article } from '../models/article';
+import { FloatingNavCategory, ValidErrorIdRange, ArticleViewCategory } from '../shared/enums';
 
 @Component({
   selector: 'jfb-article-editor',
@@ -50,13 +50,13 @@ export class ArticleEditorComponent implements OnInit {
       }
     });
     this.floatingNavSubscription = this.subjects.floatingNavBtnSubject.subscribe((res) => {
-      if (res.category === 100) {
+      if (res.category === FloatingNavCategory.SAVE) {
         this.save();
       }
-      if (res.category === 200) {
+      if (res.category === FloatingNavCategory.PREVIEW) {
         this.preview();
       }
-      if (res.category === 300) {
+      if (res.category === FloatingNavCategory.PUBLISH) {
         this.publish();
       }
     });
@@ -65,7 +65,7 @@ export class ArticleEditorComponent implements OnInit {
 
   private getNextContentByError(error: any) {
     const errorId = parseInt(error, 10);
-    if ([3000, 3001].indexOf(errorId) > -1) {
+    if (ValidErrorIdRange.ARTICLE.indexOf(errorId) > -1) {
       return { id: errorId };
     }
   }
@@ -73,11 +73,12 @@ export class ArticleEditorComponent implements OnInit {
   _update() {
     this.article.markdownContent = this.markdownContent;
     this.article.htmlContent = this.htmlContent;
+    console.log(this.article.viewCategory);
     return this.articleService.save(this.articleId, this.article);
   }
 
   save() {
-    this.article.viewCategory = 100;
+    this.article.viewCategory = ArticleViewCategory.DRAFT;
     this._update().subscribe((article) => {
       this.router.navigate(['/']);
     }, (error) => {
@@ -86,7 +87,7 @@ export class ArticleEditorComponent implements OnInit {
   }
 
   preview() {
-    this.article.viewCategory = 200;
+    this.article.viewCategory = ArticleViewCategory.PREVIEW;
     this._update().subscribe((article) => {
       this.router.navigate(['/article', article._id, 'preview']);
     }, (error) => {
@@ -95,7 +96,7 @@ export class ArticleEditorComponent implements OnInit {
   }
 
   publish() {
-    this.article.viewCategory = 300;
+    this.article.viewCategory = ArticleViewCategory.PUBLISHED;
     this._update().subscribe((article) => {
       this.router.navigate(['/article', article._id]);
     }, (error) => {

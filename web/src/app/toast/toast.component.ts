@@ -16,7 +16,6 @@ export class ToastComponent implements OnInit {
   constructor(private subjects: RxSubjectService) { }
 
   ngOnInit() {
-    console.log('toast component init');
     this.toastSubscription = this.subjects.toastSubject.subscribe((res) => {
       this.content = ErrorMessage[res.id];
       if (res.timeout) {

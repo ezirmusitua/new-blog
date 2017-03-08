@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { Loader } from '../shared/loader';
 import { UserService } from '../user.service';
 import { RxSubjectService } from '../shared/rx-subject.service';
+import { ErrorCategory } from '../shared/error';
 
 @Component({
   selector: 'app-article-list',
@@ -49,7 +50,7 @@ export class ArticleListComponent implements OnInit {
           this.hasMore = false;
         }
       }, (error) => {
-        this.toastSubject.next({ id: 2000 });
+        this.toastSubject.next({ id: ErrorCategory.DOCUMENT_NOT_FOUND });
       });
     }
   }
