@@ -26,9 +26,9 @@ export const TIME = {
   MINUTE: 60 * 1000,
   HOUR: 60 * 60 * 1000,
   DAY: 24 * 60 * 60 * 1000
-}
+};
 
-export const ResourceBase = environment.resoucePath;
+export const ResourceBase = environment.resourcePath;
 
 export const DefaultHeaders = {
   'Content-Type': 'application/json; charset=UTF-8',
@@ -37,7 +37,7 @@ export const DefaultHeaders = {
 
 export const LocalStorageKeyEnum = {
   SESSION: 'ngkoa.blog.session',
-}
+};
 
 export const ErrorMessage = {
   1000: '你没有操作的权限',
@@ -45,7 +45,7 @@ export const ErrorMessage = {
   2000: '没有找到你想要的内容',
   3000: '文章必须有标题',
   3001: '文章必须有内容',
-}
+};
 
 
 

@@ -13,7 +13,9 @@ export class ResourceService {
   constructor(
     private http: Http,
     private subjects: RxSubjectService
-  ) { }
+  ) {
+    console.log(this.resourceBase);
+  }
 
   set customHeaders(headers: Object) {
     this._customHeaders = new Headers(Object.assign(DefaultHeaders, headers));
@@ -30,7 +32,7 @@ export class ResourceService {
         params.set(
           this.queryEncoder.encodeKey(key.toString()),
           this.queryEncoder.encodeValue(query[key])
-        )
+        );
       }
     }
     return params;
@@ -58,7 +60,7 @@ export class ResourceService {
       Object.assign({ headers: this._customHeaders }, {})
     ).map((res: Response) => {
       console.log('post response: ', res.json());
-      return res.json()
+      return res.json();
     }).catch(this.handleServerError);
   }
 

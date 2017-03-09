@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  resoucePath: 'http://localhost:3000',
+  resourcePath: 'http://localhost:3000',
 };
