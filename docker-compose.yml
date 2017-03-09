@@ -9,6 +9,9 @@ services:
 
   ngkoa-server: #name of the second service
     build: server # specify the directory of the Dockerfile
+    args: 
+      NODE: development
+      PORT: 3000
     ports:
       - "3000:3000" #specify ports forewarding
 

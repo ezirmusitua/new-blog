@@ -20,4 +20,4 @@ COPY . /home/jferroal/blog/web
 EXPOSE 4200
 
 # Serve the app
-CMD ["npm", "start"]
+CMD ["npm", "deploy"]
