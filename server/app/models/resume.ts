@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
 
-interface Location {
+export interface Location {
   country: string; state: string; city?: string; address?: string;
 };
 
-interface Experience {
+export interface Experience {
   desc: string;
   from: number;
   to?: number;
@@ -16,7 +16,7 @@ export interface ResumeDocument {
   contacts: { name: string; value: string; }[];
   age: number;
   motto: string;
-  hometown: Location; 
+  hometown: Location;
   liveNow: Location;
   genderCatetgory: number;
   educations: Experience[];
