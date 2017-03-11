@@ -78,4 +78,4 @@ if __name__ == '__main__':
     # init mongo config file
     createMongoConfigFile()
     # run docker compose
-    subprocess.call(['docker-compose', 'up'])
+    subprocess.call(['sudo', 'docker-compose', 'up'])
