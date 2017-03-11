@@ -8,13 +8,13 @@ RUN mkdir -p /home/jferroal/ngkoa-blog/web
 WORKDIR /home/jferroal/ngkoa-blog/web
 
 # Copy dependency definitions
-COPY package.json /home/jferroal/ng-koa/blog/web
+COPY package.json /home/jferroal/ngkoa-blog/web
 
 # Install dependecies
 RUN npm install
 
 # Get all the code needed to run the app
-COPY . /home/jferroal/ng-koa/blog/web
+COPY . /home/jferroal/ngkoa-blog/web
 
 # Expose the port the app runs in
 EXPOSE 4200
