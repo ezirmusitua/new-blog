@@ -64,7 +64,11 @@ CMD ["mongo", "initilize-db.js"]
 CMD ["service", "mongod", "restart"]
 
 COPY docker-entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["chmod", "+x", "/entrypoint.sh"]
 
 EXPOSE 27017
+
+CMD ["mongod"]
+CMD ["mongo", "initilize-db.js"]
+CMD ["service", "mongod", "stop"]
 CMD ["mongod"]
