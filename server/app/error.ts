@@ -19,6 +19,7 @@ export class APIError extends Error {
 
 export const AdminError = {
   notAdmin: { id: 1000, status: 400, message: 'visitor can not do this action' },
+  sessionNotFound: { id: 1001, status: 404, message: 'session not found' },
 }
 
 export const MongoError = {

@@ -4,10 +4,8 @@ import { APIError, AdminError } from '../error';
 
 const router = new Router({ prefix: '/admin' });
 
-router.get('/listArticlesForAdmin', '/article', async (ctx: any, next) => {
-  if (ctx.session.isVisitor) {
-    throw new APIError(AdminError.notAdmin);
-  }
+router.get('listArticlesForAdmin', '/article', async (ctx: any, next) => {
+  if (ctx.isVisitor) throw new APIError(AdminError.notAdmin);
   const query = {} as any;
   const options = {} as any;
   if (ctx.params.viewCategory) {
@@ -24,10 +22,8 @@ router.get('/listArticlesForAdmin', '/article', async (ctx: any, next) => {
   await next();
 });
 
-router.post('create', '/article', async (ctx: any, next) => {
-  if (ctx.session.isVisitor) {
-    throw new APIError(AdminError.notAdmin);
-  }
+router.post('createNewArticle', '/article', async (ctx: any, next) => {
+  if (ctx.isVisitor) throw new APIError(AdminError.notAdmin);
   const userId = ctx.session.userId;
   const body = ctx.request.body;
   const article = await ArticleModel.createNew(ctx.session.email, body);
@@ -35,10 +31,8 @@ router.post('create', '/article', async (ctx: any, next) => {
   await next();
 })
 
-router.put('update', '/article/:articleId', async (ctx: any, next) => {
-  if (ctx.session.isVisitor) {
-    throw new APIError(AdminError.notAdmin);
-  }
+router.put('updateArticle', '/article/:articleId', async (ctx: any, next) => {
+  if (ctx.isVisitor) throw new APIError(AdminError.notAdmin);
   const _id = ctx.params.articleId;
   const body = ctx.request.body;
   const article = await ArticleModel.updateOldById(_id, body);
@@ -47,9 +41,7 @@ router.put('update', '/article/:articleId', async (ctx: any, next) => {
 })
 
 router.put('updateViewCategory', '/article/:articleId/viewCategory', async (ctx: any, next) => {
-  if (ctx.session.isVisitor) {
-    throw new APIError(AdminError.notAdmin);
-  }
+  if (ctx.isVisitor) throw new APIError(AdminError.notAdmin);
   const _id = ctx.params.articleId
   const viewCategory = ctx.params.category
   // Add validation
@@ -59,9 +51,7 @@ router.put('updateViewCategory', '/article/:articleId/viewCategory', async (ctx:
 })
 
 router.delete('hideArticle', '/article/:articleId/viewCategory', async (ctx: any, next) => {
-  if (ctx.session.isVisitor) {
-    throw new APIError(AdminError.notAdmin);
-  }
+  if (ctx.isVisitor) throw new APIError(AdminError.notAdmin);
   const _id = ctx.params.id;
   await ArticleModel.update({ _id }, { $set: { viewCategory: 100 } }).exec();
   ctx.body = JSON.stringify({ status: 200, message: 'disable article view for visitor ' })

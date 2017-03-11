@@ -1,0 +1,13 @@
+{
+  "port": 3000,
+  "db": "mongodb://localhost:27017/ngkoa-blog",
+  "db-options": {
+    "db": {
+      "native_parser": true
+    },
+    "server": {
+      "auto_reconnect": true,
+      "poolSize": 20
+    }
+  }
+}

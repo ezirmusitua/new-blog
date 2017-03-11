@@ -8,7 +8,7 @@ const router = new Router({ prefix: '/article' });
 router.get('listAllForVisitor', '/', async (ctx: any, next) => {
   const query = {} as any;
   const countQuery = {} as any;
-  if (ctx.session.isVisitor) {
+  if (ctx.isVisitor) {
     query.viewCategory = countQuery.viewCategory = 300;
   }
   const pageSize = parseInt(ctx.query.pageSize, 10) || 10;
@@ -44,17 +44,13 @@ router.get('listAllForVisitor', '/', async (ctx: any, next) => {
     marker: articles && articles.length && articles[articles.length - 1][sortBy]
   });
   await next();
-})
+});
 
 router.get('fetchOne', '/:articleId', async (ctx: any, next) => {
   const _id = ctx.params.articleId;
   const article = await ArticleModel.fetchById(_id);
   ctx.body = JSON.stringify(article);
   await next();
-})
-
-router.get('test', '/test/error', (ctx, next) => {
-  throw new APIError({ id: 0, status: 400, message: 'hell' });
-})
+});
 
 export default router;
