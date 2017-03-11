@@ -5,6 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "start": "tsc & babel -d ./dist ./dist & node ./dist/index.js",
+    "deploy": "tsc & babel -d ./dist ./dist & NODE_ENV=prod node ./dist/index.js",
     "build": "tsc & babel -d ./dist ./dist",
     "test": "jest"
   },

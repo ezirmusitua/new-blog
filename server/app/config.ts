@@ -1,5 +1,5 @@
 import fs from 'fs';
-const prodConfigFile = '../config.production.json';
+const prodConfigFile = '../config.prod.json';
 const devConfigFile = '../config.json';
 const Envs = ['prod', 'production'];
 function noFilesExists(files: string[]) {

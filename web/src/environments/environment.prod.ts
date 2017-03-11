@@ -1,4 +1,5 @@
+const config = require('../../config.prod.json');
 export const environment = {
-  production: true,
-  resourcePath: 'http://api.jferroal.com:3000',
+  production: false,
+  resourcePath: config.server.host + ':' + config.server.port,
 };
