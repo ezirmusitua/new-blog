@@ -6,7 +6,7 @@ db.createUser({
   user: 'jferroal',
   pwd: '123456',
   customData: { description: 'admin user for ngkoa-blog mongo db' },
-  roles: [{ role: 'dbAdmin', db: 'test' }]
+  roles: [{ role: 'dbAdmin', db: 'ngkoa-blog' }]
 });
 // 新建 collection 和初始用户
 db.createCollection('User');

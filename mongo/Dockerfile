@@ -59,6 +59,10 @@ RUN mkdir -p /home/jferroal/ngkoa-blog/db /home/jferroal/ngkoa-blog/configdb \
 	/home/jferroal/ngkoa-blog/configdb
 VOLUME /home/jferroal/ngkoa-blog/db /home/jferroal/ngkoa-blog/configdb
 
+CMD ["mongod"]
+CMD ["mongo", "initilize-db.js"]
+CMD ["service", "mongod", "restart"]
+
 COPY docker-entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 

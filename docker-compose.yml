@@ -2,7 +2,7 @@ version: '2.0' # specify docker-compose version
 
 # Define the services/containers to be run
 services:
-  mongodb: # name of the third service
+  mongo: # name of the third service
     build: mongo # specify image to build container from
     ports:
       - "27017:27017" # specify port forewarding
