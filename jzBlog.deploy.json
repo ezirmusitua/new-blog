@@ -3,7 +3,7 @@
     // First application
     {
       "name"      : "jzBlogServer",
-      "cwd"       : "./server",
+      "cwd"       : "./server/dist",
       "script"    : "index.js",
       "env": {
         "COMMON_VARIABLE": "true"
@@ -17,8 +17,9 @@
     // Second application
     {
       "name"      : "jzBlogWeb",
-      "cwd"       : "./web",
-      "script"    : "/usr/lib/node_modules/http-server/bin/http-server"
+      "cwd"       : "./web/dist",
+      "script"    : "/usr/lib/node_modules/http-server/bin/http-server",
+      "args"      : "-p 4200 -d false"
     }
   ],
   "deploy" : {
