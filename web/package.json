@@ -1,6 +1,6 @@
 {
-  "name": "web1",
-  "version": "0.0.0",
+  "name": "ngkoa-blog-web",
+  "version": "1.0.0",
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
