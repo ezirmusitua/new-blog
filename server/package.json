@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "start": "tsc & babel -d ./dist ./dist & node ./dist/index.js",
-    "build": "./node_modules/typescript/bin/tsc & ./node_modules/babel-cli/babel -d ./dist ./dist"
+    "build": "./node_modules/typescript/bin/tsc & ./node_modules/babel-cli/babel.js -d ./dist ./dist"
   },
   "dependencies": {
     "@types/kcors": "^2.2.0",
