@@ -9,7 +9,7 @@ function noFilesExists(files: string[]) {
   }, 0);
 }
 export function readConfigFile(env: string) {
-  if (!noFilesExists([devConfigFile, prodConfigFile])) {
+  if (noFilesExists([devConfigFile, prodConfigFile])) {
     throw new Error('\x1b[31mno config file exists !!!');
   } else {
     return Envs.indexOf(env) > -1 ? require(prodConfigFile) : require(devConfigFile);
