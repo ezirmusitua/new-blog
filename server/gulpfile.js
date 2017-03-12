@@ -2,7 +2,7 @@ const gulp = require('gulp');
 const babel = require('gulp-babel');
 const nodemon = require('gulp-nodemon');
 const ts = require('gulp-typescript');
-const tsProject = ts.createProject('./server/tsconfig.json');
+const tsProject = ts.createProject('./tsconfig.json');
 const tslint = require('gulp-tslint');
 const plumber = require('gulp-plumber');
 const argv = require('yargs').argv;
@@ -13,7 +13,7 @@ gulp.task('compile', () => {
         .pipe(babel({
             plugins: ['transform-es2015-modules-commonjs']
         }))
-        .pipe(gulp.dest('./server/dist'));
+        .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('watch', ['compile'], () => {
@@ -22,8 +22,8 @@ gulp.task('watch', ['compile'], () => {
         PORT: argv.port ? parseInt(argv.port) : '',
     };
     return nodemon({
-        script: './server/dist/index.js',
-        watch: './server/app',
+        script: './dist/index.js',
+        watch: './app',
         ext: 'ts',
         delay: 1,
         tasks: ['compile'],
