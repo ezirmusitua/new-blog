@@ -15,12 +15,12 @@
     },
 
     // Second application
-    {
-      "name"      : "jzBlogWeb",
-      "cwd"       : "./web/dist",
-      "script"    : "/usr/lib/node_modules/http-server/bin/http-server",
-      "args"      : "-p 4200 -d false"
-    }
+    // {
+    //   "name"      : "jzBlogWeb",
+    //   "cwd"       : "./web/dist",
+    //   "script"    : "/usr/lib/node_modules/http-server/bin/http-server",
+    //   "args"      : "-p 4200 -d false"
+    // }
   ],
   "deploy" : {
     "production" : {
