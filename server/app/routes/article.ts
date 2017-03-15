@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import Router from 'koa-router';
-import { APIError } from '../error';
 import { ArticleModel } from '../models/article';
 
 const router = new Router({ prefix: '/article' });
@@ -15,8 +14,7 @@ router.get('listAllForVisitor', '/', async (ctx: any, next) => {
   let marker = ctx.query.marker;
   const sortBy = ctx.query.sortBy || '_id';
   const sortOrder = parseInt(ctx.query.sortOrder, 10) || -1
-  console.log('marker', marker);
-  if (sortBy === '_id' && marker && typeof marker == 'string') {
+  if (sortBy === '_id' && marker && typeof marker === 'string') {
     marker = mongoose.Types.ObjectId(marker);
   }
   if (sortOrder === -1 && marker) {

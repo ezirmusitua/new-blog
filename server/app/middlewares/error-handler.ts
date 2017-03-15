@@ -8,6 +8,5 @@ export const errorHandler = async (ctx, next) => {
       console.log('catch error: ', error);
       ctx.throw(error.id.toString(), error.status);
     }
-    console.log(error);
   }
 }

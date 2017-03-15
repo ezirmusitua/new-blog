@@ -5,7 +5,6 @@ const Envs = ['prod', 'production'];
 function noFilesExists(files: string[]) {
   return !files.reduce((existsCount, filename) => {
     existsCount += fs.existsSync(filename) ? 1 : 0;
-    console.log(filename, fs.existsSync(filename));
     return existsCount;
   }, 0);
 }
