@@ -20,7 +20,6 @@ import { ArticleEditorComponent } from './article-editor/article-editor.componen
 import { LoginModalComponent } from './login-modal/login-modal.component';
 import { ScrollListeningLoaderDirective } from './scroll-listening-loader.directive';
 import { RxSubjectService } from './shared/rx-subject.service';
-import { ObjectSvgComponent } from './shared/object-svg/object-svg.component';
 import { ToastComponent } from './toast/toast.component';
 
 @NgModule({
@@ -34,7 +33,6 @@ import { ToastComponent } from './toast/toast.component';
     ArticleEditorComponent,
     LoginModalComponent,
     ScrollListeningLoaderDirective,
-    ObjectSvgComponent,
     ToastComponent,
   ],
   imports: [

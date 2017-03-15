@@ -24,7 +24,6 @@ export class AppComponent implements OnInit {
     // TODO: https://trello.com/c/uXWnUSOJ
     let authStr = this.ls.getSession();
     if (authStr) {
-      console.log(authStr);
       const subscription = this.userService.sessionValidated.subscribe(isValidated => {
         this.isSessionValidated = isValidated;
       });
