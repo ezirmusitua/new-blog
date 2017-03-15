@@ -46,3 +46,7 @@ web/config.prod.json
 server/config.prod.json
 mongo/mongo.conf
 
+# keys
+challenges/**
+ssl/**
+

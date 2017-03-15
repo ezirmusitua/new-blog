@@ -59,7 +59,6 @@ export class ResourceService {
       JSON.stringify(body),
       Object.assign({ headers: this._customHeaders }, {})
     ).map((res: Response) => {
-      console.log('post response: ', res.json());
       return res.json();
     }).catch(this.handleServerError);
   }

@@ -41,8 +41,13 @@
   line-height: 32px;
 }
 
-.close-icon object {
+.close-icon {
   fill: rgba(255, 255, 255, 0.85);
+  width: 24px;
+  padding: 0;
+}
+.close-icon {
+  fill: rgba(255, 65, 0, 0.86);
 }
 
 .login-img-container {

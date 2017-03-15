@@ -4,6 +4,6 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 const config = require('../../config.json');
 export const environment = {
-  production: false,
+  production: true,
   resourcePath: config.server.host + ':' + config.server.port,
 };

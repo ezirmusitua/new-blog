@@ -2,7 +2,7 @@ import db from './database';
 import app from './app';
 import { readConfigFile } from './config';
 
-const env = 'development' || process.env.NODE_ENV
+const env = process.env.NODE_ENV || 'development';
 const config = readConfigFile(env);
 
 db.connect(config);
