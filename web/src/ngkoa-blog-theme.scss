@@ -1,0 +1,23 @@
+@import '~@angular/material/core/theming/all-theme';
+// Plus imports for other components in your app.
+
+// Include the base styles for Angular Material core. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+$ngkoa-blog-primary: mat-palette($mat-teal, 300, A200, A700);
+$ngkoa-blog-accent:  mat-palette($mat-orange, 300, A200, A700);
+
+// The warn palette is optional (defaults to red).
+$ngkoa-blog-warn:    mat-palette($mat-red, 400, 600, A400);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$ngkoa-blog-theme: mat-light-theme($ngkoa-blog-primary, $ngkoa-blog-accent, $ngkoa-blog-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($ngkoa-blog-theme);
