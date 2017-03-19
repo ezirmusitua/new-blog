@@ -1,5 +1,5 @@
 {
-  "db": "mongodb://localhost:27017",
+  "db": "mongodb://localhost:27017/jzBlogDev",
   "port": "3000",
   "db-options": {
     "db": {
