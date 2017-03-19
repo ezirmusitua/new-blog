@@ -1,10 +1,12 @@
 import mongoose from 'mongoose';
 import Router from 'koa-router';
+
+import { ExtendCtx } from '../models/ctx';
 import { ArticleModel } from '../models/article';
 
 const router = new Router({ prefix: '/article' });
 
-router.get('listAllForVisitor', '/', async (ctx: any, next) => {
+router.get('listAllForVisitor', '/', async (ctx: ExtendCtx, next) => {
   const query = {} as any;
   const countQuery = {} as any;
   if (ctx.isVisitor) {
@@ -44,7 +46,7 @@ router.get('listAllForVisitor', '/', async (ctx: any, next) => {
   await next();
 });
 
-router.get('fetchOne', '/:articleId', async (ctx: any, next) => {
+router.get('fetchOne', '/:articleId', async (ctx: ExtendCtx, next) => {
   const _id = ctx.params.articleId;
   const article = await ArticleModel.fetchById(_id);
   ctx.body = JSON.stringify(article);

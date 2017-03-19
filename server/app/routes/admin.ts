@@ -1,4 +1,5 @@
 import Router from 'koa-router';
+import { ExtendCtx } from '../models/ctx';
 import { ArticleModel } from '../models/article';
 import { APIError, AdminError } from '../error';
 
@@ -22,7 +23,7 @@ router.get('listArticlesForAdmin', '/article', async (ctx: any, next) => {
   await next();
 });
 
-router.post('createNewArticle', '/article', async (ctx: any, next) => {
+router.post('createNewArticle', '/article', async (ctx: ExtendCtx, next) => {
   if (ctx.isVisitor) throw new APIError(AdminError.notAdmin);
   const userId = ctx.session.userId;
   const body = ctx.request.body;
@@ -31,7 +32,7 @@ router.post('createNewArticle', '/article', async (ctx: any, next) => {
   await next();
 })
 
-router.put('updateArticle', '/article/:articleId', async (ctx: any, next) => {
+router.put('updateArticle', '/article/:articleId', async (ctx: ExtendCtx, next) => {
   if (ctx.isVisitor) throw new APIError(AdminError.notAdmin);
   const _id = ctx.params.articleId;
   const body = ctx.request.body;
@@ -40,7 +41,7 @@ router.put('updateArticle', '/article/:articleId', async (ctx: any, next) => {
   await next();
 })
 
-router.put('updateViewCategory', '/article/:articleId/viewCategory', async (ctx: any, next) => {
+router.put('updateViewCategory', '/article/:articleId/viewCategory', async (ctx: ExtendCtx, next) => {
   if (ctx.isVisitor) throw new APIError(AdminError.notAdmin);
   const _id = ctx.params.articleId
   const viewCategory = ctx.params.category
@@ -50,7 +51,7 @@ router.put('updateViewCategory', '/article/:articleId/viewCategory', async (ctx:
   await next();
 })
 
-router.delete('hideArticle', '/article/:articleId/viewCategory', async (ctx: any, next) => {
+router.delete('hideArticle', '/article/:articleId/viewCategory', async (ctx: ExtendCtx, next) => {
   if (ctx.isVisitor) throw new APIError(AdminError.notAdmin);
   const _id = ctx.params.id;
   await ArticleModel.update({ _id }, { $set: { viewCategory: 100 } }).exec();

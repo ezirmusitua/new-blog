@@ -3,6 +3,7 @@ import { Utils } from '../utils/index';
 
 export interface SessionDocument {
   _id: any;
+  email: string;
   userId: string;
   token: string;
   clientCategory: number;
@@ -10,6 +11,10 @@ export interface SessionDocument {
 }
 
 const sessionSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    index: true,
+  },
   userId: {
     type: String,
     index: true,
