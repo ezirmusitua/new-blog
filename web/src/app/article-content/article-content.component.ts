@@ -8,7 +8,7 @@ import { FloatingNavCategory } from '../shared/enums';
 @Component({
   selector: 'jfb-article-content',
   templateUrl: './article-content.component.html',
-  styleUrls: ['./article-content.component.css']
+  styleUrls: ['./article-content.component.scss']
 })
 export class ArticleContentComponent implements OnInit {
   isPageLoaded: boolean = false;

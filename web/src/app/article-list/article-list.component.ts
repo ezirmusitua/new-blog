@@ -11,7 +11,7 @@ import { ErrorCategory } from '../shared/error';
 @Component({
   selector: 'app-article-list',
   templateUrl: './article-list.component.html',
-  styleUrls: ['./article-list.component.css']
+  styleUrls: ['./article-list.component.scss']
 })
 export class ArticleListComponent implements OnInit {
   isVisitor: boolean = true;
