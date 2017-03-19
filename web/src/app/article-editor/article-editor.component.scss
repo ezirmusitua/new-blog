@@ -1,0 +1,50 @@
+:host {
+  display: flex;
+  flex: 1;
+  padding: 12px;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.title-save-container {
+  display: flex;
+  flex-direction: row;
+  flex: 100%;
+  margin: 24px 0;
+  justify-content: space-between;
+  .title-input {
+    flex: 0.8;
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.64);
+    font-weight: 400;
+    border-radius: 4px;
+    border: none;
+    input:focus {
+      border: none;
+      border-bottom: 1px solid darkorange;
+    }
+  }
+}
+
+.content-input {
+  display: flex;
+  flex-direction: row;
+  height: 90%;
+  flex: 1;
+  textarea {
+    box-sizing: border-box;
+    width: 100%;
+    margin-right: 4px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    height: 100%;
+    font-size: 16px;
+    color:rgba(0, 0, 0, 0.64);
+    font-weight: 400;
+  }
+}

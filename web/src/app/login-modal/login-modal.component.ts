@@ -7,7 +7,7 @@ import { ErrorCategory } from '../shared/error';
 @Component({
   selector: 'jfb-login-modal',
   templateUrl: './login-modal.component.html',
-  styleUrls: ['./login-modal.component.css'],
+  styleUrls: ['./login-modal.component.scss'],
   animations: [
     trigger('dialog', [
       transition('void => *', [

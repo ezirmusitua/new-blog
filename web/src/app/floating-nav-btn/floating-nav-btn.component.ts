@@ -49,7 +49,7 @@ const matchCurrentRouteUrl = (target: string): any => {
 @Component({
   selector: 'jfb-floating-nav-btn',
   templateUrl: './floating-nav-btn.component.html',
-  styleUrls: ['./floating-nav-btn.component.css']
+  styleUrls: ['./floating-nav-btn.component.scss']
 })
 export class FloatingNavBtnComponent implements OnInit {
   _subject: Subject<any>;
