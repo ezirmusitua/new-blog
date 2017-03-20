@@ -2,7 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+
 import { MaterialModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -22,6 +25,7 @@ import { LoginModalComponent } from './login-modal/login-modal.component';
 import { ScrollListeningLoaderDirective } from './scroll-listening-loader.directive';
 import { RxSubjectService } from './shared/rx-subject.service';
 import { ToastComponent } from './toast/toast.component';
+import { HeaderNavbarComponent } from './header-navbar/header-navbar.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +39,7 @@ import { ToastComponent } from './toast/toast.component';
     LoginModalComponent,
     ScrollListeningLoaderDirective,
     ToastComponent,
+    HeaderNavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +47,7 @@ import { ToastComponent } from './toast/toast.component';
     HttpModule,
     AppRoutingModule,
     MaterialModule,
+    FlexLayoutModule,
   ],
   providers: [ArticleService, UserService, ResourceService, LocalStorage, RxSubjectService],
   bootstrap: [AppComponent, FloatingNavBtnComponent, ToastComponent]

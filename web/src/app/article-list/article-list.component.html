@@ -1,17 +1,13 @@
-<div class="container" jfbScrollListeningLoader (scrolled)="scrollLoad($event)">
-  <section class="list-container">
-    <article *ngFor="let article of articles" class="list">
-      <time>{{ article.updateAt | date }}</time><span class="line"></span>
-      <div class="info">
-        <div class="title-container">
-          <p class="title">{{ article.title }}</p>
-          <div class="tag" *ngFor="let tag of article.tags">{{ tag }}</div>
-        </div>
-        <div class="description">
-          <div>{{ article.description }}</div>
-          <a [routerLink]="['/article', article._id]"> >> 点击阅读全文</a>
-        </div>
-      </div>
-    </article>
+<div class="container" fxFlex="100%" fxLayout="row" jfbScrollListeningLoader (scrolled)="scrollLoad($event)">
+  <section fxFlex="31%" class="article-list-container">
+    article list
+    <md-list>
+      <md-list-item *ngFor="let index of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]">
+        list item + {{ index }}
+      </md-list-item>
+    </md-list>
+  </section>
+  <section fxFlex class="list-container">
+    article description
   </section>
 </div>

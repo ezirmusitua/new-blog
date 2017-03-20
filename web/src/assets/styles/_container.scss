@@ -1,0 +1,12 @@
+@import './color';
+@import './size';
+
+.toolbar-container {
+  @extend .title-text;
+  width: 100%;
+  height: 64px;
+  padding: 22px 16px;
+  color: $light-text-primary;
+  background-color: $primary-strong;
+  box-sizing: border-box;
+}

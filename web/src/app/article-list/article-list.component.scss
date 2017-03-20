@@ -1,68 +1,13 @@
+@import '../../assets/styles/color';
 :host {
   display: flex;
   flex: 1;
 }
 
-.container::-webkit-scrollbar {
-  width: 0;
-}
-
 .container {
-  overflow-y: scroll;
-  display: flex;
-  flex: 1;
-}
-
-.list-container {    
-  padding-top: 24px;
-  padding-bottom: 48px;
-  .list {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    time {
-      padding-right: 36px;
-      font-size: 24px;
-      color: rgba(0, 0, 0, 0.64);
-      min-width: 178px;
-      border-right: 4px solid rgba(128, 53, 23, 0.65);
-    }
+  padding-top: 64px;
+  .article-list-container {
+    height: 100%;
+    background-color: $primary-moderate;
   }
 }
-
-.info {
-  margin-left: 48px;
-  padding-bottom: 24px;
-  margin-bottom: 12px;
-  .title {
-    margin: 0;
-    font-size: 24px;
-    margin-bottom: 12px;
-    font-weight: 500;
-  }
-  .description {
-    font-size: 12px;
-    > div {
-      margin-bottom: 4px;    
-    }
-    > a {
-      font-weight: bold;
-      margin-bottom: 4px;    
-    }
-  }
-
-  .title-container {
-    display: flex;
-    flex-direction: row;
-    .title {
-      margin-right: 4px;
-    }
-    .tag {
-      background-color: grey;
-      border-radius: 4px;
-      padding: 0 4px;
-      margin: 0 4px;
-    }
-  }
-}
-

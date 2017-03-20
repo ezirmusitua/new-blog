@@ -1,7 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
-body {
-  margin: 0;
+
+html {
+  height: 100%;
   font-family: "Microsoft YaHei" !important;
+}
+body {
+  display: flex;
+  position: relative;
+  min-height: 100%;
+  margin: 0;
 }
 
 h1 {
@@ -110,33 +117,4 @@ table td {
 
 pre {
   margin-left: 20px;
-}
-
-.out-container {
-  position: relative;
-  background-color: #D5D5D5;
-  display: flex;
-  padding: 0 436px;
-  background-color: rgba(0, 0, 0, 0.06);
-  height: 100vh;
-}
-
-.color-out-container-bg {
-  background-color: rgb(41, 107, 98);
-}
-
-.color-container-bg {
-  background-color: rgb(152, 231, 198)
-}
-
-.color-main-text {
-  color: rgb(188, 181, 169);
-}
-
-.out- {
-  background-color: rgba(205, 114, 41, 0.47);
-}
-
-.color-coffee-2 {
-  color: rgb(128, 53, 23);
 }
