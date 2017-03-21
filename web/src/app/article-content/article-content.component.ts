@@ -22,19 +22,19 @@ export class ArticleContentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.currentRoute.params.subscribe((params) => {
-      this.articleId = params['articleId'];
-      if (this.articleId) {
-        this.articleService.getArticleById(this.articleId).subscribe(article => {
-          this.article = article;
-          this.isPageLoaded = true;
-        });
-      }
-    });
-    this.subjects.floatingNavBtnSubject.subscribe((res) => {
-      if (res.category === FloatingNavCategory.EDIT) {
-        this.router.navigate(['article', this.articleId, 'edit']);
-      }
-    });
+    // this.currentRoute.params.subscribe((params) => {
+    //   this.articleId = params['articleId'];
+    //   if (this.articleId) {
+    //     this.articleService.getArticleById(this.articleId).subscribe(article => {
+    //       this.article = article;
+    //       this.isPageLoaded = true;
+    //     });
+    //   }
+    // });
+    // this.subjects.floatingNavBtnSubject.subscribe((res) => {
+    //   if (res.category === FloatingNavCategory.EDIT) {
+    //     this.router.navigate(['article', this.articleId, 'edit']);
+    //   }
+    // });
   }
 }

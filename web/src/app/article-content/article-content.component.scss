@@ -1,20 +1,15 @@
 :host {
   display: flex;
   flex: 1;
-  padding-bottom: 24px;
+  padding-top: 64px;
 }
 
 .container {
-  display: flex;
-  flex: 1;
-  overflow-y: scroll;
-  &::-webkit-scrollbar {
-    width: 0;
-    padding-bottom: 48px;
+  width: 740px;
+  > section {
+    height: 100%;
   }
-  .article-content {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
+  .content {
+    background-color: green;
   }
 }
