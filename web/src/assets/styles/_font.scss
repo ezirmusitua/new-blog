@@ -1,0 +1,46 @@
+@import './color';
+
+.title-text {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.list-title-text {
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: $light-text-secondary;
+}
+
+.list-title-text-hover {
+  @extend .list-title-text;
+  color: rgba(0, 0, 0, 0.72);
+}
+
+.list-content-text {
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: $light-text-hint;
+}
+.list-content-text-hover {
+  @extend .list-content-text;
+  color: rgba(0, 0, 0, 0.24);
+}
+
+.subtitle-text {
+  font-size: 16px;
+  font-weight: 400
+}
+
+.body-text {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.button-text {
+  font-size: 14px;
+  font-weight: 400;
+}

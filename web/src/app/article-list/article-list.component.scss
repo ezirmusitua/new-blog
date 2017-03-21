@@ -1,13 +1,41 @@
+@import '../../assets/styles/border';
 @import '../../assets/styles/color';
+@import '../../assets/styles/font';
+@import '../../assets/styles/md';
+
 :host {
   display: flex;
   flex: 1;
 }
 
 .container {
-  padding-top: 64px;
   .article-list-container {
+    left: 0;
     height: 100%;
-    background-color: $primary-moderate;
+    // background-color: $primary-shallow;
+    md-list {
+      padding-top: 4px;
+    }
+  }
+}
+div[md-list-item] {
+  position: relative;
+  height: 72px;
+  padding: 12px 24px;
+  background-color: $primary-shallow;
+  h3 {
+    @extend .list-title-text;
+    margin-bottom: 3px;
+  }
+  p {
+    @extend .list-content-text;
+    margin-top: 3px;
+  }
+  &:hover {
+    width: calc(100% + 8px);
+    background-color: $primary-shallow-hover;
+    border-radius: $normal-border-radius;
+    box-shadow:  $layer-one;
+    z-index: 1;
   }
 }

@@ -1,8 +1,8 @@
-<form #articleEditor="ngForm" (ngSubmit)="save()" class="container">
-  <article class="title-save-container">
-    <input class="title-input" [(ngModel)]="article.title" name="title">
+<div fxLayout="row" fxFlex class="container">
+  <article fxFlex="31%" class="folder">
   </article>
-  <article class="content-input">
-    <textarea [(ngModel)]="markdownContent" (keyup)="updatePreview(markdownContent)" name="markdown" type="text"></textarea>
+  <article fxFlex fxLayout="row" class="editor">
+    <section fxFlex="72" class="content"></section>
+    <section fxFlex class="images"></section>
   </article>
-</form>
+</div>

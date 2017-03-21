@@ -15,7 +15,6 @@ import { ResourceService } from './resource.service';
 import { LocalStorage } from './localStorage.service';
 
 import { AppComponent } from './app.component';
-import { FloatingNavBtnComponent } from './floating-nav-btn/floating-nav-btn.component';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { ArticleContentComponent } from './article-content/article-content.component';
 import { ReadingProgressBarComponent } from './reading-progress-bar/reading-progress-bar.component';
@@ -30,7 +29,6 @@ import { HeaderNavbarComponent } from './header-navbar/header-navbar.component';
 @NgModule({
   declarations: [
     AppComponent,
-    FloatingNavBtnComponent,
     ArticleListComponent,
     ArticleContentComponent,
     ReadingProgressBarComponent,
@@ -50,6 +48,6 @@ import { HeaderNavbarComponent } from './header-navbar/header-navbar.component';
     FlexLayoutModule,
   ],
   providers: [ArticleService, UserService, ResourceService, LocalStorage, RxSubjectService],
-  bootstrap: [AppComponent, FloatingNavBtnComponent, ToastComponent]
+  bootstrap: [AppComponent, ToastComponent]
 })
 export class AppModule { }

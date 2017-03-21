@@ -6,7 +6,7 @@ import { RxSubjectService } from '../shared/rx-subject.service';
 import { ArticleService } from '../article.service';
 import { MarkdownService } from '../markdown.service';
 import { Article } from '../models/article';
-import { FloatingNavCategory, ValidErrorIdRange, ArticleViewCategory } from '../shared/enums';
+import { ValidErrorIdRange, ArticleViewCategory } from '../shared/enums';
 
 @Component({
   selector: 'jfb-article-editor',
@@ -41,26 +41,26 @@ export class ArticleEditorComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.currentRoute.params.subscribe((params) => {
-      const articleId = params['articleId'];
-      if (articleId) {
-        this.articleService.getArticleById(articleId).subscribe(article => {
-          this.initArticle(article);
-        });
-      }
-    });
-    this.floatingNavSubscription = this.subjects.floatingNavBtnSubject.subscribe((res) => {
-      if (res.category === FloatingNavCategory.SAVE) {
-        this.save();
-      }
-      if (res.category === FloatingNavCategory.PREVIEW) {
-        this.preview();
-      }
-      if (res.category === FloatingNavCategory.PUBLISH) {
-        this.publish();
-      }
-    });
-    this.toastSubject = this.subjects.toastSubject;
+    // this.currentRoute.params.subscribe((params) => {
+    //   const articleId = params['articleId'];
+    //   if (articleId) {
+    //     this.articleService.getArticleById(articleId).subscribe(article => {
+    //       this.initArticle(article);
+    //     });
+    //   }
+    // });
+    // this.floatingNavSubscription = this.subjects.floatingNavBtnSubject.subscribe((res) => {
+    //   if (res.category === FloatingNavCategory.SAVE) {
+    //     this.save();
+    //   }
+    //   if (res.category === FloatingNavCategory.PREVIEW) {
+    //     this.preview();
+    //   }
+    //   if (res.category === FloatingNavCategory.PUBLISH) {
+    //     this.publish();
+    //   }
+    // });
+    // this.toastSubject = this.subjects.toastSubject;
   }
 
   private getNextContentByError(error: any) {

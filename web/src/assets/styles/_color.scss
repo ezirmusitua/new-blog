@@ -1,6 +1,10 @@
-$primary-shallow: #4DB6AC;
-$primary-moderate: #64FFDA;
-$primary-strong: #00BFA5;
+$primary-shallow: rgb(178, 223, 219);
+$primary-moderate: rgb(0, 191, 165);
+$primary-strong: rgb(0, 77, 64);
+
+$primary-shallow-hover: rgba(178, 223, 219, 0.88);
+$primary-moderate-hover: rgba(0, 191, 165, 0.12);
+$primary-strong-hover: rgba(0, 77, 64, 0.12);
 
 $accent-shallow: #FFB74D;
 $accent-moderate: #FFAB40;
