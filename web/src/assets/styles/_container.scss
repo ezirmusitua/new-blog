@@ -10,3 +10,13 @@
   background-color: $primary-strong;
   box-sizing: border-box;
 }
+
+.self-scroll-list {
+  height: calc(100vh - 64px);
+  padding-right: 12px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  &::-webkit-scrollbar{
+    width: 0;
+  }
+}

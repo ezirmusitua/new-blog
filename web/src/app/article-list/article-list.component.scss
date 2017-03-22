@@ -1,5 +1,6 @@
 @import '../../assets/styles/border';
 @import '../../assets/styles/color';
+@import '../../assets/styles/container';
 @import '../../assets/styles/font';
 @import '../../assets/styles/md';
 
@@ -11,15 +12,7 @@
 
 .container {
   .list-container {
-    left: 0;
-    height: calc(100vh - 64px);
-    padding-right: 12px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    // background-color: $primary-shallow;
-    &::-webkit-scrollbar{
-      width: 0;
-    }
+    @extend .self-scroll-list;
     md-list {
       padding-top: 4px;
     }
@@ -42,7 +35,7 @@ div[md-list-item] {
     @extend .list-content-text;
     margin-top: 3px;
   }
-  &:hover {
+  .focused, &:hover {
     width: calc(100% + 8px);
     background-color: $primary-shallow-hover;
     border-radius: $normal-border-radius;

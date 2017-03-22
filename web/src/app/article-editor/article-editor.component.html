@@ -1,5 +1,25 @@
 <div fxLayout="row" fxFlex class="container">
-  <article fxFlex="31%" class="folder">
+
+  <article fxFlex="23%" fxLayout="row" class="directory-container">
+    <section class="category">
+    </section>
+    <section class="list">
+      <md-list>
+        <div class="folder-container" md-list-item *ngFor="let folder of directoryItems; let folderIndex = index;">
+          <div fxLayout="row">
+            <md-icon *ngIf="!folder.opened" svgIcon="folder"></md-icon>
+            <md-icon *ngIf="folder.opened" svgIcon="folder_open"></md-icon>
+            <h3 md-line (click)="toggleFolder(folder)">{{folder.title}}</h3>
+          </div>
+          <md-list *ngIf="folder.opened">
+            <div md-list-item (click)="selectArticle(article)" *ngFor="let article of folder.articles; let articleIndex = index;">
+              <p [ngClass]="{selected: article.selected}" md-line>{{article.title}}</p>
+            </div>
+          </md-list>
+        </div>
+      </md-list>
+
+    </section>
   </article>
   <article fxFlex fxLayout="row" class="editor">
     <section fxFlex="72" class="content"></section>

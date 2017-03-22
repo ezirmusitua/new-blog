@@ -1,3 +1,7 @@
+@import '../../assets/styles/color';
+@import '../../assets/styles/container';
+@import '../../assets/styles/font';
+
 :host {
   display: flex;
   flex: 1;
@@ -5,19 +9,59 @@
 }
 
 .container {
+  padding-top: 4px;
   > article {
     height: 100%;
   }
-  .folder {
-    background-color: red;
+  .directory-container {
+    @extend .self-scroll-list;
   }
-  .editor {
-    .content {
-      border-right: 2px solid darkblue;
+}
+.directory-container {
+  .category {
+    min-width: 64px;
+    background-color: $primary-moderate;
+  }
+  .list {
+    width: calc(100% - 64px);
+    padding-left: 24px;
+    background-color: $primary-shallow;
+    .folder-container {
+      padding-bottom: 12px;
+      h3 {
+        @extend .list-title-text;
+        margin-left: 4px;
+        padding-bottom: 3px;
+      }
+      p {
+        @extend .list-content-text;
+        font-size: 14px;
+        padding-left: 16px;
+        margin-bottom: 3px;
+        &:hover {
+          @extend .list-content-text-hover;
+          font-size: 14px;
+          padding-left: 16px;
+          margin-bottom: 3px;
+          background-color: $primary-shallow-hover;
+        } 
+      }
+      p.selected {
+        @extend .list-content-text-hover;
+        font-size: 14px;
+        padding-left: 16px;
+        margin-bottom: 3px;
+        background-color: rgba(0, 0, 0, 0.12);
+      }
     }
-    .images {
-      background-color: yellow;
-    }
+  }
+}
+.editor {
+  .content {
+    border-right: 2px solid darkblue;
+  }
+  .images {
+    background-color: yellow;
   }
 }
 
