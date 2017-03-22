@@ -1,12 +1,15 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { Article } from '../models/article';
-import { ArticleService } from '../article.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MdIconRegistry } from '@angular/material';
 import { Subject } from 'rxjs';
 
+import { Article } from '../models/article';
+import { ArticleService } from '../article.service';
 import { Loader } from '../shared/loader';
 import { UserService } from '../user.service';
 import { RxSubjectService } from '../shared/rx-subject.service';
 import { ErrorCategory } from '../shared/error';
+import { Trusted } from '../shared/constant';
 
 @Component({
   selector: 'app-article-list',
@@ -17,6 +20,7 @@ export class ArticleListComponent implements OnInit {
   isVisitor: boolean = true;
   isShowLoginDialog: boolean = false;
   articles: Article[] = [];
+  currentArticle: Article;
   isLoading: boolean = false;
   toastSubject: Subject<any>;
   hasMore: boolean = true;
@@ -25,8 +29,14 @@ export class ArticleListComponent implements OnInit {
   constructor(
     private articleService: ArticleService,
     private userService: UserService,
-    private subjects: RxSubjectService
+    private subjects: RxSubjectService,
+    private sanitizer: DomSanitizer,
+    private iconRegistry: MdIconRegistry
   ) {
+    iconRegistry.addSvgIcon('comment',
+      sanitizer.bypassSecurityTrustResourceUrl(Trusted.icon('comment', 'black')));
+    iconRegistry.addSvgIcon('like',
+      sanitizer.bypassSecurityTrustResourceUrl(Trusted.icon('favorite', 'black')));
   }
 
   ngOnInit() {
@@ -45,11 +55,12 @@ export class ArticleListComponent implements OnInit {
                     每揽（览）昔人兴感之由，若合一契，未尝不临文嗟悼，不能喻之于怀。固知一死生为虚诞，齐彭殇为妄作。
                     后之视今，亦由（犹）今之视昔，悲夫！故列叙时人，录其所述，虽世殊事异，所以兴怀，其致一也。
                     后之揽（览）者，亦将有感于斯文。`
-      const coverUrl = 'http://placehold.it/350x150';
+      const coverUrl = 'http://placehold.it/480x270';
       const commentCount = 99;
       const likeCount = 99;
       return { title, shortDesc, desc, coverUrl, commentCount, likeCount } as any;
-    })
+    });
+    this.currentArticle = this.articles[0];
   }
 
   private scrollLoad(event) {
@@ -73,12 +84,7 @@ export class ArticleListComponent implements OnInit {
       });
     }
   }
-  private onMouseEnterListItem(index) {
-    console.log(index);
-    this.currentListItemIndex = index;
-  }
-  private shouldShowListItemMask(index) {
-    console.log('111111')
-    return this.currentListItemIndex === index;
+  private chooseArticleByClick(index: number) {
+    this.currentArticle = this.articles[index];
   }
 }

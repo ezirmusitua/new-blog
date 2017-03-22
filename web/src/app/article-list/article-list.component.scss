@@ -24,7 +24,7 @@
     }
   }
   .detail-container {
-    padding: 24px 20%;
+    padding: 32px 20%;
   }
 }
 div[md-list-item] {
@@ -51,20 +51,24 @@ div[md-list-item] {
 }
 
 .detail-container {
-  .title-container {
-    height: 64px;
+  .cover-container {
+    margin-bottom: 8px;
+  }
+  .desc-container {
+    margin-bottom: 24px;
     h3 {
       @extend .article-title-text;
       margin: 0;
-      line-height: 64px;
+      line-height: 56px;
     }
-  }
-  .desc-container {
     p {
       margin: 0;
       @extend .article-content-text;
     }
   }
   .comment-like-container {
+    md-icon {
+      color: $light-divider;
+    }
   }
 }

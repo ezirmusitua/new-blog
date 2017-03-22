@@ -35,6 +35,11 @@ export const DefaultHeaders = {
   Accept: 'application/json',
 };
 
+
+export const Trusted = {
+  icon: (name: string, color: string = 'white', size: number = 24) => `assets/icons/ic_${name}_${color}_${size}px.svg`,
+}
+
 export const LocalStorageKeyEnum = {
   SESSION: 'ngkoa.blog.session',
 };
