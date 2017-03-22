@@ -2,7 +2,7 @@
 @import './font';
 
 .toolbar-container {
-  @extend .title-text;
+  @extend .toolbar-title-text;
   width: 100%;
   height: 64px;
   padding: 22px 16px;
