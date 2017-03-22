@@ -13,6 +13,7 @@
   .list-container {
     left: 0;
     height: calc(100vh - 64px);
+    padding-right: 12px;
     overflow-y: auto;
     overflow-x: hidden;
     // background-color: $primary-shallow;
@@ -67,6 +68,8 @@ div[md-list-item] {
     }
   }
   .comment-like-container {
+    width: 100%;
+    height: 24px;
     md-icon {
       color: $light-divider;
     }
