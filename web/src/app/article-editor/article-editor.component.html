@@ -21,8 +21,17 @@
 
     </section>
   </article>
-  <article fxFlex fxLayout="row" class="editor">
-    <section fxFlex="72" class="content"></section>
+  <article fxFlex fxLayout="row" class="editor-container">
+    <section fxFlex="75" class="editor">
+      <form fxFlex fxLayout="column" class="editor-form">
+        <md-input-container fxFlex="10%" class="title">
+          <input mdInput placeholder="文章标题" value="Google">
+        </md-input-container>
+        <md-input-container fxFlex class="content">
+          <textarea mdInput (minRows)="10" placeholder="文章正文" value="Google"></textarea>
+        </md-input-container>
+      </form>
+    </section>
     <section fxFlex class="images"></section>
   </article>
 </div>
