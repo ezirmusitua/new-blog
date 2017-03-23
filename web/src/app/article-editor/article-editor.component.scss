@@ -9,7 +9,6 @@
 }
 
 .container {
-  padding-top: 4px;
   > article {
     height: 100%;
   }
@@ -23,7 +22,7 @@
     background-color: $primary-moderate;
   }
   .list {
-    width: calc(100% - 64px);
+    width: calc(100% - 68px);
     padding-left: 24px;
     background-color: $primary-shallow;
     .folder-container {
@@ -33,32 +32,39 @@
         margin-left: 4px;
         padding-bottom: 3px;
       }
-      p {
-        @extend .list-content-text;
-        font-size: 14px;
+      .file-container {
         padding-left: 16px;
         margin-bottom: 3px;
-        &:hover {
-          @extend .list-content-text-hover;
-          font-size: 14px;
-          padding-left: 16px;
-          margin-bottom: 3px;
-          background-color: $primary-shallow-hover;
-        }
-      }
-      p.selected {
-        @extend .list-content-text-hover;
-        font-size: 14px;
-        padding-left: 16px;
-        margin-bottom: 3px;
-        background-color: rgba(0, 0, 0, 0.12);
       }
     }
   }
 }
+
+.file-container {
+  p {
+    @extend .list-content-text;
+    font-size: 14px;
+    &:hover {
+      @extend .list-content-text-hover;
+      font-size: 14px;
+      background-color: $primary-shallow-hover;
+    }
+    &.selected {
+      @extend .list-content-text-hover;
+      font-size: 14px;
+      background-color: rgba(0, 0, 0, 0.12);
+    }
+  }
+  md-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+  }
+}
+
 .editor-form {
-  height: 100%;
-  padding: 32px 48px;
+  height: calc(100% - 8px);
+  padding: 24px 48px;
   border-right: 2px solid $light-divider;
   .title {
     label {
@@ -68,6 +74,8 @@
       border: none;
     }
     input {
+      font-family: Georgia, "Times New Roman", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", serif;
+      font-size: 14px;
       &:active, &:focus {
         outline: 0px;
       }
@@ -79,6 +87,10 @@
       height: 100%;
       resize: none;
       border: none;
+      font-family: Georgia, "Times New Roman", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", serif;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 1px;
       &::-webkit-scrollbar{
         width: 0px;
       }
@@ -91,26 +103,26 @@
 }
 .uploaded-images {
   background-color: $light-divider;
-  padding: 12px 24px;
-  height: calc(100vh - 56px);
+  padding: 8px 36px;
+  height: calc(100vh - 68px);
   overflow-y: auto;
   &::-webkit-scrollbar {
     width: 0;
   }
-  md-card {
-    padding: 12px 24px;
+  .uploaded-image-card {
+    padding: 0 24px;
     border-radius: 4px;
     margin-bottom: 12px;
-    md-card-header {
-      height: 24px;
-      margin: 0;
-    }
-    img {
+    .mat-card-image {
+      margin-top: 0;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
       margin-bottom: 0;
+      height: 225px;
     }
-    md-card-actions {
-      padding-top: 8px;
+    .mat-card-actions {
       margin-bottom: 0;
+      padding-top: 0;
       .mat-button {
         line-height: 24px;
       }

@@ -12,7 +12,8 @@
             <h3 md-line (click)="toggleFolder(folder)">{{folder.title}}</h3>
           </div>
           <md-list *ngIf="folder.opened">
-            <div md-list-item (click)="selectArticle(article)" *ngFor="let article of folder.articles; let articleIndex = index;">
+            <div class="file-container" fxLayout="row" md-list-item (click)="selectArticle(article)" *ngFor="let article of folder.articles; let articleIndex = index;">
+              <md-icon svgIcon="article"></md-icon>
               <p [ngClass]="{selected: article.selected}" md-line>{{article.title}}</p>
             </div>
           </md-list>
@@ -33,14 +34,11 @@
       </form>
     </section>
     <section fxFlex class="uploaded-images">
-      <md-card class="example-card" *ngFor="let image of uploadedImages">
-        <md-card-header>
-          <md-card-title>{{image.ariaLabel}}</md-card-title>
-        </md-card-header>
+      <md-card class="uploaded-image-card" *ngFor="let image of uploadedImages">
         <img md-card-image width="120" [src]="image.src">
-        <md-card-actions>
-          <button md-button>LIKE</button>
-          <button md-button>SHARE</button>
+        <md-card-actions fxLayoutAlign="end center">
+          <button md-icon-button><md-icon svgIcon="edit"></md-icon></button>
+          <button md-icon-button><md-icon svgIcon="delete"></md-icon></button>
         </md-card-actions>
       </md-card>
     </section>
