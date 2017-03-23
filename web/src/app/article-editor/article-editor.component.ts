@@ -25,6 +25,7 @@ export class ArticleEditorComponent implements OnInit {
   floatingNavSubscription: Subscription;
   toastSubject: Subject<any>;
   currentSelected: any;
+  uploadedImages: any[] = [];
   article: Article = new Article();
 
   constructor(
@@ -100,7 +101,13 @@ export class ArticleEditorComponent implements OnInit {
           { _id: 'article-4', title: '这是一片测试文章[4]', createAt: Date.now() - 45 * 60 * 1000, selected: false, },
         ], opened: false, selected: false,
       },
-    ]
+    ];
+    this.uploadedImages = Array.from({ length: 10 }, (v, i) => {
+      return {
+        ariaLabel: `uploaded-image-${i}`,
+        src: `https://placeholdit.imgix.net/~text?txtsize=96&bg=ff6f6f&txtclr=ffffff&txt=J%20Z&w=240&h=240`
+      };
+    });
   }
 
   private getNextContentByError(error: any) {

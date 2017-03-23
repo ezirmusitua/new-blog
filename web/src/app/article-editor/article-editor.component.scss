@@ -79,6 +79,9 @@
       height: 100%;
       resize: none;
       border: none;
+      &::-webkit-scrollbar{
+        width: 0px;
+      }
       &:active, &:focus {
         outline: 0px;
         border-left: 1px solid $light-divider;
@@ -86,7 +89,32 @@
     }
   }
 }
-.images {
-  background-color: yellow;
+.uploaded-images {
+  background-color: $light-divider;
+  padding: 12px 24px;
+  height: calc(100vh - 56px);
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+  md-card {
+    padding: 12px 24px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    md-card-header {
+      height: 24px;
+      margin: 0;
+    }
+    img {
+      margin-bottom: 0;
+    }
+    md-card-actions {
+      padding-top: 8px;
+      margin-bottom: 0;
+      .mat-button {
+        line-height: 24px;
+      }
+    }
+  }
 }
 

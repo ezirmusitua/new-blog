@@ -28,12 +28,21 @@
           <input mdInput placeholder="文章标题" value="Google">
         </md-input-container>
         <div class="content" fxFlex>
-          <textarea placeholder="文章正文"></textarea>
+          <textarea fxFlex placeholder="文章正文"></textarea>
         </div>
       </form>
     </section>
-    <section fxFlex class="images">
-      
+    <section fxFlex class="uploaded-images">
+      <md-card class="example-card" *ngFor="let image of uploadedImages">
+        <md-card-header>
+          <md-card-title>{{image.ariaLabel}}</md-card-title>
+        </md-card-header>
+        <img md-card-image width="120" [src]="image.src">
+        <md-card-actions>
+          <button md-button>LIKE</button>
+          <button md-button>SHARE</button>
+        </md-card-actions>
+      </md-card>
     </section>
   </article>
 </div>
