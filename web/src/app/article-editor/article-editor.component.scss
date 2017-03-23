@@ -44,7 +44,7 @@
           padding-left: 16px;
           margin-bottom: 3px;
           background-color: $primary-shallow-hover;
-        } 
+        }
       }
       p.selected {
         @extend .list-content-text-hover;
@@ -56,20 +56,37 @@
     }
   }
 }
-.editor-container {
-  .editor-form {
-    height: 100%;
-    padding: 32px 48px;
-    border-right: 2px solid $light-divider;
-    .title {
-
+.editor-form {
+  height: 100%;
+  padding: 32px 48px;
+  border-right: 2px solid $light-divider;
+  .title {
+    label {
+      color: $light-text-hint;
     }
-    .content {
-
+    .mat-input-underline {
+      border: none;
+    }
+    input {
+      &:active, &:focus {
+        outline: 0px;
+      }
     }
   }
-  .images {
-    background-color: yellow;
+  .content {
+    textarea {
+      width: 100%;
+      height: 100%;
+      resize: none;
+      border: none;
+      &:active, &:focus {
+        outline: 0px;
+        border-left: 1px solid $light-divider;
+      }
+    }
   }
+}
+.images {
+  background-color: yellow;
 }
 
