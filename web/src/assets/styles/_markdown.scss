@@ -1,0 +1,82 @@
+@import './font';
+
+.markdown-style {
+  h1 {
+    @extend .article-title-text;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  h2 {
+    @extend .article-title-text;
+    font-size: 24px;
+    margin: 0;
+  }
+
+  h3 {
+    @extend .article-title-text;
+    margin: 0;
+  }
+
+  h4 {
+    @extend .article-title-text;
+    font-size: 16px;
+    margin: 0;
+  }
+
+  img {
+    border-radius: 12px;
+    padding: 8px;
+  }
+
+  a {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.64)
+  }
+
+  p {
+    @extend .article-content-text;
+    cursor: default;
+  }
+
+  blockquote {
+    margin: 0 0 12px 18px;
+    padding: 8px 0;
+    background-color: rgb(152, 231, 198);
+    border-radius: 12px;
+  }
+
+  ul {
+    margin: 0;
+    -webkit-padding-start: 30px;
+  }
+
+  li {
+    @extend .article-content-text;
+    margin: 0.5em 0;
+    margin-left: 0.8em;
+    cursor: default;
+    list-style: circle;
+  }
+
+  table {
+    margin-left: 20px;
+    line-height: 120%;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.64);
+    cursor: default;
+  }
+
+  table thead {
+    text-align: left;
+  }
+
+  table td {
+    min-width: 6rem;
+  }
+
+  pre {
+    margin-left: 20px;
+  }
+}

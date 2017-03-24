@@ -1,8 +1,15 @@
+@import '../../assets/styles/markdown';
+
 :host {
   display: flex;
   flex: 1;
   padding-top: 64px;
 }
+
+:host /deep/ .content {
+  @extend .markdown-style;
+}
+
 
 .container {
   width: 740px;
@@ -10,6 +17,5 @@
     height: 100%;
   }
   .content {
-    background-color: green;
   }
 }
