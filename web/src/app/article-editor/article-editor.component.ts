@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MdIconRegistry } from '@angular/material';
+import { MdIconRegistry, MdDialog, MdDialogRef } from '@angular/material';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject, Subscription, Observable } from 'rxjs';
 
@@ -8,6 +8,7 @@ import { RxSubjectService } from '../shared/rx-subject.service';
 import { ArticleService } from '../article.service';
 import { MarkdownService } from '../markdown.service';
 import { Article } from '../models/article';
+import { CoverDescriptionEdit } from './dialog-cover-desc-edit.component';
 import { ValidErrorIdRange, ArticleViewCategory } from '../shared/enums';
 import { Trusted } from '../shared/constant';
 
@@ -17,6 +18,7 @@ import { Trusted } from '../shared/constant';
   styleUrls: ['./article-editor.component.scss']
 })
 export class ArticleEditorComponent implements OnInit {
+  dialogRef: MdDialogRef<CoverDescriptionEdit>;
   editorCategory: number = 100;
   directoryItems: any[] = [];
   markdownContent: string = '';
@@ -35,7 +37,8 @@ export class ArticleEditorComponent implements OnInit {
     private currentRoute: ActivatedRoute,
     private router: Router,
     private sanitizer: DomSanitizer,
-    private iconRegistry: MdIconRegistry
+    private iconRegistry: MdIconRegistry,
+    private dialog: MdDialog
   ) {
     iconRegistry.addSvgIcon('folder',
       sanitizer.bypassSecurityTrustResourceUrl(Trusted.icon('folder')));
@@ -167,5 +170,17 @@ export class ArticleEditorComponent implements OnInit {
     }
     this.currentSelected = article;
     this.currentSelected.selected = !article.selected;
+  }
+
+  public openDialog() {
+    console.log(123);
+    // this.dialogRef = this.dialog.open(CoverDescriptionEdit, {
+    //   disableClose: false
+    // });
+
+    // this.dialogRef.afterClosed().subscribe(result => {
+    //   console.log('result: ' + result);
+    //   this.dialogRef = null;
+    // });
   }
 }

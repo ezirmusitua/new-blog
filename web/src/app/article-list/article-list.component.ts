@@ -37,6 +37,8 @@ export class ArticleListComponent implements OnInit {
       sanitizer.bypassSecurityTrustResourceUrl(Trusted.icon('comment', 'black')));
     iconRegistry.addSvgIcon('like',
       sanitizer.bypassSecurityTrustResourceUrl(Trusted.icon('favorite', 'black')));
+    iconRegistry.addSvgIcon('forward',
+      sanitizer.bypassSecurityTrustResourceUrl(Trusted.icon('forward', 'black')));
   }
 
   ngOnInit() {

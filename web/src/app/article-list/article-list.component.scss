@@ -64,6 +64,17 @@ div[md-list-item] {
       @extend .article-content-text;
     }
   }
+  .article-content-link {
+    .mat-icon {
+      margin-left: 8px;
+    }
+    a {
+      cursor: pointer;
+      font-size: 14px;
+      color: $link-text;
+      line-height: 22px;
+    }
+  }
   .more-info-container {
     height: 32px;
     width: 100%;
