@@ -47,6 +47,10 @@ div[md-list-item] {
 .detail-container {
   .cover-container {
     margin-bottom: 8px;
+    width: 100%;
+    img {
+      width: 100%;
+    }
   }
   .desc-container {
     margin-bottom: 24px;
