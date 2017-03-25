@@ -1,6 +1,110 @@
+@import './border';
+@import './color';
 @import './font';
 
+.github-markdown-style {
+  // Reference from https://github.com/isagalaev/highlight.js/blob/master/src/styles/github.css
+  .hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    color: #333;
+    background: #f8f8f8;
+  }
+
+  .hljs-comment,
+  .hljs-quote {
+    color: #998;
+    font-style: italic;
+  }
+
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-subst {
+    color: #333;
+    font-weight: bold;
+  }
+
+  .hljs-number,
+  .hljs-literal,
+  .hljs-variable,
+  .hljs-template-variable,
+  .hljs-tag .hljs-attr {
+    color: #008080;
+  }
+
+  .hljs-string,
+  .hljs-doctag {
+    color: #d14;
+  }
+
+  .hljs-title,
+  .hljs-section,
+  .hljs-selector-id {
+    color: #900;
+    font-weight: bold;
+  }
+
+  .hljs-subst {
+    font-weight: normal;
+  }
+
+  .hljs-type,
+  .hljs-class .hljs-title {
+    color: #458;
+    font-weight: bold;
+  }
+
+  .hljs-tag,
+  .hljs-name,
+  .hljs-attribute {
+    color: #000080;
+    font-weight: normal;
+  }
+
+  .hljs-regexp,
+  .hljs-link {
+    color: #009926;
+  }
+
+  .hljs-symbol,
+  .hljs-bullet {
+    color: #990073;
+  }
+
+  .hljs-built_in,
+  .hljs-builtin-name {
+    color: #0086b3;
+  }
+
+  .hljs-meta {
+    color: #999;
+    font-weight: bold;
+  }
+
+  .hljs-deletion {
+    background: #fdd;
+  }
+
+  .hljs-addition {
+    background: #dfd;
+  }
+
+  .hljs-emphasis {
+    font-style: italic;
+  }
+
+  .hljs-strong {
+    font-weight: bold;
+  }
+}
 .markdown-style {
+  font-family: $font-family;
+  > * {
+    padding: 8px 0;
+    line-height: 24px;
+    margin: 0;
+  }
   h1 {
     @extend .article-title-text;
     font-size: 24px;
@@ -11,72 +115,81 @@
   h2 {
     @extend .article-title-text;
     font-size: 24px;
+    padding: 8px 0;
     margin: 0;
   }
 
   h3 {
     @extend .article-title-text;
-    margin: 0;
   }
 
   h4 {
     @extend .article-title-text;
-    font-size: 16px;
-    margin: 0;
-  }
-
-  img {
-    border-radius: 12px;
-    padding: 8px;
   }
 
   a {
     text-decoration: none;
-    color: rgba(0, 0, 0, 0.64)
+    color: $link-text;
   }
 
   p {
     @extend .article-content-text;
     cursor: default;
+    code {
+      background-color: $block-bg;
+      padding: 0 4px;
+    }
+  }
+  img {
+    padding: 8px 0;
   }
 
   blockquote {
-    margin: 0 0 12px 18px;
-    padding: 8px 0;
-    background-color: rgb(152, 231, 198);
-    border-radius: 12px;
+    padding: 8px 20px;
+    background-color: $block-bg;
+    border-left: 12px solid $light-divider;
+    * {
+      margin: 0;
+    }
   }
 
   ul {
     margin: 0;
     -webkit-padding-start: 30px;
-  }
-
-  li {
-    @extend .article-content-text;
-    margin: 0.5em 0;
-    margin-left: 0.8em;
-    cursor: default;
-    list-style: circle;
+    li {
+      @extend .article-content-text;
+      margin: 0.5em 0;
+      margin-left: 0.8em;
+      cursor: default;
+      list-style: circle;
+    }
   }
 
   table {
-    margin-left: 20px;
-    line-height: 120%;
-    font-size: 16px;
-    color: rgba(0, 0, 0, 0.64);
+    @extend .article-content-text;
     cursor: default;
-  }
-
-  table thead {
-    text-align: left;
-  }
-
-  table td {
-    min-width: 6rem;
+    border-collapse: collapse;
+    margin: 8px 0;
+    thead {
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      border-top: 1px solid $light-divider;
+    }
+    td {
+      min-width: 6rem;
+    }
   }
 
   pre {
-    margin-left: 20px;
+    background-color: $block-bg;
+    padding: 8px 16px;
+    margin: 0;
+  }
+  code {
+    font-family: $font-family;
+    font-size: 14px;
+    line-height: 24px;
   }
 }

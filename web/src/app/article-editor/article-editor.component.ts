@@ -50,7 +50,7 @@ export class ArticleEditorComponent implements OnInit {
   }
 
   updatePreview(markdownContent: string) {
-    this.htmlContent = this.markdownService.convert(markdownContent);
+    // this.htmlContent = this.markdownService.convert(markdownContent);
   }
 
   private initArticle(article: Article) {

@@ -7,7 +7,7 @@
 }
 
 :host /deep/ .content {
-  @extend .markdown-style;
+  @extend .markdown-style, .github-markdown-style;
 }
 
 
@@ -17,5 +17,6 @@
     height: 100%;
   }
   .content {
+    padding: 16px 0;
   }
 }

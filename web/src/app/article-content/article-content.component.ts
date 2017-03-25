@@ -160,8 +160,42 @@ export class ArticleContentComponent implements OnInit {
       " }  \n" +
       "```  \n" +
       "Flow 的更多介绍，可以阅读[《Exploring Flow, Facebook's Type Checker for JavaScript》](http://www.crmarsh.com/flow/)。  \n" +
-      "本文的原始幻灯片点击[这里](http://slides.ruanyifeng.com/type/)（里面有更多内容）。  \n" +
-      "（完）  "
+      "本文的原始幻灯片点击[这里](http://slides.ruanyifeng.com/type/)（里面有更多内容）。  \n\n" +
+      "> **Note:**  \n" +
+      "> - StackEdit is accessible offline after the application has been loaded for the first time.\n" +
+      "> - Your local documents are not shared between different browsers or computers.\n" +
+      "> - Clearing your browser's data may **delete all your local documents!** Make sure your documents are synchronized with **Google Drive** or **Dropbox** (check out the [<i class=\"icon- refresh\"><\/i> Synchronization](#synchronization) section).\n\n" +
+      "### Tables\n" +
+      "**Markdown Extra** has a special syntax for tables:\n\n" +
+      "Item     | Value\n" +
+      "-------- | ---\n" +
+      "Computer | $1600\n" +
+      "Phone    | $12\n" +
+      "Pipe     | $1\n" +
+      "### SmartyPants\n" +
+      "SmartyPants converts ASCII punctuation characters into \"smart\" typographic punctuation HTML entities. For example:\n\n" +
+      "|                  | ASCII                        | HTML              |\n" +
+      " ----------------- | ---------------------------- | ------------------|\n" +
+      "| Single backticks | `'Isn't this fun?'`          | 'Isn't this fun?' |\n" +
+      "| Dashes           | `-- is en-dash, --- is em-dash` | -- is en-dash, --- is em-dash |\n" +
+      "### UML diagrams\n" +
+      "You can also render sequence diagrams like this:\n" +
+      "```sequence\n" +
+      "Alice->Bob: Hello Bob, how are you?\n" +
+      "Note right of Bob: Bob thinks\n" +
+      "Bob-->Alice: I am good thanks!\n" +
+      "```\n" +
+      "And flow charts like this:\n" +
+      "```flow\n" +
+      "st=>start: Start\n" +
+      "e=>end\n" +
+      "op=>operation: My Operation\n" +
+      "cond=>condition: Yes or No?\n" +
+      "st->op->cond\n" +
+      "cond(yes)->e\n" +
+      "cond(no)->op\n" +
+      "```\n\n" +
+      "`[TOC]`大家好，我是 JJ 林俊杰，今天个大家带来一首不是自己的歌，叫做瓜牛\n\n"
     ).sanitize().end() as SafeHtml;
   }
 }
