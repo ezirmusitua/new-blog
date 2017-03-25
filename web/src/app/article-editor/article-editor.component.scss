@@ -67,7 +67,13 @@
   height: calc(100% - 8px);
   padding: 24px 48px;
   border-right: 2px solid $light-divider;
+  .basic-info-input {
+    button {
+      font-size: 16px;
+    }
+  }
   .title {
+    margin-right: 16px;
     label {
       color: $light-text-hint;
     }

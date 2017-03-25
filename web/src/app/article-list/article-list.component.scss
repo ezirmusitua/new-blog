@@ -64,11 +64,18 @@ div[md-list-item] {
       @extend .article-content-text;
     }
   }
-  .comment-like-container {
+  .more-info-container {
+    height: 32px;
     width: 100%;
-    height: 24px;
-    md-icon {
-      color: $light-divider;
+    color: $light-text-hint;
+    .comments-likes {
+      width: 100%;
+      > div {
+        padding: 8px;
+      }
+    }
+    .mat-icon {
+      margin-right: 4px;
     }
   }
 }

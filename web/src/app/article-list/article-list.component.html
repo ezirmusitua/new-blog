@@ -18,12 +18,15 @@
         <p>{{currentArticle.desc}}</p>
       </div>
     </article>
-    <article fxLayout="row" fxLayoutAlign="start center" fxFlex class="comment-like-container">
-      <div fxFlex="8%" fxLayoutAlign="start center">
-        <md-icon [color]="accent" svgIcon="comment"></md-icon><span>{{this.currentArticle.commentCount}}</span>
-      </div>
-      <div fxFlex="8%" fxLayoutAlign="start center">
-        <md-icon svgIcon="like"></md-icon><span>{{this.currentArticle.likeCount}}</span>
+    <article fxFlex fxLayout="row" fxLayoutAlign="space-between center" class="more-info-container">
+      <time fxFlex datetime="2001-05-15T19:00">May 15</time>
+      <div fxFlex fxLayout="row" fxLayoutAlign="end center" class="comments-likes">
+        <div fxLayoutAlign="start center">
+          <md-icon [color]="accent" svgIcon="comment"></md-icon><span>{{this.currentArticle.commentCount}}</span>
+        </div>
+        <div fxLayoutAlign="start center">
+          <md-icon svgIcon="like"></md-icon><span>{{this.currentArticle.likeCount}}</span>
+        </div>
       </div>
     </article>
   </section>
