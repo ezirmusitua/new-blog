@@ -1,3 +1,5 @@
+@import '../../assets/styles/color';
+@import '../../assets/styles/font';
 @import '../../assets/styles/markdown';
 
 :host {
@@ -10,13 +12,48 @@
   @extend .markdown-style, .github-markdown-style;
 }
 
-
 .container {
   width: 740px;
   > article {
     height: 100%;
+    padding-bottom: 32px;
   }
   .content {
     padding: 16px 0;
+  }
+  .actions-container {
+    padding: 24px 0;
+    border-top: 1px solid $light-divider;
+    border-bottom: 1px solid $light-divider;
+  }
+  .comments-container {
+    padding-top: 16px;
+    .comment-container {
+      padding: 16px 0;
+      border-bottom: 1px dotted $light-divider;
+      &:hover {
+        background-color: $light-divider;
+      }
+    }
+    .mat-list-avatar {
+      border-radius: $round-border-radius;
+      padding: 0 8px;
+    }
+    .mat-line {
+      white-space: normal;
+      overflow-x: auto;
+      padding-left: 8px;
+      h3 {
+        @extend .list-title-text;
+        color: $light-text-primary;
+        margin-bottom: 8px;
+      }
+      p {
+        @extend .list-content-text;
+        font-size: 12px;
+        color: $light-text-primary;
+        line-height: 20px;
+      }
+    }
   }
 }

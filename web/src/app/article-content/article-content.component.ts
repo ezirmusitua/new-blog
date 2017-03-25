@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 
+import { Md5 } from 'ts-md5/dist/md5';
+
 import { Article } from '../models/article';
 import { ArticleService } from '../article.service';
 import { MarkdownService } from '../markdown.service';
@@ -197,5 +199,10 @@ export class ArticleContentComponent implements OnInit {
       "```\n\n" +
       "`[TOC]`大家好，我是 JJ 林俊杰，今天个大家带来一首不是自己的歌，叫做瓜牛\n\n"
     ).sanitize().end() as SafeHtml;
+  }
+
+  private generateGravatarSrc(email: string) {
+    const hash = Md5.hashStr(email);
+    return `https://www.gravatar.com/avatar/${hash}?s=48`;
   }
 }
