@@ -14,7 +14,6 @@ export class ResourceService {
     private http: Http,
     private subjects: RxSubjectService
   ) {
-    console.log(this.resourceBase);
   }
 
   set customHeaders(headers: Object) {

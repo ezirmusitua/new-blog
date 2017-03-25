@@ -17,13 +17,11 @@ export class MarkdownService {
   private converted: SafeHtml | string;
 
   constructor(private sanitizer: DomSanitizer) {
-    console.log(123123);
     this.md = marked.setOptions({
       highlight: (code, lang) => {
         return highlight.highlightAuto(code, [lang]).value;
       }
     });
-    console.log(234234);
   }
 
   public setConfig(config: IMarkdownConfig) {
@@ -35,7 +33,6 @@ export class MarkdownService {
       this.converted = '';
     } else {
       this.converted = this.md.parse(markdown);
-      console.log(this.md.parse(markdown) as string)
     }
     return this;
   }

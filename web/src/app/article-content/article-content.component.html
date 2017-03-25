@@ -2,9 +2,16 @@
   <article fxFlex="28"></article>
   <article fxFlex>
     <section class="content" [innerHtml]="safeArticleHtmlContent"></section>
-    <section class="actions-container">发表评论和点赞</section>
+    <section fxLayout="row" fxLayoutAlign="end center" class="actions-container">
+      <button md-icon-button (click)="openCommentArea()"><md-icon svgIcon="comment"></md-icon></button>
+      <button md-icon-button (click)="toggleLike()"><md-icon svgIcon="favorite"></md-icon></button>
+    </section>
     <section class="comments-container">
       <h3>评论列表</h3>
+      <div *ngIf="commentAreaOpened" fxLayout="column" fxLayoutAlign="start end" class="comment-editor">
+        <textarea class="comment-input"></textarea>
+        <button md-button>发表</button>
+      </div>
       <md-list>
         <div md-list-item class="comment-container" fxLayout="row" fxLayoutAlign="start start" *ngFor="let item of [0, 1, 2, 3, 4, 5, 6, 7, 8]">
           <img md-list-avatar [src]="generateGravatarSrc('jferroal@gmail.com')" alt="...">

@@ -1,6 +1,7 @@
 @import '../../assets/styles/color';
 @import '../../assets/styles/font';
 @import '../../assets/styles/markdown';
+@import '../../assets/styles/input';
 
 :host {
   display: flex;
@@ -28,6 +29,22 @@
   }
   .comments-container {
     padding-top: 16px;
+    > h3 {
+      @extend .list-title-text;
+      font-size: 24px;
+    }
+    .comment-editor {
+      padding: 16px;
+    }
+    .comment-editor .comment-input {
+      @extend .textarea-style;
+      height: 84px;
+      border: 1px solid $light-divider;
+      margin-bottom: 16px;
+    }
+    .comment-editor .mat-button {
+      color: $light-text-primary;
+    }
     .comment-container {
       padding: 16px 0;
       border-bottom: 1px dotted $light-divider;
