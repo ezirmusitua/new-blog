@@ -45,6 +45,7 @@ export class ArticleListComponent implements OnInit {
     // this.listArticle();
     // this.toastSubject = this.subjects.toastSubject;
     this.articles = Array.from({ length: 20 }, (v, i) => {
+      console.log(123);
       const title = `这是一篇用于测试的 article[${i}] .`;
       const shortDesc = `这是一篇用于测试的 article[${i}] 的简短描述 ... `;
       const desc = `永和九年，岁在癸丑，暮春之初，会于会稽山阴之兰亭，修稧（禊）事也。群贤毕至，少长咸集。
@@ -57,7 +58,7 @@ export class ArticleListComponent implements OnInit {
                     每揽（览）昔人兴感之由，若合一契，未尝不临文嗟悼，不能喻之于怀。固知一死生为虚诞，齐彭殇为妄作。
                     后之视今，亦由（犹）今之视昔，悲夫！故列叙时人，录其所述，虽世殊事异，所以兴怀，其致一也。
                     后之揽（览）者，亦将有感于斯文。`
-      const coverUrl = 'http://placehold.it/480x270';
+      const coverUrl = 'https://placehold.it/480x270';
       const commentCount = 99;
       const likeCount = 99;
       return { title, shortDesc, desc, coverUrl, commentCount, likeCount } as any;
