@@ -15,7 +15,7 @@ const appRoutes: Routes = [
   { path: 'articles', component: ArticleListComponent },
   { path: 'article/archive', component: ArticleArchiveComponent },
   { path: 'article/:articleId', component: ArticleContentComponent },
-  { path: 'article', component: ArticleEditorComponent },
+  { path: 'dashboard', component: ArticleEditorComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

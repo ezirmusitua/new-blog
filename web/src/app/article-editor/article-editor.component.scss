@@ -19,8 +19,21 @@
 }
 .directory-container {
   .category {
-    min-width: 64px;
+    min-width: 48px;
     background-color: $primary-moderate;
+  }
+  .category .mat-list {
+    padding: 0;
+    height: 100%;
+  }
+  .category-option {
+    padding: 12px;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    &:hover {
+      background-color: $block-bg;
+    }
   }
   .list {
     width: calc(100% - 68px);
@@ -37,6 +50,14 @@
         padding-left: 16px;
         margin-bottom: 3px;
       }
+    }
+  }
+  .new-article-btn {
+    width: calc(100% - 24px);
+    height: 24px;
+    background-color: $block-bg;
+    .mat-icon {
+      padding-bottom: 10px;
     }
   }
 }
