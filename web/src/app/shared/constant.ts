@@ -25,7 +25,10 @@ export const NetworkCondition = {
 export const TIME = {
   MINUTE: 60 * 1000,
   HOUR: 60 * 60 * 1000,
-  DAY: 24 * 60 * 60 * 1000
+  DAY: 24 * 60 * 60 * 1000,
+  WEEK: 7 * 24 * 60 * 60 * 1000,
+  MONTH: 30 * 24 * 60 * 60 * 1000,
+  YEAR: 365 * 24 * 60 * 60 * 1000,
 };
 
 export const ResourceBase = environment.resourcePath;
@@ -34,6 +37,11 @@ export const DefaultHeaders = {
   'Content-Type': 'application/json; charset=UTF-8',
   Accept: 'application/json',
 };
+
+
+export const Trusted = {
+  icon: (name: string, color: string = 'white', size: number = 24) => `assets/icons/ic_${name}_${color}_${size}px.svg`,
+}
 
 export const LocalStorageKeyEnum = {
   SESSION: 'ngkoa.blog.session',

@@ -1,0 +1,31 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="container">
+  <nav fxFlex="50%" fxLayout="row" class="navbar">
+    <div fxLayout="row" fxLayout="start center" class="nav-item">
+      <md-icon svgIcon="home"></md-icon>
+      <a fxFlex>主页</a>
+    </div>
+    <div  fxLayout="row" fxLayout="start center" class="nav-item">
+      <md-icon svgIcon="archive"></md-icon>
+      <a fxFlex>归档</a>
+    </div>
+  </nav>
+  <div class="profile-container">
+    <a *ngIf="false">登陆</a>
+    <div fxLayout="row" fxLayoutAlign="start center" class="profile">
+      <button [mdMenuTriggerFor]="profileMenu" md-icon-button class="profile-menu-toggle">
+        <md-icon svgIcon="more_vert"></md-icon>
+      </button>
+      <md-menu #profileMenu="mdMenu">
+        <button md-menu-item>
+          <md-icon>dialpad</md-icon>
+          <span>Redial</span>
+        </button>
+        <button md-menu-item>
+          <md-icon>notifications_off</md-icon>
+          <span>Disable alerts</span>
+        </button>
+      </md-menu>
+      <img width="40" src="https://placehold.it/48x48">
+    </div>
+  </div>
+</div>

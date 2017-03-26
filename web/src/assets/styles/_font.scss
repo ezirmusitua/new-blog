@@ -1,0 +1,64 @@
+@import './color';
+
+$font-family: Roboto, Noto, "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", serif;
+
+.toolbar-title-text {
+  font-size: 20px;
+  font-weight: 500;
+  color: $dark-text-primary;
+}
+
+.list-title-text {
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: $light-text-secondary;
+  cursor: pointer;
+}
+
+.list-title-text-hover {
+  @extend .list-title-text;
+  color: rgba(0, 0, 0, 0.72);
+}
+
+.list-content-text {
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: $light-text-hint;
+  cursor: pointer;
+}
+
+.list-content-text-hover {
+  @extend .list-content-text;
+  color: rgba(0, 0, 0, 0.24);
+}
+
+.article-title-text {
+  font-size: 20px;
+  font-weight: 500;
+  color: $light-text-primary
+}
+
+.article-content-text {
+  font-size: 14px;
+  font-weight: 400;
+  color: $light-text-primary
+}
+
+.subtitle-text {
+  font-size: 16px;
+  font-weight: 400
+}
+
+.body-text {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.button-text {
+  font-size: 14px;
+  font-weight: 400;
+}

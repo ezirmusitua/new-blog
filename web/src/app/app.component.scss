@@ -1,14 +1,11 @@
 :host {
-  display: flex;
   flex: 1;
-  padding: 24px 96px;
-  padding-bottom: 0;
+  display: flex;
+  position: relative;
+  min-height: 100%;
 }
 
 .app-container {
   position: relative;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  flex: 1;
+  height: 100%;
 }

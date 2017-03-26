@@ -1,0 +1,19 @@
+@import '../../assets/styles/color';
+
+:host {
+  display: flex;
+  flex: 1;
+  padding-top: 64px;
+}
+.container {
+  width: 740px;
+  height: calc(100vh - 64px);
+  padding-top: 32px 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+.archive-container {
+  .mat-tab-body-wrapper {
+    padding-top: 8px;
+  }
+}

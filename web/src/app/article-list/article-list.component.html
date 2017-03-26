@@ -1,15 +1,35 @@
-<div class="container" jfbScrollListeningLoader (scrolled)="scrollLoad($event)">
-  <section class="list-container">
-    <article *ngFor="let article of articles" class="list">
-      <time>{{ article.updateAt | date }}</time><span class="line"></span>
-      <div class="info">
-        <div class="title-container">
-          <p class="title">{{ article.title }}</p>
-          <div class="tag" *ngFor="let tag of article.tags">{{ tag }}</div>
+<div class="container" fxFlex="100%" fxLayout="row" jfbScrollListeningLoader (scrolled)="scrollLoad($event)">
+  <section fxFlex="21%" class="list-container">
+    <md-list>
+      <div md-list-item fxFlex fxLayout="column" fxLayoutAlign="space-artound start" *ngFor="let item of articles; let i = index;"
+        (click)="chooseArticleByClick(i)">
+        <h3 fxFlex md-line>{{ item.title }}</h3>
+        <p fxFlex md-line>{{ item.shortDesc }} ~ </p>
+      </div>
+    </md-list>
+  </section>
+  <section fxFlex fxLayout="column" fxLayoutAlign="space-between center" class="detail-container">
+    <article class="desc-container" fxLayout="column" fxFlex="94%">
+      <div class="cover-container">
+        <img [src]="currentArticle.coverUrl">
+      </div>
+      <div class="desc-container">
+        <h3>{{currentArticle.title}}</h3>
+        <p>{{currentArticle.desc}}</p>
+      </div>
+      <div fxFlex fxLayout="row" fxLayoutAlign="end end" class="article-content-link">
+        <md-icon svgIcon="forward"></md-icon>
+        <a>查看全文</a>
+      </div>
+    </article>
+    <article fxFlex fxLayout="row" fxLayoutAlign="space-between center" class="more-info-container">
+      <time fxFlex datetime="2001-05-15T19:00">May 15</time>
+      <div fxFlex fxLayout="row" fxLayoutAlign="end center" class="comments-likes">
+        <div fxLayoutAlign="start center">
+          <md-icon [color]="accent" svgIcon="comment"></md-icon><span>{{this.currentArticle.commentCount}}</span>
         </div>
-        <div class="description">
-          <div>{{ article.description }}</div>
-          <a [routerLink]="['/article', article._id]"> >> 点击阅读全文</a>
+        <div fxLayoutAlign="start center">
+          <md-icon svgIcon="like"></md-icon><span>{{this.currentArticle.likeCount}}</span>
         </div>
       </div>
     </article>

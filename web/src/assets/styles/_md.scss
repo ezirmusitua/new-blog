@@ -1,0 +1,10 @@
+@import './color';
+
+.list-container {
+  .mat-list-item-content {
+    h3 {
+      font-size: 16px;
+      color: $light-text-primary;
+    }
+  }
+}

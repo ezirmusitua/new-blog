@@ -1,0 +1,37 @@
+@import '../../assets/styles/color';
+
+:host {
+  display: flex;
+  flex: 1;
+}
+
+.mat-list {
+  padding-top: 0;
+  width: 100%;
+}
+
+.archive-item {
+  padding: 16px 0;
+  width: 100%;
+  border-bottom: 1px dotted $light-text-hint;
+  .archive-label {
+    font-size: 20px;
+    font-weight: 500;
+    color: $light-text-primary;
+    margin: 0;
+    margin-bottom: 8px;
+  }
+  .article-link-container {
+    font-size: 14px;
+    letter-spacing: 1.28px;
+    padding-left: 24px;
+    color: $light-text-primary;
+    a {
+      cursor: pointer;
+    }
+    span {
+      color: $light-text-secondary;
+      text-align: end;
+    }
+  }
+}

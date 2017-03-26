@@ -1,8 +1,54 @@
-<form #articleEditor="ngForm" (ngSubmit)="save()" class="container">
-  <article class="title-save-container">
-    <input class="title-input" [(ngModel)]="article.title" name="title">
+<div fxLayout="row" fxFlex class="container">
+  <article fxFlex="23%" fxLayout="row" class="directory-container">
+    <section class="category">
+      <md-list>
+        <div fxFlex class="category-option" md-list-item *ngFor="let item of [0, 1, 2]">
+          <md-icon md-line svgIcon="add"></md-icon>
+        </div>
+      </md-list>
+    </section>
+    <section class="list">
+      <md-list>
+        <div class="folder-container" md-list-item *ngFor="let folder of directoryItems; let folderIndex = index;">
+          <div fxLayout="row">
+            <md-icon *ngIf="!folder.opened" svgIcon="folder"></md-icon>
+            <md-icon *ngIf="folder.opened" svgIcon="folder_open"></md-icon>
+            <h3 md-line (click)="toggleFolder(folder)">{{folder.title}}</h3>
+          </div>
+          <md-list *ngIf="folder.opened">
+            <div class="file-container" fxLayout="row" md-list-item (click)="selectArticle(article)" *ngFor="let article of folder.articles; let articleIndex = index;">
+              <md-icon svgIcon="article"></md-icon>
+              <p [ngClass]="{selected: article.selected}" md-line>{{article.title}}</p>
+            </div>
+          </md-list>
+        </div>
+      </md-list>
+      <button class="new-article-btn" md-button><md-icon svgIcon="add"></md-icon></button>
+    </section>
   </article>
-  <article class="content-input">
-    <textarea [(ngModel)]="markdownContent" (keyup)="updatePreview(markdownContent)" name="markdown" type="text"></textarea>
+  <article fxFlex fxLayout="row" class="editor-container">
+    <section fxFlex="75" class="editor">
+      <form fxFlex fxLayout="column" class="editor-form">
+        <div fxLayout="row" fxFlex="7%" class="basic-info-input">
+          <md-input-container fxFlex="75%" class="title">
+            <input mdInput placeholder="文章标题" value="Google">
+          </md-input-container>
+          <button md-button (click)="openDialog()">添加封面</button>
+          <button md-button>添加文章描述</button>
+        </div>
+        <div class="content" fxFlex>
+          <textarea fxFlex placeholder="文章正文"></textarea>
+        </div>
+      </form>
+    </section>
+    <section fxFlex class="uploaded-images">
+      <md-card class="uploaded-image-card" *ngFor="let image of uploadedImages">
+        <img md-card-image width="120" [src]="image.src">
+        <md-card-actions fxLayoutAlign="end center">
+          <button md-icon-button><md-icon svgIcon="edit"></md-icon></button>
+          <button md-icon-button><md-icon svgIcon="delete"></md-icon></button>
+        </md-card-actions>
+      </md-card>
+    </section>
   </article>
-</form>
+</div>

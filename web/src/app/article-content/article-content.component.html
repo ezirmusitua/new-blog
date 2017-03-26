@@ -1,11 +1,32 @@
-<div class="container">
-  <section *ngIf="!isPageLoaded">hello world</section>
-  <section class="article-content" *ngIf="isPageLoaded">
-    <article class="info">
-      <h1>{{ article.title }}</h1>
-    </article>
-    <article class="content" [innerHtml]="article.htmlContent">
-    </article>
-  </section>
+<div fxLayout="row" fxFlex fxLayoutAlign="center center" class="container">
+  <article fxFlex="28"></article>
+  <article fxFlex>
+    <section class="content" [innerHtml]="safeArticleHtmlContent"></section>
+    <section fxLayout="row" fxLayoutAlign="end center" class="actions-container">
+      <button md-icon-button (click)="openCommentArea()"><md-icon svgIcon="comment"></md-icon></button>
+      <button md-icon-button (click)="toggleLike()"><md-icon svgIcon="favorite"></md-icon></button>
+    </section>
+    <section class="comments-container">
+      <h3>评论列表</h3>
+      <div *ngIf="commentAreaOpened" fxLayout="column" fxLayoutAlign="start end" class="comment-editor">
+        <textarea class="comment-input"></textarea>
+        <button md-button>发表</button>
+      </div>
+      <md-list>
+        <div md-list-item class="comment-container" fxLayout="row" fxLayoutAlign="start start" *ngFor="let item of [0, 1, 2, 3, 4, 5, 6, 7, 8]">
+          <img md-list-avatar [src]="generateGravatarSrc('jferroal@gmail.com')" alt="...">
+          <div md-line>
+            <h3 md-line>jferroal@gmail.com</h3>
+            <p md-line>
+            这篇还是在说「怎么用」，而不是在说「为什么要用」。
+最后用于比对的代码也带有强烈的目的性，过程式的代码是把函数定义放到过程中，函数式代码确是引用已经定义的函数，当然后者会易读一些。
+所以我们到底为什么需要纯函数的编程？
+            </p>
+          </div>
+        </div>
+      </md-list>
+    </section>
+  </article>
+  <article fxFlex="28"></article>
 </div>
 <jfb-reading-progress-bar *ngIf="isPageLoaded" [catalog]="article.catalog"></jfb-reading-progress-bar>

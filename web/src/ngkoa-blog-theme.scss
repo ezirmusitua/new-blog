@@ -8,7 +8,7 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
-$ngkoa-blog-primary: mat-palette($mat-teal, 300, A200, A700);
+$ngkoa-blog-primary: mat-palette($mat-teal, 100, A700, 900);
 $ngkoa-blog-accent:  mat-palette($mat-orange, 300, A200, A700);
 
 // The warn palette is optional (defaults to red).

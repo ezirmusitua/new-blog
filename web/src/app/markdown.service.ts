@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
+
 import * as marked from 'marked';
 import * as highlight from 'highlight.js';
 
@@ -12,8 +14,9 @@ interface IMarkdownConfig {
 @Injectable()
 export class MarkdownService {
   private md: MarkedStatic;
+  private converted: SafeHtml | string;
 
-  constructor() {
+  constructor(private sanitizer: DomSanitizer) {
     this.md = marked.setOptions({
       highlight: (code, lang) => {
         return highlight.highlightAuto(code, [lang]).value;
@@ -21,14 +24,29 @@ export class MarkdownService {
     });
   }
 
-  setConfig(config: IMarkdownConfig) {
+  public setConfig(config: IMarkdownConfig) {
     this.md = marked.setOptions(config);
   }
 
-  convert(markdown: string): string {
+  public toHtml(markdown: string) {
     if (!markdown) {
-      return '';
+      this.converted = '';
+    } else {
+      this.converted = this.md.parse(markdown);
     }
-    return this.md.parse(markdown);
+    return this;
+  }
+
+  public sanitize() {
+    this.converted = this.sanitizer.bypassSecurityTrustHtml(this.converted as string);
+    return this;
+  }
+
+  public end() {
+    return this.converted;
+  }
+
+  public convert(markdown: string) {
+    return this.toHtml(markdown).sanitize().end() as SafeHtml;
   }
 }
