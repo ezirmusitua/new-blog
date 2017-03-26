@@ -52,6 +52,8 @@ export class ArticleEditorComponent implements OnInit {
       sanitizer.bypassSecurityTrustResourceUrl(Trusted.icon('mode_edit', 'black')));
     iconRegistry.addSvgIcon('add',
       sanitizer.bypassSecurityTrustResourceUrl(Trusted.icon('add')));
+    iconRegistry.addSvgIcon('publish',
+      sanitizer.bypassSecurityTrustResourceUrl(Trusted.icon('publish')));
   }
 
   updatePreview(markdownContent: string) {

@@ -85,6 +85,7 @@
 }
 
 .editor-form {
+  position: relative;
   height: calc(100% - 8px);
   padding: 24px 48px;
   border-right: 2px solid $light-divider;
@@ -109,6 +110,11 @@
     textarea {
      @extend .textarea-style;
     }
+  }
+  .article-publish-btn {
+    position: absolute;
+    right: 24px;
+    bottom: 16px;
   }
 }
 .uploaded-images {
