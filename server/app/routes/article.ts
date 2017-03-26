@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+
 import Router from 'koa-router';
 
 import { ExtendCtx } from '../models/ctx';
@@ -6,51 +6,43 @@ import { ArticleModel } from '../models/article';
 
 const router = new Router({ prefix: '/article' });
 
-router.get('listAllForVisitor', '/', async (ctx: ExtendCtx, next) => {
-  const query = {} as any;
-  const countQuery = {} as any;
-  if (ctx.isVisitor) {
-    query.viewCategory = countQuery.viewCategory = 300;
+router.get('list', '/', async (ctx: ExtendCtx, next) => {
+  const condition = { viewCategory: ArticleModel.Enum.ViewCategory.PUBLISHED } as any;
+  const projection = { title: true, updateAt: true } as any;
+  if (ctx.isAdmin) {
+    condition.viewCategory = { $in: [ArticleModel.Enum.ViewCategory.DRAFT, ArticleModel.Enum.ViewCategory.PUBLISHED] };
+    projection.belongToLabel = true;
+  } else {
+    projection.description = true;
   }
-  const pageSize = parseInt(ctx.query.pageSize, 10) || 10;
-  let marker = ctx.query.marker;
-  const sortBy = ctx.query.sortBy || '_id';
-  const sortOrder = parseInt(ctx.query.sortOrder, 10) || -1
-  if (sortBy === '_id' && marker && typeof marker === 'string') {
-    marker = mongoose.Types.ObjectId(marker);
+  const options = {
+    limit: ctx.params.latest ? 20 : null,
+    sort: { updateAt: -1 },
   }
-  if (sortOrder === -1 && marker) {
-    query[sortBy] = { $lt: marker };
-  }
-  if (sortOrder === 1 && marker) {
-    query[sortBy] = { $gt: marker };
-  }
-  const options = { limit: pageSize, sort: { [sortBy]: sortOrder } };
-  const [totalCount, articles] = await Promise.all([
-    await ArticleModel.count(countQuery).exec(),
-    await ArticleModel.list(query, {
-      catalog: false,
-      htmlContent: false,
-    }, options)
-  ]);
-  ctx.body = JSON.stringify({
-    count: totalCount,
-    items: articles.map(article => {
-      return Object.assign(article, {
-        description: article.markdownContent.split('  ')[0],
-        markdownContent: ''
-      });
-    }),
-    marker: articles && articles.length && articles[articles.length - 1][sortBy]
-  });
+  const articles = await ArticleModel.list(condition, projection, options);
+  const data = { count: articles.length, items: articles, };
+  ctx.body = JSON.stringify({ data });
   await next();
 });
 
-router.get('fetchOne', '/:articleId', async (ctx: ExtendCtx, next) => {
+router.get('fetchById', '/:articleId', async (ctx: ExtendCtx, next) => {
   const _id = ctx.params.articleId;
+  const mode = ctx.params.mode;
+  const projection = { title: true, description: true, updateAt: true, coverUrl: true } as any;
+  if (mode === 'edit' || mode === 'view') {
+    projection.content = true;
+  }
+  if (mode === 'edit') {
+    projection.images = true;
+  }
   const article = await ArticleModel.fetchById(_id);
-  ctx.body = JSON.stringify(article);
+  let data = { article };
+  if (mode === 'view' || mode === 'list') {
+    // like count and comment count
+    data = Object.assign({ likeCount: 0, commentCount: 0 }, data);
+  }
+  ctx.body = JSON.stringify({ data });
   await next();
 });
 
-export default router;
+exports.router = router;

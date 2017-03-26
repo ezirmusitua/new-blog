@@ -2,11 +2,11 @@ import mongoose from 'mongoose';
 import { APIError, ArticleError, MongoError } from '../error';
 import { Utils } from '../utils/index';
 import { _listImmutableDocs, FindOptions, Callback } from './basic-methods';
+import { ArticleViewCategory } from '../../../web/src/app/shared/enums';
 
 const ViewCategory = {
   DRAFT: 100,
-  PREVIEW: 200,
-  PUBLISHED: 300,
+  PUBLISHED: 200,
 }
 
 export interface CatalogItem {
@@ -18,11 +18,13 @@ export interface CatalogItem {
 export interface ArticleDocument {
   title: string;
   updateAt: number;
+  description: string;
   markdownContent: string;
   htmlContent: string;
   catalog: CatalogItem[]
   tags: { label: string }[];
   viewCategory: number;
+  belongToLabel: string;
   createBy: string;
 }
 
@@ -36,6 +38,7 @@ const articleSchema = new mongoose.Schema({
     type: Number,
     index: true,
   },
+  description: String,
   markdownContent: {
     type: String,
     required: true,
@@ -62,12 +65,18 @@ const articleSchema = new mongoose.Schema({
   viewCategory: {
     type: Number,
     index: true,
-    default: ViewCategory.PREVIEW,
+    default: ViewCategory.DRAFT,
+  },
+  belongToLabel: {
+    type: String,
+    index: true,
   },
   createBy: String,
 });
 
 type MongoArticleDocument = ArticleDocument & mongoose.Document;
+
+const articleModel = mongoose.model<MongoArticleDocument>('Article', articleSchema, 'Article');
 
 const constructBody = (_id: string, body: any, createBy?: string): ArticleDocument => {
   const articleBody = {} as ArticleDocument;
@@ -103,24 +112,27 @@ const updateOldById = async (_id: string, body: any) => {
   return await articleModel.findOneAndUpdate({ _id }, { $set: constructBody(_id, body) }, { new: true }).exec();
 }
 
-const listImmutableDocs = async (condition?: Object, projection?: Object, options?: FindOptions, callback?: Callback, execCallback?: Callback) => {
-  return await _listImmutableDocs<ArticleDocument>(articleModel, condition, projection, options, callback, execCallback);
+const listImmutableDocs = async (condition?: Object, projection?: Object, options?: FindOptions, callback?: Callback,
+  execCallback?: Callback) => {
+  return await _listImmutableDocs<ArticleDocument>(articleModel, condition, projection, options, callback,
+    execCallback);
 }
 
-const findImmutableOne = async (condition: Object, projection?: Object, callback?: Callback, execCallback?: Callback): Promise<ArticleDocument> => {
+const findImmutableOne = async (condition: Object, projection?: Object, callback?: Callback,
+  execCallback?: Callback): Promise<ArticleDocument> => {
   const docs = await listImmutableDocs(condition, projection, { limit: 1 }, callback, execCallback);
   return ((docs && docs.length) ? docs[0] : null) as ArticleDocument;
 }
 
-const findImmutableById = async (_id: string, projection?: Object, callback?: Callback, execCallback?: Callback): Promise<ArticleDocument> => {
+const findImmutableById = async (_id: string, projection?: Object, callback?: Callback,
+  execCallback?: Callback): Promise<ArticleDocument> => {
   const doc = await findImmutableOne({ _id }, projection, callback, execCallback);
   if (!doc) throw new APIError(MongoError.notFound);
   return doc;
 }
 
-const articleModel = mongoose.model<MongoArticleDocument>('Article', articleSchema, 'Article');
-
 export const ArticleModel = Object.assign(articleModel, {
+  Enum: { ViewCategory: ArticleViewCategory, },
   list: listImmutableDocs,
   fetch: findImmutableOne,
   fetchById: findImmutableById,

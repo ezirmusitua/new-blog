@@ -13,16 +13,16 @@ router.post('isSessionAlive', '/alive', async (ctx: ExtendCtx, next) => {
   await next();
 });
 
-router.post('userLogin', '/login', async (ctx: ExtendCtx, next) => {
+router.post('login', '/login', async (ctx: ExtendCtx, next) => {
   const email = ctx.request.body.email as string;
   const password = ctx.request.body.password as string;
   const user = await UserModel.findUserByEmailAndPassword(email, password);
-  const session = await SessionModel.updateOrCreateSession(user._id.toString())
+  const session = await SessionModel.updateOrCreateSession(user)
   ctx.body = session;
   await next();
 });
 
-router.delete('userLogout', '/logout', async (ctx: ExtendCtx, next) => {
+router.delete('logout', '/logout', async (ctx: ExtendCtx, next) => {
   if (!ctx.isVisitor) throw new APIError(AdminError.sessionNotFound);
   await SessionModel.removeSession(ctx.session.token, ctx.session.userId);
 });
@@ -32,5 +32,4 @@ router.put('sessionActivate', '/activate', async (ctx: ExtendCtx, next) => {
   await next();
 });
 
-export default router;
-
+exports.router = router;

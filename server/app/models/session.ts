@@ -1,20 +1,17 @@
 import mongoose from 'mongoose';
 import { Utils } from '../utils/index';
+import { UserDocument } from './user';
 
 export interface SessionDocument {
-  _id: any;
-  email: string;
+  _id?: any;
   userId: string;
   token: string;
   clientCategory: number;
   updateAt: number;
+  role: number;
 }
 
 const sessionSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    index: true,
-  },
   userId: {
     type: String,
     index: true,
@@ -25,9 +22,12 @@ const sessionSchema = new mongoose.Schema({
   },
   clientCategory: Number,
   updateAt: Number,
+  role: Boolean,
 });
 
 type MongoSessionDocument = SessionDocument & mongoose.Document;
+
+const sessionModel = mongoose.model<MongoSessionDocument>('Session', sessionSchema, 'Session');
 
 const findOneByUserId = async (userId: string): Promise<SessionDocument> => {
   if (!userId) return null;
@@ -36,15 +36,19 @@ const findOneByUserId = async (userId: string): Promise<SessionDocument> => {
   return sessions.length ? sessions[0] : null;
 };
 
-const updateOrCreateSession = async (userId: string): Promise<SessionDocument> => {
-  if (!userId) return null;
+const updateOrCreateSession = async (user: UserDocument): Promise<SessionDocument> => {
+  if (!user) return null;
   const clientCategory = 100;
   const token = Utils.generateRandomBytes();
   const sessionBody = {
-    userId, token, clientCategory, updateAt: Date.now()
+    userId: user._id.toString(),
+    token,
+    clientCategory,
+    updateAt: Date.now(),
+    role: user.role
   } as SessionDocument;
   const session = await sessionModel.findOneAndUpdate(
-    { userId }, sessionBody,
+    { userId: user._id.toString() }, sessionBody,
     { upsert: true, setDefaultsOnInsert: true, new: true },
   );
   return session;
@@ -64,8 +68,6 @@ const activateSession = async (token: string, userId: string): Promise<MongoSess
 const removeSession = async (token: string, userId: string): Promise<void> => {
   await sessionModel.remove({ userId, token });
 }
-
-const sessionModel = mongoose.model<MongoSessionDocument>('Session', sessionSchema, 'Session');
 
 export const SessionModel = Object.assign(sessionModel, {
   findOneByUserId, updateOrCreateSession, activateSession, removeSession
