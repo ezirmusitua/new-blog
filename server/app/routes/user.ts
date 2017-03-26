@@ -6,7 +6,7 @@ import { AdminError, APIError } from '../error';
 
 const router = new Router({ prefix: '/user' });
 
-router.post('isSessionAlive', '/alive', async (ctx: ExtendCtx, next) => {
+router.post('alive', '/alive', async (ctx: ExtendCtx, next) => {
   const token = ctx.request.body.token as string;
   const userId = ctx.request.body.userId as string;
   ctx.body = await SessionModel.activateSession(token, userId);
@@ -27,7 +27,7 @@ router.delete('logout', '/logout', async (ctx: ExtendCtx, next) => {
   await SessionModel.removeSession(ctx.session.token, ctx.session.userId);
 });
 
-router.put('sessionActivate', '/activate', async (ctx: ExtendCtx, next) => {
+router.put('activate', '/activate', async (ctx: ExtendCtx, next) => {
   await SessionModel.activateSession(ctx.session.token, ctx.session.userId);
   await next();
 });

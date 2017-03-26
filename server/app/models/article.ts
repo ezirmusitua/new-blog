@@ -19,8 +19,7 @@ export interface ArticleDocument {
   title: string;
   updateAt: number;
   description: string;
-  markdownContent: string;
-  htmlContent: string;
+  content: string;
   catalog: CatalogItem[]
   tags: { label: string }[];
   viewCategory: number;
@@ -39,11 +38,7 @@ const articleSchema = new mongoose.Schema({
     index: true,
   },
   description: String,
-  markdownContent: {
-    type: String,
-    required: true,
-  },
-  htmlContent: {
+  content: {
     type: String,
     required: true,
   },
@@ -84,11 +79,7 @@ const constructBody = (_id: string, body: any, createBy?: string): ArticleDocume
     throw new APIError(ArticleError.needTitle);
   }
   articleBody.title = body.title.trim();
-  if (!body.htmlContent || !body.markdownContent) {
-    throw new APIError(ArticleError.needContent);
-  }
-  articleBody.htmlContent = body.htmlContent.trim();
-  articleBody.markdownContent = body.markdownContent.trim();
+  articleBody.content = body.content.trim();
   articleBody.updateAt = Date.now();
   articleBody.tags = [];
   if (typeof body.tags === 'string') {
@@ -97,10 +88,9 @@ const constructBody = (_id: string, body: any, createBy?: string): ArticleDocume
   if (Array.isArray(body.tags)) {
     articleBody.tags = body.tags.map(tag => ({ label: tag.label && tag.label.trim() })).filter(tag => !!tag.label);
   }
-  articleBody.catalog = Utils.generateCatalog(articleBody.markdownContent);
-  articleBody.createBy = 'no-name';
+  articleBody.catalog = Utils.generateCatalog(articleBody.content);
+  articleBody.createBy = createBy || 'no-name';
   articleBody.viewCategory = parseInt(body.viewCategory, 10);
-  articleBody.createBy = createBy;
   return articleBody;
 }
 
