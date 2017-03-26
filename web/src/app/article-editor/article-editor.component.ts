@@ -21,8 +21,7 @@ export class ArticleEditorComponent implements OnInit {
   dialogRef: MdDialogRef<CoverDescriptionEdit>;
   editorCategory: number = 100;
   directoryItems: any[] = [];
-  markdownContent: string = '';
-  htmlContent: string = '';
+  content: string = '';
   articleId: string;
   floatingNavSubscription: Subscription;
   toastSubject: Subject<any>;
@@ -63,8 +62,7 @@ export class ArticleEditorComponent implements OnInit {
   private initArticle(article: Article) {
     this.articleId = article._id;
     this.article = article;
-    this.markdownContent = this.article.markdownContent;
-    this.htmlContent = this.article.htmlContent;
+    this.content = this.article.content;
   }
 
   ngOnInit() {
@@ -131,10 +129,8 @@ export class ArticleEditorComponent implements OnInit {
   }
 
   _update() {
-    this.article.markdownContent = this.markdownContent;
-    this.article.htmlContent = this.htmlContent;
-    console.log(this.article.viewCategory);
-    return this.articleService.save(this.articleId, this.article);
+    this.article.content = this.content;
+    return this.articleService.updateOrCreate(this.articleId, this.article);
   }
 
   save() {
@@ -177,7 +173,6 @@ export class ArticleEditorComponent implements OnInit {
   }
 
   public openDialog() {
-    console.log(123);
     // this.dialogRef = this.dialog.open(CoverDescriptionEdit, {
     //   disableClose: false
     // });

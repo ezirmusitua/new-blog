@@ -7,33 +7,21 @@ import { Article } from './models/article';
 export class ArticleService {
   constructor(private resource: ResourceService) { }
 
-  private _loaderListMethod(query: Object = {}) {
-    return this.resource.get('/article', query);
-  }
-
-  get loaderListMethod() {
-    return this._loaderListMethod;
-  }
-
-  listArticle(query: Object = {}) {
+  list(query: Object = {}) {
     return this.resource.get('/article', query).map(res => {
-      return {
-        marker: res.marker || null,
-        totalCount: res.count,
-        articles: res.items.map(article => new Article(article)),
-      }
+      console.log(res);
+      return res.data
     });
   }
 
   getArticleById(id: string) {
-    return this.resource.get('/article/' + id).map(res => new Article(res));
+    return this.resource.get('/article/' + id).map(res => {
+      console.log('9999', res);
+      return new Article(res.data.article)
+    });
   }
 
-  save(id: string, article: Article) {
-    if (id) {
-      return this.resource.put('/admin/article' + '/' + id, article);
-    } else {
-      return this.resource.post('/admin/article', article).map(res => new Article(res));
-    }
+  updateOrCreate(id: string, article: Article) {
+    return this.resource.put('/admin/article' + '/' + id, article);
   }
 }

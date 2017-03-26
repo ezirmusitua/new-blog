@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 import { APIError, ArticleError, MongoError } from '../error';
 import { Utils } from '../utils/index';
 import { _listImmutableDocs, FindOptions, Callback } from './basic-methods';
-import { ArticleViewCategory } from '../../../web/src/app/shared/enums';
 
 const ViewCategory = {
   DRAFT: 100,
@@ -22,6 +21,8 @@ export interface ArticleDocument {
   content: string;
   catalog: CatalogItem[]
   tags: { label: string }[];
+  images: { label: string, url: string }[];
+  coverUrl?: string;
   viewCategory: number;
   belongToLabel: string;
   createBy: string;
@@ -57,6 +58,8 @@ const articleSchema = new mongoose.Schema({
     default: [],
     index: true,
   },
+  images: [{ label: String, url: String }],
+  coverUrl: String,
   viewCategory: {
     type: Number,
     index: true,
@@ -88,6 +91,13 @@ const constructBody = (_id: string, body: any, createBy?: string): ArticleDocume
   if (Array.isArray(body.tags)) {
     articleBody.tags = body.tags.map(tag => ({ label: tag.label && tag.label.trim() })).filter(tag => !!tag.label);
   }
+  if (Array.isArray(body.images)) {
+    articleBody.images = body.images.map(image => ({
+      label: image.label && image.label.trim(),
+      url: image.url && image.url.trim(),
+    })).filter(image => !!image.label);
+  }
+  articleBody.coverUrl = body.coverUrl.trim() || '';
   articleBody.catalog = Utils.generateCatalog(articleBody.content);
   articleBody.createBy = createBy || 'no-name';
   articleBody.viewCategory = parseInt(body.viewCategory, 10);
@@ -122,7 +132,7 @@ const findImmutableById = async (_id: string, projection?: Object, callback?: Ca
 }
 
 export const ArticleModel = Object.assign(articleModel, {
-  Enum: { ViewCategory: ArticleViewCategory, },
+  Enum: { ViewCategory, },
   list: listImmutableDocs,
   fetch: findImmutableOne,
   fetchById: findImmutableById,

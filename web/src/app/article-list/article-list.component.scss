@@ -34,6 +34,9 @@ div[md-list-item] {
   p {
     @extend .list-content-text;
     margin-top: 3px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
   }
   .focused, &:hover {
     width: calc(100% + 8px);

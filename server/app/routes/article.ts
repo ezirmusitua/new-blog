@@ -22,6 +22,7 @@ router.get('list', '/', async (ctx: ExtendCtx, next) => {
     sort: { updateAt: -1 },
   }
   const articles = await ArticleModel.list(condition, projection, options);
+  console.log(articles);
   const data = { count: articles.length, items: articles, };
   ctx.body = JSON.stringify({ data });
   await next();
