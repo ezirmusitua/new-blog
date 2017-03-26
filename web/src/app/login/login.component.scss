@@ -1,0 +1,29 @@
+@import '../../assets/styles/border';
+@import '../../assets/styles/color';
+
+:host {
+  display: flex;
+  flex: 1;
+  padding-top: 64px;
+}
+
+.login-form {
+  width: 384px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 196px;
+  margin-bottom: auto;
+  border: 1px solid $light-divider;
+  border-radius: $normal-border-radius;
+  box-shadow: $layer-one;
+  padding: 32px;
+  background-color: $primary-moderate;
+  .password-input, .email-input {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  .login-btn {
+    width: 100%;
+    margin-top: 16px;
+  }
+}

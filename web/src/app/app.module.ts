@@ -25,6 +25,7 @@ import { ScrollListeningLoaderDirective } from './scroll-listening-loader.direct
 import { RxSubjectService } from './shared/rx-subject.service';
 import { ToastComponent } from './toast/toast.component';
 import { HeaderNavbarComponent } from './header-navbar/header-navbar.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { HeaderNavbarComponent } from './header-navbar/header-navbar.component';
     ScrollListeningLoaderDirective,
     ToastComponent,
     HeaderNavbarComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
