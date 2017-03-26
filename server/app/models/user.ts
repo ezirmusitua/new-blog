@@ -67,4 +67,4 @@ const findUserByEmailAndPassword = async (email: string, password: string): Prom
   return user;
 }
 
-export const UserModel = Object.assign(userModel, { findOneByEmail, findUserByEmailAndPassword });
+export const UserModel = Object.assign(userModel, { Role: RoleCategory, findOneByEmail, findUserByEmailAndPassword });

@@ -27,8 +27,17 @@ export const MongoError = {
 }
 
 export const ArticleError = {
-  needTitle: { id: 3000, status: 400, message: 'article must have title' },
-  needContent: { id: 3000, status: 400, message: 'article must have content' },
+  needTitle: { id: 3000, status: 400, message: 'create article must have title' },
+  needContent: { id: 3001, status: 400, message: 'update article must have content' },
 }
 
+export const CommentError = {
+  needEntityId: { id: 4000, status: 400, message: 'create comment must have entityId' },
+  needContent: { id: 4001, status: 400, message: 'create comment must have content' },
+  needCreateBy: { id: 4002, status: 400, message: 'create comment must have createBy' },
+}
 
+export const LikeError = {
+  needEntityId: { id: 5000, status: 400, message: 'like must have entityId' },
+  needCreateBy: { id: 5001, status: 400, message: 'like must have createBy' },
+}
