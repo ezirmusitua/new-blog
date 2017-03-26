@@ -20,12 +20,13 @@ import { ArticleContentComponent } from './article-content/article-content.compo
 import { ReadingProgressBarComponent } from './reading-progress-bar/reading-progress-bar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ArticleEditorComponent } from './article-editor/article-editor.component';
-import { LoginModalComponent } from './login-modal/login-modal.component';
 import { ScrollListeningLoaderDirective } from './scroll-listening-loader.directive';
 import { RxSubjectService } from './shared/rx-subject.service';
 import { ToastComponent } from './toast/toast.component';
 import { HeaderNavbarComponent } from './header-navbar/header-navbar.component';
 import { LoginComponent } from './login/login.component';
+import { ArticleArchiveComponent } from './article-archive/article-archive.component';
+import { ArchiveListComponent } from './article-archive/archive-list.component';
 
 @NgModule({
   declarations: [
@@ -35,11 +36,12 @@ import { LoginComponent } from './login/login.component';
     ReadingProgressBarComponent,
     PageNotFoundComponent,
     ArticleEditorComponent,
-    LoginModalComponent,
     ScrollListeningLoaderDirective,
     ToastComponent,
     HeaderNavbarComponent,
     LoginComponent,
+    ArticleArchiveComponent,
+    ArchiveListComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,12 @@
+<div class="container">
+  <section class="archive-container">
+    <md-tab-group class="tab-group">
+      <md-tab label="系列">
+        <archive-list [archives]="archives" [archiveCategory]="100"></archive-list>
+      </md-tab>
+      <md-tab label="时间">
+        <archive-list [archives]="archives" [archiveCategory]="200"></archive-list>
+      </md-tab>
+    </md-tab-group>
+  </section>
+</div>

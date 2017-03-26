@@ -6,15 +6,16 @@ import { ArticleContentComponent } from './article-content/article-content.compo
 import { ArticleEditorComponent } from './article-editor/article-editor.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
+import { ArticleArchiveComponent } from './article-archive/article-archive.component';
 
 
 const appRoutes: Routes = [
   { path: '', component: ArticleListComponent },
   { path: 'login', component: LoginComponent },
   { path: 'articles', component: ArticleListComponent },
+  { path: 'article/archive', component: ArticleArchiveComponent },
   { path: 'article/:articleId', component: ArticleContentComponent },
   { path: 'article', component: ArticleEditorComponent },
-  { path: 'article/:articleId/edit', component: ArticleEditorComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
