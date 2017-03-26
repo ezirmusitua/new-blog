@@ -83,4 +83,4 @@ router.delete('unlikeArticle', '/:article/like', async (ctx: ExtendCtx, next) =>
   await next();
 });
 
-exports.router = router;
+export default router;

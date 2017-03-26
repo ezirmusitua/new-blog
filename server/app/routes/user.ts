@@ -32,4 +32,4 @@ router.put('activate', '/activate', async (ctx: ExtendCtx, next) => {
   await next();
 });
 
-exports.router = router;
+export default router;

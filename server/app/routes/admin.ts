@@ -19,4 +19,4 @@ router.post('updateOrcreate', '/article/:articleId', async (ctx: ExtendCtx, next
   await next();
 });
 
-exports.router = router;
+export default router;
