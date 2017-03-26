@@ -7,7 +7,6 @@ const MonthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep
 const calcTimeLabel = (leftTime: number, rightTime: number = Date.now()) => {
   const [leftDate, rightDate] = [new Date(leftTime), new Date(rightTime)];
   const timeDelta = rightTime - leftTime;
-  console.log(timeDelta, rightTime, leftTime);
   if (timeDelta > 6 * TIME.MONTH) return leftDate.getFullYear().toLocaleString();
   if (timeDelta > 1 * TIME.MONTH && timeDelta <= 6 * TIME.MONTH) {
     return MonthNames[leftDate.getMonth()] + ' ~ ' + MonthNames[leftDate.getMonth() + 6];
@@ -48,20 +47,21 @@ const groupArticleByBelongToLabel = (articles) => {
   selector: 'archive-list',
   template: `
   <md-list>
-    <div md-list-item *ngFor="let item of groupedArchives">
-      <a *ngIf="!item.articles || !item.articles.length">item.title</a>
-      <md-list *ngIf="item.articles && item.articles.length">
-        <h3>{{item.title}}</h3>
+    <div md-list-item *ngFor="let item of groupedArchives" class="archive-item">
+      <a class="article-link" *ngIf="!item.articles || !item.articles.length">item.title</a>
+      <md-list class="archive-list" *ngIf="item.articles && item.articles.length">
+        <h3 class="archive-label">{{item.title}}</h3>
         <md-list>
-          <div md-list-item *ngFor="let article of item.articles">
-            <a>{{article.title}}</a>
+          <div fxLayout="row" fxLayoutAlign="end center" class="article-link-container" md-list-item *ngFor="let article of item.articles">
+            <a fxFlex>{{article.title}}</a>
+            <span fxFlex>{{ article.createAt | date:'short'}}</span>
           </div>
         </md-list>
       </md-list>
     </div>
   </md-list>
   `,
-  styles: ['./article-archive.component.scss']
+  styleUrls: ['./archive-list.component.scss']
 })
 export class ArchiveListComponent implements OnInit {
   @Input() archives: any[];
@@ -73,17 +73,14 @@ export class ArchiveListComponent implements OnInit {
     // archive by series
     if (this.archiveCategory === 100) {
       this.groupedArchives = groupArticleByBelongToLabel(this.archives)
-      console.log('by series: ', this.groupedArchives);
     }
     // archive by time
     if (this.archiveCategory === 200) {
       const archivesWithTimeStr = this.archives.reduce((res, archive) => {
         const timeLabel = calcTimeLabel(archive.createAt);
-        console.log(timeLabel);
         return res.concat([Object.assign({}, archive, { seriesLabel: timeLabel })]);
       }, []);
       this.groupedArchives = groupArticleByBelongToLabel(archivesWithTimeStr);
-      console.log('by time: ', this.groupedArchives);
     }
   }
 }
