@@ -22,6 +22,8 @@ import { LoginModalComponent } from './login-modal/login-modal.component';
 import { ScrollListeningLoaderDirective } from './scroll-listening-loader.directive';
 import { RxSubjectService } from './shared/rx-subject.service';
 import { ToastComponent } from './toast/toast.component';
+import { InstantViewTextareaComponent } from './instant-view-textarea/instant-view-textarea.component';
+import { InstantMarkdownDirective } from './instant-markdown.directive';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { ToastComponent } from './toast/toast.component';
     LoginModalComponent,
     ScrollListeningLoaderDirective,
     ToastComponent,
+    InstantViewTextareaComponent,
+    InstantMarkdownDirective,
   ],
   imports: [
     BrowserModule,
