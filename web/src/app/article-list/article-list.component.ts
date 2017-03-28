@@ -57,7 +57,7 @@ export class ArticleListComponent implements OnInit {
 
   private chooseArticleByClick(index: number) {
     const articleId = this.articles[index]._id;
-    this.articleService.getArticleById(articleId).subscribe((res) => {
+    this.articleService.getArticleById(articleId, { mode: 'list' }).subscribe((res) => {
       this.currentArticle = res;
     });
   }

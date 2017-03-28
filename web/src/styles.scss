@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import './assets/styles/font';
+@import './assets/styles/color';
 
 html {
   height: 100%;
@@ -11,4 +12,9 @@ body {
   position: relative;
   min-height: 100%;
   margin: 0;
+}
+
+a, a:hover, a:active, a:visited, a:focus {
+    text-decoration:none;
+    color: $dark-text-primary;
 }

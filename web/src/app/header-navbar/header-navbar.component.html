@@ -2,15 +2,15 @@
   <nav fxFlex="50%" fxLayout="row" class="navbar">
     <div fxLayout="row" fxLayout="start center" class="nav-item">
       <md-icon svgIcon="home"></md-icon>
-      <a fxFlex>主页</a>
+      <a routerLink="/" fxFlex>主页</a>
     </div>
-    <div  fxLayout="row" fxLayout="start center" class="nav-item">
+    <div fxLayout="row" fxLayout="start center" class="nav-item">
       <md-icon svgIcon="archive"></md-icon>
-      <a fxFlex>归档</a>
+      <a routerLink="/archive" fxFlex>归档</a>
     </div>
   </nav>
   <div class="profile-container">
-    <a *ngIf="false">登陆</a>
+    <a routerLink="/login" *ngIf="false">登陆</a>
     <div fxLayout="row" fxLayoutAlign="start center" class="profile">
       <button [mdMenuTriggerFor]="profileMenu" md-icon-button class="profile-menu-toggle">
         <md-icon svgIcon="more_vert"></md-icon>
