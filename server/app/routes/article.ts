@@ -22,7 +22,6 @@ router.get('list', '/', async (ctx: ExtendCtx, next) => {
     sort: { updateAt: -1 },
   }
   const articles = await ArticleModel.list(condition, projection, options);
-  console.log(articles);
   const data = { count: articles.length, items: articles, };
   ctx.body = JSON.stringify({ data });
   await next();
@@ -30,7 +29,8 @@ router.get('list', '/', async (ctx: ExtendCtx, next) => {
 
 router.get('fetchById', '/:articleId', async (ctx: ExtendCtx, next) => {
   const _id = ctx.params.articleId;
-  const mode = ctx.params.mode;
+  const mode = ctx.query.mode;
+  console.log(mode);
   const projection = { title: true, description: true, updateAt: true, coverUrl: true } as any;
   if (mode === 'edit' || mode === 'view') {
     projection.content = true;
@@ -41,11 +41,11 @@ router.get('fetchById', '/:articleId', async (ctx: ExtendCtx, next) => {
   const article = await ArticleModel.fetchById(_id);
   let data = { article };
   if (mode === 'view' || mode === 'list') {
-    // like count and comment count
     const [likeCount, commentCount] = await Promise.all<number>([
       LikeModel.countOfEntity(_id), CommentModel.countOfEntity(_id),
     ]);
-    data = Object.assign({ likeCount, commentCount }, data);
+    data.article.likeCount = likeCount;
+    data.article.commentCount = commentCount;
   }
   ctx.body = { data };
   await next();

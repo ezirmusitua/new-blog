@@ -9,14 +9,12 @@ export class ArticleService {
 
   list(query: Object = {}) {
     return this.resource.get('/article', query).map(res => {
-      console.log(res);
       return res.data
     });
   }
 
-  getArticleById(id: string) {
-    return this.resource.get('/article/' + id).map(res => {
-      console.log('9999', res);
+  getArticleById(id: string, query: Object = {}) {
+    return this.resource.get('/article/' + id, query).map(res => {
       return new Article(res.data.article)
     });
   }

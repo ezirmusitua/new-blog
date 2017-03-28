@@ -12,7 +12,7 @@
   <section fxFlex fxLayout="column" fxLayoutAlign="space-between center" class="detail-container">
     <article class="desc-container" fxLayout="column" fxFlex="94%">
       <div class="cover-container">
-        <img [src]="currentArticle.coverUrl">{{currentArticle.coverUrl}}
+        <img [src]="currentArticle.coverUrl">
       </div>
       <div class="desc-container">
         <h3>{{currentArticle.title}}</h3>
@@ -20,7 +20,7 @@
       </div>
       <div fxFlex fxLayout="row" fxLayoutAlign="end end" class="article-content-link">
         <md-icon svgIcon="forward"></md-icon>
-        <a>查看全文</a>
+        <a [routerLink]="['article', currentArticle._id.toString()]">查看全文</a>
       </div>
     </article>
     <article fxFlex fxLayout="row" fxLayoutAlign="space-between center" class="more-info-container">

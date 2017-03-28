@@ -14,6 +14,8 @@ export class Article {
   createBy: any;
   coverUrl?: string;
   images?: string[];
+  likeCount?: number;
+  commentCount?: number;
   constructor(body?: any) {
     this._id = body ? body._id.toString() : '';
     this.title = body ? body.title : '';
@@ -49,6 +51,7 @@ export class Article {
       this.viewCategory = parseInt(body.viewCategory, 10);
     }
     this.createBy = body ? body.createBy : '';
-    console.log(this);
+    this.commentCount = parseInt(body.commentCount, 10) || 0;
+    this.likeCount = parseInt(body.likeCount, 10) || 0;
   }
 }

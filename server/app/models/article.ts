@@ -26,6 +26,8 @@ export interface ArticleDocument {
   viewCategory: number;
   belongToLabel: string;
   createBy: string;
+  likeCount?: number;
+  commentCount?: number;
 }
 
 const articleSchema = new mongoose.Schema({

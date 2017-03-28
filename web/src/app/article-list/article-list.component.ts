@@ -38,7 +38,7 @@ export class ArticleListComponent implements OnInit {
   ngOnInit() {
     this.articleService.list().subscribe((res) => {
       this.articles = res.items;
-      this.articleService.getArticleById(res.items[0]._id).subscribe(res => {
+      this.articleService.getArticleById(res.items[0]._id, { mode: 'list' }).subscribe(res => {
         this.currentArticle = res;
       });
     }, (error) => {

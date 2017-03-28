@@ -20,7 +20,6 @@ const calcTimeLabel = (leftTime: number, rightTime: number = Date.now()) => {
 const groupArticleByBelongToLabel = (articles) => {
   const articleBelongToLabelMap = articles.reduce((group, archive) => {
     const seriesLabel = archive.seriesLabel;
-    // console.log('series label: ', seriesLabel, 'group: ', group);
     if (archive.seriesLabel in group) {
       const series = group[seriesLabel];
       series.articles.push(archive);
