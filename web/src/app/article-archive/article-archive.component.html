@@ -1,5 +1,5 @@
 <div class="container">
-  <section class="archive-container">
+  <section *ngIf="archives.length" class="archive-container">
     <md-tab-group class="tab-group">
       <md-tab label="系列">
         <archive-list [archives]="archives" [archiveCategory]="100"></archive-list>

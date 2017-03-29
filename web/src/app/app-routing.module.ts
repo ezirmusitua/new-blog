@@ -12,8 +12,7 @@ import { ArticleArchiveComponent } from './article-archive/article-archive.compo
 const appRoutes: Routes = [
   { path: '', component: ArticleListComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'articles', component: ArticleListComponent },
-  { path: 'article/archive', component: ArticleArchiveComponent },
+  { path: 'archive', component: ArticleArchiveComponent },
   { path: 'article/:articleId', component: ArticleContentComponent },
   { path: 'dashboard', component: ArticleEditorComponent },
   { path: '**', component: PageNotFoundComponent }

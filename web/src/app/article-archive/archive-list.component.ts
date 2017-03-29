@@ -19,23 +19,24 @@ const calcTimeLabel = (leftTime: number, rightTime: number = Date.now()) => {
 
 const groupArticleByBelongToLabel = (articles) => {
   const articleBelongToLabelMap = articles.reduce((group, archive) => {
-    const seriesLabel = archive.seriesLabel;
-    if (archive.seriesLabel in group) {
-      const series = group[seriesLabel];
+    console.log(archive.belongToLabel);
+    const belongToLabel = archive.belongToLabel || '未分类';
+    if (belongToLabel in group) {
+      const series = group[belongToLabel];
       series.articles.push(archive);
       series.createAt = series.createAt > archive.createAt ? archive.createAt : series.createAt;
     } else {
-      group[seriesLabel] = {};
-      group[seriesLabel].articles = [archive];
-      group[seriesLabel].createAt = archive.createAt;
-      group[seriesLabel].title = seriesLabel;
+      group[belongToLabel] = {};
+      group[belongToLabel].articles = [archive];
+      group[belongToLabel].createAt = archive.createAt;
+      group[belongToLabel].title = belongToLabel;
     }
     return group;
   }, {});
   const archives = [];
-  for (const seriesLabel in articleBelongToLabelMap) {
-    if (articleBelongToLabelMap.hasOwnProperty(seriesLabel)) {
-      const series = articleBelongToLabelMap[seriesLabel];
+  for (const belongToLabel in articleBelongToLabelMap) {
+    if (articleBelongToLabelMap.hasOwnProperty(belongToLabel)) {
+      const series = articleBelongToLabelMap[belongToLabel];
       archives.push(series);
     }
   }
@@ -52,7 +53,7 @@ const groupArticleByBelongToLabel = (articles) => {
         <h3 class="archive-label">{{item.title}}</h3>
         <md-list>
           <div fxLayout="row" fxLayoutAlign="end center" class="article-link-container" md-list-item *ngFor="let article of item.articles">
-            <a fxFlex>{{article.title}}</a>
+            <a [routerLink]="['/article', article._id.toString()]" fxFlex>{{article.title}}</a>
             <span fxFlex>{{ article.createAt | date:'short'}}</span>
           </div>
         </md-list>
@@ -76,8 +77,9 @@ export class ArchiveListComponent implements OnInit {
     // archive by time
     if (this.archiveCategory === 200) {
       const archivesWithTimeStr = this.archives.reduce((res, archive) => {
-        const timeLabel = calcTimeLabel(archive.createAt);
-        return res.concat([Object.assign({}, archive, { seriesLabel: timeLabel })]);
+        const timeLabel = calcTimeLabel(archive.updateAt);
+        console.log(Object.assign({}, archive, { belongToLabel: timeLabel }))
+        return res.concat([Object.assign({}, archive, { belongToLabel: timeLabel })]);
       }, []);
       this.groupedArchives = groupArticleByBelongToLabel(archivesWithTimeStr);
     }

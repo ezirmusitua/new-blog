@@ -14,6 +14,7 @@ export class Article {
   createBy: any;
   coverUrl?: string;
   images?: string[];
+  belongToLabel?: string;
   likeCount?: number;
   commentCount?: number;
   constructor(body?: any) {
@@ -51,6 +52,7 @@ export class Article {
       this.viewCategory = parseInt(body.viewCategory, 10);
     }
     this.createBy = body ? body.createBy : '';
+    this.belongToLabel = body ? body.belongToLabel : '';
     this.commentCount = parseInt(body.commentCount, 10) || 0;
     this.likeCount = parseInt(body.likeCount, 10) || 0;
   }

@@ -10,10 +10,9 @@ const router = new Router({ prefix: '/article' });
 
 router.get('list', '/', async (ctx: ExtendCtx, next) => {
   const condition = { viewCategory: ArticleModel.Enum.ViewCategory.PUBLISHED } as any;
-  const projection = { title: true, updateAt: true } as any;
+  const projection = { title: true, updateAt: true, belongToLabel: true } as any;
   if (ctx.isAdmin) {
     condition.viewCategory = { $in: [ArticleModel.Enum.ViewCategory.DRAFT, ArticleModel.Enum.ViewCategory.PUBLISHED] };
-    projection.belongToLabel = true;
   } else {
     projection.description = true;
   }
@@ -23,7 +22,8 @@ router.get('list', '/', async (ctx: ExtendCtx, next) => {
   }
   const articles = await ArticleModel.list(condition, projection, options);
   const data = { count: articles.length, items: articles, };
-  ctx.body = JSON.stringify({ data });
+  console.log(articles[0])
+  ctx.body = { data };
   await next();
 });
 
