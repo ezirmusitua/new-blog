@@ -54,7 +54,7 @@ const groupArticleByBelongToLabel = (articles) => {
         <md-list>
           <div fxLayout="row" fxLayoutAlign="end center" class="article-link-container" md-list-item *ngFor="let article of item.articles">
             <a [routerLink]="['/article', article._id.toString()]" fxFlex>{{article.title}}</a>
-            <span fxFlex>{{ article.createAt | date:'short'}}</span>
+            <span fxFlex>{{ article.updateAt | date:'short'}}</span>
           </div>
         </md-list>
       </md-list>

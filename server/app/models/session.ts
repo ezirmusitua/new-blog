@@ -22,7 +22,7 @@ const sessionSchema = new mongoose.Schema({
   },
   clientCategory: Number,
   updateAt: Number,
-  role: Boolean,
+  role: Number,
 });
 
 type MongoSessionDocument = SessionDocument & mongoose.Document;
@@ -66,7 +66,9 @@ const activateSession = async (token: string, userId: string): Promise<MongoSess
 };
 
 const removeSession = async (token: string, userId: string): Promise<void> => {
-  await sessionModel.remove({ userId, token });
+  console.log({ userId, token })
+  await sessionModel.remove({ userId, token }, (err) => console.log(err));
+  console.log(123);
 }
 
 export const SessionModel = Object.assign(sessionModel, {

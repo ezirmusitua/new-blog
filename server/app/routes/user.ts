@@ -23,8 +23,8 @@ router.post('login', '/login', async (ctx: ExtendCtx, next) => {
 });
 
 router.delete('logout', '/logout', async (ctx: ExtendCtx, next) => {
-  if (!ctx.isVisitor) throw new APIError(AdminError.sessionNotFound);
-  await SessionModel.removeSession(ctx.session.token, ctx.session.userId);
+  if (ctx.isVisitor) throw new APIError(AdminError.sessionNotFound);
+  SessionModel.removeSession(ctx.session.token, ctx.session.userId);
 });
 
 router.put('activate', '/activate', async (ctx: ExtendCtx, next) => {

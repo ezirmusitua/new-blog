@@ -2,11 +2,12 @@
   <article fxFlex="28"></article>
   <article fxFlex *ngIf="content">
     <section class="content" [innerHtml]="content"></section>
-    <section fxLayout="row" fxLayoutAlign="end center" class="actions-container">
+    <!--TODO: Open comment and like area-->
+    <section *ngIf="false" fxLayout="row" fxLayoutAlign="end center" class="actions-container">
       <button md-icon-button (click)="openCommentArea()"><md-icon svgIcon="comment"></md-icon></button>
       <button md-icon-button (click)="toggleLike()"><md-icon svgIcon="favorite"></md-icon></button>
     </section>
-    <section class="comments-container">
+    <section *ngIf="false" class="comments-container">
       <h3>评论列表</h3>
       <div *ngIf="commentAreaOpened" fxLayout="column" fxLayoutAlign="start end" class="comment-editor">
         <textarea class="comment-input"></textarea>
@@ -18,9 +19,7 @@
           <div md-line>
             <h3 md-line>jferroal@gmail.com</h3>
             <p md-line>
-            这篇还是在说「怎么用」，而不是在说「为什么要用」。
-最后用于比对的代码也带有强烈的目的性，过程式的代码是把函数定义放到过程中，函数式代码确是引用已经定义的函数，当然后者会易读一些。
-所以我们到底为什么需要纯函数的编程？
+              这篇还是在说「怎么用」，而不是在说「为什么要用」。 最后用于比对的代码也带有强烈的目的性，过程式的代码是把函数定义放到过程中，函数式代码确是引用已经定义的函数，当然后者会易读一些。 所以我们到底为什么需要纯函数的编程？
             </p>
           </div>
         </div>

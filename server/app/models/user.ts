@@ -60,7 +60,6 @@ const findOneByEmail = async (email: string): Promise<UserDocument> => {
 const findUserByEmailAndPassword = async (email: string, password: string): Promise<UserDocument> => {
   if (!email || !password) return null;
   const passwordHash = Utils.generateHash(password);
-  console.log(passwordHash);
   const user = await userModel.findOneAndUpdate({
     email, password: passwordHash, status: StatusCategory.ACTIVE
   }, { $set: { lastActiveAt: Date.now() } }, { new: true }).exec() as UserDocument;

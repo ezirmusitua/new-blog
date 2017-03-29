@@ -13,13 +13,13 @@ const SESSION_KEY = 'ngkoa.blog.session';
 
 @Injectable()
 export class UserService {
-  _isVisitor: boolean = true;
+  _isVisitor: Subject<boolean> = new Subject<boolean>();
   _sessionValidated: Observable<boolean> = new Observable(observer => observer.next(false));
   sessionActivateInterval: any;
   constructor(private resource: ResourceService, private ls: LocalStorage) {
   }
 
-  get isVisitor(): boolean {
+  get isVisitor() {
     return this._isVisitor;
   }
 
@@ -49,11 +49,11 @@ export class UserService {
         auth.Authorization = session.toAuthString();
         this.resource.customHeaders = auth;
         this.setSessionActivateInterval();
-        this._isVisitor = false;
+        this._isVisitor.next(false);
       } else {
         localStorage.removeItem(SESSION_KEY);
         this.resource.customHeaders = auth;
-        this._isVisitor = true;
+        this._isVisitor.next(true);
       }
       this._sessionValidated = new Observable<boolean>(observer => {
         observer.next(true);
@@ -70,25 +70,17 @@ export class UserService {
       this.resource.customHeaders = { Authorization: session.toAuthString() };
       this.ls.setSession(session);
       this.setSessionActivateInterval();
-      this._isVisitor = false;
+      this._isVisitor.next(true);
     });
   }
 
-  public uniqLogin(email: string, password: string) {
-    const currentAuthHeader = this.resource.getHeadersField('Authorization');
-    if (this._isVisitor) {
-      return this.login(email, password);
-    } else {
-      return Observable.throw(1001);
-    }
-  }
-
   public logout() {
-    return this.resource.delete('/user/logout').map(() => {
+    return this.resource.delete('/user/logout').map((res) => {
+      console.log(res);
       this.resource.customHeaders = { Authorization: null };
       this.ls.removeSession();
-      this._isVisitor = true;
       clearInterval(this.sessionActivateInterval);
+      this._isVisitor.next(true);
       return 'logout success';
     })
   }

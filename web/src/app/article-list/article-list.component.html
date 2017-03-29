@@ -25,7 +25,8 @@
     </article>
     <article fxFlex fxLayout="row" fxLayoutAlign="space-between center" class="more-info-container">
       <time fxFlex datetime="2001-05-15T19:00">May 15</time>
-      <div fxFlex fxLayout="row" fxLayoutAlign="end center" class="comments-likes">
+      <!--TODO: Open comment and like-->
+      <div *ngIf="false" fxFlex fxLayout="row" fxLayoutAlign="end center" class="comments-likes">
         <div fxLayoutAlign="start center">
           <md-icon [color]="accent" svgIcon="comment"></md-icon><span>{{this.currentArticle.commentCount}}</span>
         </div>

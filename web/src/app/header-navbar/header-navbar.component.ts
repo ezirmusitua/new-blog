@@ -13,7 +13,7 @@ import { Trusted } from '../shared/constant';
   styleUrls: ['./header-navbar.component.scss']
 })
 export class HeaderNavbarComponent implements OnInit {
-  isVisitor: boolean;
+  isVisitor: boolean = true;
   constructor(
     private userService: UserService,
     private rxSubjectService: RxSubjectService,
@@ -29,12 +29,14 @@ export class HeaderNavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isVisitor = this.userService.isVisitor;
+    this.userService.isVisitor.subscribe(isVisitor => {
+      console.log(123);
+      this.isVisitor = isVisitor;
+    });
   }
 
   private logout() {
-    console.log('123');
-    if (!this.userService.isVisitor) {
+    if (!this.isVisitor) {
       this.userService.logout().subscribe(msg => {
         console.log(msg);
       });

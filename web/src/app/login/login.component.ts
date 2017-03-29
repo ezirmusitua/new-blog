@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   private login() {
-    this.userService.uniqLogin(this.email, this.password).subscribe(res => {
+    this.userService.login(this.email, this.password).subscribe(res => {
       this.router.navigate(['/']);
     }, (error) => {
       this.subjects.toastSubject.next({ id: ErrorCategory.DOCUMENT_NOT_FOUND });
