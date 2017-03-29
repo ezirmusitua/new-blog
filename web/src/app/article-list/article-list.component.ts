@@ -19,7 +19,6 @@ import { Trusted } from '../shared/constant';
 export class ArticleListComponent implements OnInit {
   articles: Article[] = [];
   currentArticle: Article;
-  toastSubject: Subject<any>;
   constructor(
     private articleService: ArticleService,
     private userService: UserService,
@@ -42,16 +41,15 @@ export class ArticleListComponent implements OnInit {
         this.currentArticle = res;
       });
     }, (error) => {
-      this.toastSubject.next({ id: ErrorCategory.DOCUMENT_NOT_FOUND });
+      this.subjects.toastSubject.next({ id: ErrorCategory.DOCUMENT_NOT_FOUND });
     });
-    this.toastSubject = this.subjects.toastSubject;
   }
 
   private listArticle() {
     this.articleService.list().subscribe((res) => {
       this.articles = res.items;
     }, (error) => {
-      this.toastSubject.next({ id: ErrorCategory.DOCUMENT_NOT_FOUND });
+      this.subjects.toastSubject.next({ id: ErrorCategory.DOCUMENT_NOT_FOUND });
     });
   }
 

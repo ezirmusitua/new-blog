@@ -33,7 +33,7 @@ export class Article {
         progress: Math.ceil(catalogItem.progress * 100),
       })).filter(item => !!item);
     }
-    this.coverUrl = body.coverUrl && body.coverUrl.trim();
+    this.coverUrl = body && body.coverUrl && body.coverUrl.trim();
     this.tags = [];
     if (body && body.tags && body.tags.length) {
       this.tags = body.tags.map(tag => tag.label.trim()).filter((tag) => !!tag.label);

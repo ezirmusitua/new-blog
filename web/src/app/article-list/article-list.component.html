@@ -1,6 +1,5 @@
-<div *ngIf="articles && articles.length && currentArticle" class="container" fxFlex="100%" fxLayout="row" jfbScrollListeningLoader
-  (scrolled)="scrollLoad($event)">
-  <section fxFlex="21%" class="list-container">
+<div class="container" fxFlex="100%" fxLayout="row">
+  <section *ngIf="articles.length" fxFlex="21%" class="list-container">
     <md-list>
       <div md-list-item fxFlex fxLayout="column" fxLayoutAlign="space-artound start" *ngFor="let item of articles; let i = index;"
         (click)="chooseArticleByClick(i)">
@@ -9,7 +8,7 @@
       </div>
     </md-list>
   </section>
-  <section fxFlex fxLayout="column" fxLayoutAlign="space-between center" class="detail-container">
+  <section *ngIf="currentArticle" fxFlex fxLayout="column" fxLayoutAlign="space-between center" class="detail-container">
     <article class="desc-container" fxLayout="column" fxFlex="94%">
       <div class="cover-container">
         <img [src]="currentArticle.coverUrl">

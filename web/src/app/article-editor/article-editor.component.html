@@ -7,7 +7,7 @@
         </div>
       </md-list>
     </section>
-    <section class="list">
+    <section class="list" *ngIf="directoryItems.length">
       <md-list>
         <div class="folder-container" md-list-item *ngFor="let folder of directoryItems; let folderIndex = index;">
           <div fxLayout="row">
@@ -26,18 +26,19 @@
       <button class="new-article-btn" md-button><md-icon svgIcon="add"></md-icon></button>
     </section>
   </article>
-  <article fxFlex fxLayout="row" class="editor-container">
+  <article *ngIf="currentSelected" fxFlex fxLayout="row" class="editor-container">
     <section fxFlex="75" class="editor">
-      <form fxFlex fxLayout="column" class="editor-form">
+      <form fxFlex fxLayout="column" class="editor-form" #editorForm="ngForm">
         <div fxLayout="row" fxFlex="7%" class="basic-info-input">
           <md-input-container fxFlex="75%" class="title">
-            <input mdInput placeholder="文章标题" value="Google">
+            <input mdInput placeholder="文章标题" name="articleTitle" [(ngModel)]="currentSelected.title">
           </md-input-container>
           <button md-button (click)="openDialog()">添加封面</button>
           <button md-button>添加文章描述</button>
         </div>
         <div class="content" fxFlex>
-          <textarea fxFlex placeholder="文章正文"></textarea>
+          <textarea name="markdownContent" [(ngModel)]="currentSelected.content" fxFlex placeholder="文章正文">
+          </textarea>
         </div>
         <button class="article-publish-btn" md-fab><md-icon svgIcon="publish"></md-icon></button>
       </form>

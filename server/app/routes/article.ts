@@ -22,7 +22,6 @@ router.get('list', '/', async (ctx: ExtendCtx, next) => {
   }
   const articles = await ArticleModel.list(condition, projection, options);
   const data = { count: articles.length, items: articles, };
-  console.log(articles[0])
   ctx.body = { data };
   await next();
 });
@@ -30,7 +29,6 @@ router.get('list', '/', async (ctx: ExtendCtx, next) => {
 router.get('fetchById', '/:articleId', async (ctx: ExtendCtx, next) => {
   const _id = ctx.params.articleId;
   const mode = ctx.query.mode;
-  console.log(mode);
   const projection = { title: true, description: true, updateAt: true, coverUrl: true } as any;
   if (mode === 'edit' || mode === 'view') {
     projection.content = true;
