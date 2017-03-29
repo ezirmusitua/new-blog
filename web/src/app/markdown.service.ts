@@ -43,6 +43,7 @@ export class MarkdownService {
   }
 
   public end() {
+    console.log(this.converted);
     return this.converted;
   }
 

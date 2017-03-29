@@ -1,7 +1,7 @@
 <div fxLayout="row" fxFlex fxLayoutAlign="center center" class="container">
   <article fxFlex="28"></article>
-  <article fxFlex>
-    <section class="content" [innerHtml]="safeArticleHtmlContent"></section>
+  <article fxFlex *ngIf="content">
+    <section class="content" [innerHtml]="content"></section>
     <section fxLayout="row" fxLayoutAlign="end center" class="actions-container">
       <button md-icon-button (click)="openCommentArea()"><md-icon svgIcon="comment"></md-icon></button>
       <button md-icon-button (click)="toggleLike()"><md-icon svgIcon="favorite"></md-icon></button>

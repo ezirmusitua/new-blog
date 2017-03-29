@@ -22,7 +22,7 @@ export class Article {
     if (body && body.updateAt) {
       this.updateAt = body.updateAt
     }
-    this.content = body ? body.htmlContent : '';
+    this.content = body ? body.content : '';
     this.description = body ? body.description : '';
     this.catalog = [];
     if (body && body.catalog && body.catalog.length) {
