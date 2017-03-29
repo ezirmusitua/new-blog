@@ -1,11 +1,11 @@
-<form fxLayout="column" fxLayoutAlign="start end" class="login-form">
+<form (ngSubmit)="login()" #loginForm="ngForm" fxLayout="column" fxLayoutAlign="start end" class="login-form">
   <md-input-container class="email-input">
-    <input mdInput type="email" placeholder="邮箱" value="jferroal@gmail.com">
+    <input mdInput [(ngModel)]="email" name="email" type="email" placeholder="邮箱">
   </md-input-container>
   <md-input-container class="password-input">
-    <input mdInput type="password" placeholder="密码">
+    <input mdInput [(ngModel)]="password" name="password" type="password" placeholder="密码">
   </md-input-container>
-  <button md-raised-button class="login-btn">
+  <button type="submit" md-raised-button class="login-btn">
     登陆
   </button>
 </form>

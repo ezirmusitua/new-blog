@@ -3,12 +3,14 @@ export class Session {
   private token: string;
   private clientCategory: string;
   private updateAt: number;
+  private role: number;
 
   constructor(body: any) {
     this.userId = body.userId;
     this.token = body.token;
     this.clientCategory = body.clientCategory;
     this.updateAt = body.updateAt;
+    this.role = body.role;
   }
 
   public constructAuthBody(): Object {
