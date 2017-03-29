@@ -14,6 +14,9 @@
   @extend .toolbar-container;
   padding-left: 20%;
   padding-right: 20%;
+  a, a:hover, a:active, a:visited, a:focus {
+    color: $dark-text-primary;
+  }
   .navbar {
     @extend .toolbar-title-text;
     height: 100%;
@@ -26,10 +29,16 @@
       &:hover {
         background-color: $dark-divider;
       }
+      .mat-menu-item {
+        a {
+          color: $light-text-primary;
+        }
+      }
       .mat-icon {
         margin-top: 2px;
         margin-right: 4px; 
       }
+
     }
   }
   .profile-container {

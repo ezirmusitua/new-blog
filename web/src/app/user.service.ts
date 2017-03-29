@@ -84,11 +84,12 @@ export class UserService {
   }
 
   public logout() {
-    this.resource.delete('/user/logout').subscribe(() => {
+    return this.resource.delete('/user/logout').map(() => {
       this.resource.customHeaders = { Authorization: null };
       this.ls.removeSession();
       this._isVisitor = true;
       clearInterval(this.sessionActivateInterval);
+      return 'logout success';
     })
   }
 }

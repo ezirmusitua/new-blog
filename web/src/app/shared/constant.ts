@@ -50,6 +50,7 @@ export const LocalStorageKeyEnum = {
 export const ErrorMessage = {
   1000: '你没有操作的权限',
   1001: '你已经登陆了',
+  1002: '登出失败！',
   2000: '没有找到你想要的内容',
   3000: '文章必须有标题',
   3001: '文章必须有内容',
