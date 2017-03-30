@@ -12,6 +12,13 @@ import { CoverDescriptionEdit } from './dialog-cover-desc-edit.component';
 import { groupArticleByBelongToLabel } from '../shared/archive.helper';
 import { ValidErrorIdRange, ArticleViewCategory } from '../shared/enums';
 import { Trusted } from '../shared/constant';
+import { ErrorCategory } from '../shared/error';
+
+interface SelectedArticleIndex { folderIndex: string; articleIndex: number };
+
+const getSelectedItem = (folder: any, selected: SelectedArticleIndex) => {
+  return folder[selected.folderIndex].articles[selected.articleIndex];
+}
 
 @Component({
   selector: 'jfb-article-editor',
@@ -21,9 +28,10 @@ import { Trusted } from '../shared/constant';
 export class ArticleEditorComponent implements OnInit {
   // dialogRef: MdDialogRef<CoverDescriptionEdit>;
   editorCategory: number = 100;
-  directoryItems: any[] = [];
+  folderItems: any[] = [];
   toastSubject: Subject<any>;
-  currentSelected: any;
+  selected: SelectedArticleIndex;
+  article: Article;
   uploadedImages: any[] = [];
 
   constructor(
@@ -57,11 +65,10 @@ export class ArticleEditorComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(1111111111111111111111123);
     this.articleService.list().subscribe(res => {
-      this.directoryItems = groupArticleByBelongToLabel(res.items
+      this.folderItems = groupArticleByBelongToLabel(res.items
         .map(article => Object.assign(article, { selected: false })))
-        .map(directory => Object.assign(directory, { opened: false }));
+        .map(folder => Object.assign(folder, { opened: false }));
     });
     this.uploadedImages = Array.from({ length: 10 }, (v, i) => {
       return {
@@ -114,13 +121,20 @@ export class ArticleEditorComponent implements OnInit {
     folder.opened = !folder.opened;
   }
 
-  private selectArticle(article) {
+  private selectArticle(folderIndex, articleIndex) {
     // TODO: load from server
-    if (this.currentSelected) {
-      this.currentSelected.selected = false;
+    if (this.selected) {
+      const prevSelectedArticle = getSelectedItem(this.folderItems, this.selected);
     }
-    this.currentSelected = article;
-    this.currentSelected.selected = !article.selected;
+    this.selected = { folderIndex, articleIndex };
+    const selectedArticle = getSelectedItem(this.folderItems, this.selected);
+    selectedArticle.selected = true;
+    this.articleService.getArticleById(selectedArticle._id.toString(), { mode: 'edit' }).subscribe(res => {
+      console.log(res);
+      this.article = res;
+    }, (err) => {
+      this.subjects.toastSubject.next({ id: ErrorCategory.DOCUMENT_NOT_FOUND });
+    });
   }
 
   public openDialog() {

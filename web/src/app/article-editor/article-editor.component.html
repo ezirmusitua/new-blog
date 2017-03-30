@@ -7,16 +7,16 @@
         </div>
       </md-list>
     </section>
-    <section class="list" *ngIf="directoryItems.length">
+    <section class="list" *ngIf="folderItems.length">
       <md-list>
-        <div class="folder-container" md-list-item *ngFor="let folder of directoryItems; let folderIndex = index;">
+        <div class="folder-container" md-list-item *ngFor="let folder of folderItems; let folderIndex = index;">
           <div fxLayout="row">
             <md-icon *ngIf="!folder.opened" svgIcon="folder"></md-icon>
             <md-icon *ngIf="folder.opened" svgIcon="folder_open"></md-icon>
             <h3 md-line (click)="toggleFolder(folder)">{{folder.title}}</h3>
           </div>
           <md-list *ngIf="folder.opened">
-            <div class="file-container" fxLayout="row" md-list-item (click)="selectArticle(article)" *ngFor="let article of folder.articles; let articleIndex = index;">
+            <div class="file-container" fxLayout="row" md-list-item (click)="selectArticle(folderIndex, articleIndex)" *ngFor="let article of folder.articles; let articleIndex = index;">
               <md-icon svgIcon="article"></md-icon>
               <p [ngClass]="{selected: article.selected}" md-line>{{article.title}}</p>
             </div>
@@ -26,18 +26,18 @@
       <button class="new-article-btn" md-button><md-icon svgIcon="add"></md-icon></button>
     </section>
   </article>
-  <article *ngIf="currentSelected" fxFlex fxLayout="row" class="editor-container">
+  <article *ngIf="article" fxFlex fxLayout="row" class="editor-container">
     <section fxFlex="75" class="editor">
       <form fxFlex fxLayout="column" class="editor-form" #editorForm="ngForm">
         <div fxLayout="row" fxFlex="7%" class="basic-info-input">
           <md-input-container fxFlex="75%" class="title">
-            <input mdInput placeholder="文章标题" name="articleTitle" [(ngModel)]="currentSelected.title">
+            <input mdInput placeholder="文章标题" name="articleTitle" [(ngModel)]="article.title">
           </md-input-container>
           <button md-button (click)="openDialog()">添加封面</button>
           <button md-button>添加文章描述</button>
         </div>
         <div class="content" fxFlex>
-          <textarea name="markdownContent" [(ngModel)]="currentSelected.content" fxFlex placeholder="文章正文">
+          <textarea name="markdownContent" [(ngModel)]="article.content" fxFlex placeholder="文章正文">
           </textarea>
         </div>
         <button class="article-publish-btn" md-fab><md-icon svgIcon="publish"></md-icon></button>
