@@ -30,7 +30,6 @@ export class HeaderNavbarComponent implements OnInit {
 
   ngOnInit() {
     this.userService.isVisitor.subscribe(isVisitor => {
-      console.log(123);
       this.isVisitor = isVisitor;
     });
   }

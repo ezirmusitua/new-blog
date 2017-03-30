@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RxSubjectService } from '../shared/rx-subject.service';
-import { ErrorMessage } from '../shared/constant';
+import { Message } from '../shared/constant';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -17,7 +17,7 @@ export class ToastComponent implements OnInit {
 
   ngOnInit() {
     this.toastSubscription = this.subjects.toastSubject.subscribe((res) => {
-      this.content = ErrorMessage[res.id];
+      this.content = Message[res.id];
       if (res.timeout) {
         this.timeout = res.timeout;
       }

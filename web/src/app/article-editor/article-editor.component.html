@@ -40,7 +40,7 @@
           <textarea name="markdownContent" [(ngModel)]="article.content" fxFlex placeholder="文章正文">
           </textarea>
         </div>
-        <button class="article-publish-btn" md-fab><md-icon svgIcon="publish"></md-icon></button>
+        <button (click)="publish()" class="article-publish-btn" md-fab><md-icon svgIcon="publish"></md-icon></button>
       </form>
     </section>
     <section fxFlex class="uploaded-images">

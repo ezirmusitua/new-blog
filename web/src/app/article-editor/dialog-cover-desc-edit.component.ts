@@ -13,6 +13,5 @@ import { MdDialog, MdDialogRef } from '@angular/material';
 })
 export class CoverDescriptionEdit {
   selectedOption: string;
-
   constructor() { }
 }

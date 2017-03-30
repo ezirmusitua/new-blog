@@ -16,7 +16,10 @@ export class UserService {
   _isVisitor: Subject<boolean> = new Subject<boolean>();
   _sessionValidated: Observable<boolean> = new Observable(observer => observer.next(false));
   sessionActivateInterval: any;
-  constructor(private resource: ResourceService, private ls: LocalStorage) {
+  constructor(
+    private resource: ResourceService,
+    private ls: LocalStorage
+  ) {
   }
 
   get isVisitor() {
@@ -35,7 +38,7 @@ export class UserService {
       this.sessionActivateInterval = setInterval(() => {
         this.resource.put('/user/activate').subscribe((res) => console.log('activated'));
       }, 15 * TIME.MINUTE);
-    }, 1000)
+    }, 1000);
   }
 
   public validateSession(session: Session): void {
@@ -76,7 +79,6 @@ export class UserService {
 
   public logout() {
     return this.resource.delete('/user/logout').map((res) => {
-      console.log(res);
       this.resource.customHeaders = { Authorization: null };
       this.ls.removeSession();
       clearInterval(this.sessionActivateInterval);

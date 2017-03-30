@@ -28,6 +28,8 @@ import { LoginComponent } from './login/login.component';
 import { ArticleArchiveComponent } from './article-archive/article-archive.component';
 import { ArchiveListComponent } from './article-archive/archive-list.component';
 
+import { CoverDescriptionEdit } from './article-editor/dialog-cover-desc-edit.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +44,7 @@ import { ArchiveListComponent } from './article-archive/archive-list.component';
     LoginComponent,
     ArticleArchiveComponent,
     ArchiveListComponent,
+    CoverDescriptionEdit,
   ],
   imports: [
     BrowserModule,

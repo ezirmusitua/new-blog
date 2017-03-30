@@ -5,7 +5,7 @@ import { APIError, AdminError } from '../error';
 
 const router = new Router({ prefix: '/admin' });
 
-router.post('updateOrcreate', '/article/:articleId', async (ctx: ExtendCtx, next) => {
+router.put('updateOrcreate', '/article/:articleId', async (ctx: ExtendCtx, next) => {
   if (!ctx.isAdmin) throw new APIError(AdminError.notAdmin);
   const _id = ctx.params.articleId;
   const body = ctx.request.body;

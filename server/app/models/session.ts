@@ -66,9 +66,7 @@ const activateSession = async (token: string, userId: string): Promise<MongoSess
 };
 
 const removeSession = async (token: string, userId: string): Promise<void> => {
-  console.log({ userId, token })
   await sessionModel.remove({ userId, token }, (err) => console.log(err));
-  console.log(123);
 }
 
 export const SessionModel = Object.assign(sessionModel, {
