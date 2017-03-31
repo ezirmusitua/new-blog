@@ -13,7 +13,7 @@ export class Article {
   viewCategory: number;
   createBy: any;
   coverUrl?: string;
-  images?: string[];
+  images?: { label: string, url: string }[];
   belongToLabel?: string;
   likeCount?: number;
   commentCount?: number;

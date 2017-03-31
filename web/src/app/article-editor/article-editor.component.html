@@ -33,8 +33,8 @@
           <md-input-container fxFlex="75%" class="title">
             <input mdInput placeholder="文章标题" name="articleTitle" [(ngModel)]="article.title">
           </md-input-container>
-          <button md-button (click)="openDialog()">添加封面</button>
-          <button md-button>添加文章描述</button>
+          <button md-button (click)="openCoverEditDialog()">添加封面</button>
+          <button md-button (click)="openTitleEditDialog()">添加文章描述</button>
         </div>
         <div class="content" fxFlex>
           <textarea name="markdownContent" [(ngModel)]="article.content" fxFlex placeholder="文章正文">

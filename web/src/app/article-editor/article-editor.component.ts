@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Inject, Component, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MdIconRegistry, MdDialog, MdDialogRef } from '@angular/material';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -21,6 +21,46 @@ const getSelectedItem = (folder: any, selected: SelectedArticleIndex) => {
 };
 
 @Component({
+  selector: 'dialog-result-example',
+  template: `
+  <div class="dialog-container">
+    <h3 class="dialog-title" md-dialog-title> {{ title }} </h3>
+    <md-dialog-content>
+      <md-input-container class="input-container">
+        <input mdInput #howMuch [placeholder]="placeholder">
+      </md-input-container>
+    </md-dialog-content>
+    <md-dialog-actions fxLayout="row" fxLayoutAlign="end center">
+      <button fxFlex="20%" md-button md-dialog-close>关闭</button>
+      <button fxFlex="20%" md-button (click)="dialogRef.close(howMuch.value)">保存</button>
+    </md-dialog-actions>
+  </div>
+  `,
+  styles: [`
+  .dialog-container {
+    padding: 8px 0;
+  }
+  .dialog-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.87);
+  }
+  .input-container {
+    width: 100%;
+  }
+  `]
+})
+export class OneLineInputDialog {
+  selectedOption: string;
+  title: string = 'No title';
+  placeholder: string;
+
+  constructor(
+    public dialogRef: MdDialogRef<OneLineInputDialog>
+  ) { }
+}
+
+@Component({
   selector: 'jfb-article-editor',
   entryComponents: [
     CoverDescriptionEdit,
@@ -29,13 +69,16 @@ const getSelectedItem = (folder: any, selected: SelectedArticleIndex) => {
   styleUrls: ['./article-editor.component.scss']
 })
 export class ArticleEditorComponent implements OnInit {
-  // dialogRef: MdDialogRef<CoverDescriptionEdit>;
   editorCategory: number = 100;
   folderItems: any[] = [];
   selected: SelectedArticleIndex;
   article: Article;
   uploadedImages: any[] = [];
-  dialogRef: MdDialogRef<any>;
+  dialogRef: MdDialogRef<OneLineInputDialog>;
+  oneLineDialogConfig: any = {
+    disableClose: false,
+    width: '512px',
+  };
 
   constructor(
     private markdownService: MarkdownService,
@@ -75,7 +118,7 @@ export class ArticleEditorComponent implements OnInit {
     });
     this.uploadedImages = Array.from({ length: 10 }, (v, i) => {
       return {
-        ariaLabel: `uploaded-image-${i}`,
+        ariaLabel: `uploaded-image - ${i}`,
         src: `https://placeholdit.imgix.net/~text?txtsize=96&bg=ff6f6f&txtclr=ffffff&txt=J%20Z&w=240&h=240`
       };
     });
@@ -132,12 +175,28 @@ export class ArticleEditorComponent implements OnInit {
     });
   }
 
-  public openDialog(category) {
-    this.dialogRef = this.dialog.open(CoverDescriptionEdit);
+  public openTitleEditDialog() {
+    this.dialogRef = this.dialog.open(OneLineInputDialog, this.oneLineDialogConfig);
+    this.dialogRef.componentInstance.title = '文章描述';
+    this.dialogRef.componentInstance.placeholder = '请输入文章描述';
+    this.dialogRef.afterClosed().subscribe((res: string) => {
+      if (res && res !== this.article.description) {
+        this.article.description = res;
+      }
+      this.dialogRef = null;
+    });
+  }
 
-    // this.dialogRef.afterClosed().subscribe(result => {
-    //   console.log('result: ' + result);
-    //   this.dialogRef = null;
-    // });
+  public openCoverEditDialog() {
+    this.dialogRef = this.dialog.open(OneLineInputDialog, this.oneLineDialogConfig);
+    this.dialogRef.componentInstance.title = '图片链接';
+    this.dialogRef.componentInstance.placeholder = '请输入文章封面图片链接';
+    this.dialogRef.afterClosed().subscribe((res: string) => {
+      if (res && res !== this.article.coverUrl) {
+        this.article.coverUrl = res;
+        this.article.images.push({ label: 'article cover', url: res });
+      }
+      this.dialogRef = null;
+    });
   }
 }

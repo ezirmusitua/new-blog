@@ -6,7 +6,6 @@ import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-
 import { AppRoutingModule } from './app-routing.module';
 
 import { ArticleService } from './article.service';
@@ -19,7 +18,7 @@ import { ArticleListComponent } from './article-list/article-list.component';
 import { ArticleContentComponent } from './article-content/article-content.component';
 import { ReadingProgressBarComponent } from './reading-progress-bar/reading-progress-bar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ArticleEditorComponent } from './article-editor/article-editor.component';
+import { ArticleEditorComponent, OneLineInputDialog } from './article-editor/article-editor.component';
 import { ScrollListeningLoaderDirective } from './scroll-listening-loader.directive';
 import { RxSubjectService } from './shared/rx-subject.service';
 import { ToastComponent } from './toast/toast.component';
@@ -44,7 +43,7 @@ import { CoverDescriptionEdit } from './article-editor/dialog-cover-desc-edit.co
     LoginComponent,
     ArticleArchiveComponent,
     ArchiveListComponent,
-    CoverDescriptionEdit,
+    OneLineInputDialog,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +53,10 @@ import { CoverDescriptionEdit } from './article-editor/dialog-cover-desc-edit.co
     MaterialModule,
     FlexLayoutModule,
   ],
+  entryComponents: [
+    OneLineInputDialog,
+  ],
   providers: [ArticleService, UserService, ResourceService, LocalStorage, RxSubjectService],
-  bootstrap: [AppComponent, ToastComponent]
+  bootstrap: [AppComponent, ToastComponent,]
 })
 export class AppModule { }
