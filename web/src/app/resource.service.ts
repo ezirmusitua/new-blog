@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response, URLSearchParams, QueryEncoder } from '@angular/http';
 import { Observable } from 'rxjs';
-import { ResourceBase, DefaultHeaders, NetworkDelay, NetworkCondition, ErrorMessage } from './shared/constant';
+import { ResourceBase, DefaultHeaders, NetworkDelay, NetworkCondition, Message } from './shared/constant';
 import { RxSubjectService } from './shared/rx-subject.service';
 
 @Injectable()
