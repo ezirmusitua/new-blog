@@ -1,4 +1,6 @@
 <section class="container">
+  <div class="textarea" [innerHtml]="htmlContent" (input)="inputMarkdownContent($event)">
+  </div>
   <div class="textarea" contenteditable="true" [textContent]="content" (input)="inputMarkdownContent($event)">
   </div>
 </section>

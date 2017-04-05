@@ -13,6 +13,7 @@ const MarkdownSpecialChar = [
 })
 export class InstantViewTextareaComponent implements OnInit {
   content: string = '';
+  htmlContent: string = '';
   currentTag: { name: string; prev: string; value: string; isTagCharEnd: boolean } = { name: '', prev: '', value: '', isTagCharEnd: false };
   currentTagStack: string;
   constructor(private markdownService: MarkdownService) { }
@@ -22,19 +23,7 @@ export class InstantViewTextareaComponent implements OnInit {
 
   inputMarkdownContent($event) {
     this.content = $event.target.textContent
-    const last = $event.target.textContent.length - 1;
-    const currentChar = $event.target.textContent.charAt(last);
-    if (currentChar === ' ' && /h\d/gi.test(this.currentTag.name) && !this.currentTag.isTagCharEnd) {
-      this.currentTag.isTagCharEnd = true;
-    }
-    if (currentChar === '#' && !this.currentTag.isTagCharEnd) {
-      if (/h\d/gi.test(this.currentTag.name)) {
-        const nextHLevel = parseInt(/h(\d)/.exec(this.currentTag.name)[1], 10) + 1;
-        this.currentTag.name = 'h' + nextHLevel.toString();
-        this.currentTag.value = '<h' + nextHLevel.toString() + '>';
-      }
-    }
-    console.log(this.content);
+    this.htmlContent = this.markdownService.convert(this.content);
   }
 
 }
