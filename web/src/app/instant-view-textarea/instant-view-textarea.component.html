@@ -1,6 +1,9 @@
 <section class="container">
-  <div class="textarea" [innerHtml]="htmlContent" (input)="inputMarkdownContent($event)">
-  </div>
-  <div class="textarea" contenteditable="true" [textContent]="content" (input)="inputMarkdownContent($event)">
+  <div id="editableDiv" class="textarea" contenteditable="true" (input)="handleDivInput($event)" (keypress)="handleDivKeypress($event)">
+    <h1>hello world</h1>
+    <p>GGGGGG</p>
+    <ul>
+      <li>1123</li>
+    </ul>
   </div>
 </section>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, Component, OnInit, ElementRef, Renderer } from '@angular/core';
 
 import { MarkdownService } from '../markdown.service';
 
@@ -13,17 +13,33 @@ const MarkdownSpecialChar = [
 })
 export class InstantViewTextareaComponent implements OnInit {
   content: string = '';
-  htmlContent: string = '';
+  editableDiv: ElementRef;
   currentTag: { name: string; prev: string; value: string; isTagCharEnd: boolean } = { name: '', prev: '', value: '', isTagCharEnd: false };
   currentTagStack: string;
-  constructor(private markdownService: MarkdownService) { }
+  constructor(
+    private markdownService: MarkdownService,
+    private elementRef: ElementRef,
+    private renderer: Renderer,
+  ) { }
 
   ngOnInit() {
   }
 
-  inputMarkdownContent($event) {
-    this.content = $event.target.textContent
-    this.htmlContent = this.markdownService.convert(this.content);
+  ngAfterContentInit() {
+    this.editableDiv = new ElementRef(this.elementRef.nativeElement.querySelector('#editableDiv'));
+  }
+
+  handleDivInput($event) {
+    // console.log(this.editableDiv);
+    const lastChild = new ElementRef(this.editableDiv.nativeElement.lastElementChild);
+    // const inputingElem = this.editableDiv.nativeElement.
+    this.content = lastChild.nativeElement.innerText;
+  }
+  handleDivKeypress($event) {
+    if ($event.keyCode === 13) {
+      console.log(this.content);
+      this.editableDiv.nativeElement.appendChild(this.markdownService.convert(this.content));
+    }
   }
 
 }
