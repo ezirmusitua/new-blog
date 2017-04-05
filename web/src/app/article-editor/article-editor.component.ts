@@ -8,7 +8,6 @@ import { RxSubjectService } from '../shared/rx-subject.service';
 import { ArticleService } from '../article.service';
 import { MarkdownService } from '../markdown.service';
 import { Article } from '../models/article';
-import { CoverDescriptionEdit } from './dialog-cover-desc-edit.component';
 import { groupArticleByBelongToLabel } from '../shared/archive.helper';
 import { ValidErrorIdRange, ArticleViewCategory } from '../shared/enums';
 import { Trusted, TIME } from '../shared/constant';
@@ -62,9 +61,6 @@ export class OneLineInputDialog {
 
 @Component({
   selector: 'jfb-article-editor',
-  entryComponents: [
-    CoverDescriptionEdit,
-  ],
   templateUrl: './article-editor.component.html',
   styleUrls: ['./article-editor.component.scss']
 })

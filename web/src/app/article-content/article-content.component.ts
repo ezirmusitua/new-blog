@@ -45,7 +45,6 @@ export class ArticleContentComponent implements OnInit {
           this.article = article;
           this.content = this.markdownService.toHtml(article.content)
             .sanitize().end() as SafeHtml;
-          console.log(this.content);
         });
       }
     });

@@ -53,7 +53,6 @@ export class ArchiveListComponent implements OnInit {
     if (this.archiveCategory === 200) {
       const archivesWithTimeStr = this.archives.reduce((res, archive) => {
         const timeLabel = calcTimeLabel(archive.updateAt);
-        console.log(Object.assign({}, archive, { belongToLabel: timeLabel }))
         return res.concat([Object.assign({}, archive, { belongToLabel: timeLabel })]);
       }, []);
       this.groupedArchives = groupArticleByBelongToLabel(archivesWithTimeStr);
