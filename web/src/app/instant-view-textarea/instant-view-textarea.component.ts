@@ -13,7 +13,8 @@ const MarkdownSpecialChar = [
 })
 export class InstantViewTextareaComponent implements OnInit {
   content: string = '';
-  editableDiv: ElementRef;
+  editableDivRef: ElementRef;
+  editableDivDom: Node;
   currentTag: { name: string; prev: string; value: string; isTagCharEnd: boolean } = { name: '', prev: '', value: '', isTagCharEnd: false };
   currentTagStack: string;
   constructor(
@@ -26,19 +27,28 @@ export class InstantViewTextareaComponent implements OnInit {
   }
 
   ngAfterContentInit() {
-    this.editableDiv = new ElementRef(this.elementRef.nativeElement.querySelector('#editableDiv'));
+    this.editableDivRef = new ElementRef(this.elementRef.nativeElement.querySelector('#editableDiv'));
+    this.editableDivDom = document.querySelector('#editableDiv')
   }
 
   handleDivInput($event) {
-    // console.log(this.editableDiv);
-    const lastChild = new ElementRef(this.editableDiv.nativeElement.lastElementChild);
-    // const inputingElem = this.editableDiv.nativeElement.
-    this.content = lastChild.nativeElement.innerText;
+    const lastChild = new ElementRef(this.editableDivRef.nativeElement.lastElementChild);
+    if (!lastChild.nativeElement && this.editableDivRef.nativeElement.innerText) {
+      this.content = this.editableDivRef.nativeElement.innerText;
+    } else if (lastChild.nativeElement.nodeName === 'DIV') {
+      this.content = lastChild.nativeElement.innerText;
+    }
   }
   handleDivKeypress($event) {
-    if ($event.keyCode === 13) {
-      console.log(this.content);
-      this.editableDiv.nativeElement.appendChild(this.markdownService.convert(this.content));
+    if ($event.keyCode === 13 && this.content) {
+      // remove
+      const childCount = this.editableDivDom.childNodes.length;
+      const lastChild = this.editableDivDom.childNodes[childCount - 1];
+      this.editableDivDom.removeChild(lastChild);
+      // append
+      const elem = document.createElement('div');
+      elem.innerHTML = this.markdownService.convert(this.content);
+      this.editableDivDom.appendChild(elem);
     }
   }
 
