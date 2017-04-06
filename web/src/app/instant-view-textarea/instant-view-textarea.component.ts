@@ -13,8 +13,6 @@ const MarkdownSpecialChar = [
 })
 export class InstantViewTextareaComponent implements OnInit {
   content: string = '';
-  editableDivRef: ElementRef;
-  editableDivDom: Node;
   currentTag: { name: string; prev: string; value: string; isTagCharEnd: boolean } = { name: '', prev: '', value: '', isTagCharEnd: false };
   currentTagStack: string;
   constructor(
@@ -27,28 +25,49 @@ export class InstantViewTextareaComponent implements OnInit {
   }
 
   ngAfterContentInit() {
-    this.editableDivRef = new ElementRef(this.elementRef.nativeElement.querySelector('#editableDiv'));
-    this.editableDivDom = document.querySelector('#editableDiv')
+    const editableDivDom = document.querySelector('#editableDiv')
+    const newLineDiv = document.createElement('div');
+    newLineDiv.setAttribute('id', 'editing-line');
+    newLineDiv.contentEditable = 'true';
+    newLineDiv.style.height = '100px';
+    newLineDiv.style.backgroundColor = 'blue';
+    newLineDiv.style.zIndex = '1';
+    newLineDiv.focus();
+    setTimeout(() => editableDivDom.appendChild(newLineDiv), 0);
   }
 
   handleDivInput($event) {
-    const lastChild = new ElementRef(this.editableDivRef.nativeElement.lastElementChild);
-    if (!lastChild.nativeElement && this.editableDivRef.nativeElement.innerText) {
-      this.content = this.editableDivRef.nativeElement.innerText;
-    } else if (lastChild.nativeElement.nodeName === 'DIV') {
-      this.content = lastChild.nativeElement.innerText;
+    const editingLine = new ElementRef(this.elementRef.nativeElement.querySelector('#editing-line'));
+    this.content = editingLine.nativeElement.innerText;
+    if (!this.content) {
+      const editableDivRef = new ElementRef(document.querySelector('#editableDiv'));
+      this.content = editableDivRef.nativeElement.innerText;
     }
+
   }
   handleDivKeypress($event) {
     if ($event.keyCode === 13 && this.content) {
+      const editableDivRef = new ElementRef(this.elementRef.nativeElement.querySelector('#editableDiv'));
+      const editableDivDom = document.querySelector('#editableDiv')
       // remove
-      const childCount = this.editableDivDom.childNodes.length;
-      const lastChild = this.editableDivDom.childNodes[childCount - 1];
-      this.editableDivDom.removeChild(lastChild);
-      // append
+      const editingLineNode = document.querySelector('#editing-line');
+      editableDivDom.removeChild(editingLineNode);
+      // append converted
       const elem = document.createElement('div');
-      elem.innerHTML = this.markdownService.convert(this.content);
-      this.editableDivDom.appendChild(elem);
+      elem.contentEditable = 'true';
+      elem.style.height = '100px';
+      elem.style.backgroundColor = 'green';
+      elem.style.zIndex = '1';
+      elem.innerHTML = this.markdownService.convert(this.content.trim());
+      setTimeout(() => editableDivDom.parentNode.appendChild(elem), 0);
+      // append new line
+      const newLineDiv = document.createElement('div');
+      newLineDiv.setAttribute('id', 'editing-line');
+      newLineDiv.style.height = '100px';
+      newLineDiv.style.backgroundColor = 'blue';
+      newLineDiv.focus();
+      setTimeout(() => editableDivDom.appendChild(newLineDiv), 0);
+      this.content = '';
     }
   }
 
