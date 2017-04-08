@@ -14,7 +14,7 @@
   .list-container {
     @extend .self-scroll-list;
     padding-right: 0;
-    background-color: green;
+    background-color: $primary-shallow;
     md-list {
       padding-top: 0;
     }
