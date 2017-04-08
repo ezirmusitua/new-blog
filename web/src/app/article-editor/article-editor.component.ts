@@ -15,6 +15,7 @@ import { groupArticleByBelongToLabel } from '../shared/archive.helper';
 import { ValidErrorIdRange, ArticleViewCategory } from '../shared/enums';
 import { Trusted, TIME } from '../shared/constant';
 import { ErrorCategory } from '../shared/error';
+import { UploaderBuilder } from 'qiniu4js';
 
 interface SelectedArticleIndex { folderIndex: string; articleIndex: number };
 
