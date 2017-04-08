@@ -80,11 +80,10 @@ const articleModel = mongoose.model<MongoArticleDocument>('Article', articleSche
 
 const constructBody = (_id: string, body: any, createBy?: string): ArticleDocument => {
   const articleBody = {} as ArticleDocument;
-  if (!body.title) {
-    throw new APIError(ArticleError.needTitle);
-  }
+  if (!body.title) throw new APIError(ArticleError.needTitle);
   articleBody.title = body.title.trim();
   articleBody.content = body.content.trim();
+  articleBody.description = body.description.trim();
   articleBody.updateAt = Date.now();
   articleBody.tags = [];
   if (typeof body.tags === 'string') {
