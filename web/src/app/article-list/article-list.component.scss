@@ -13,8 +13,10 @@
 .container {
   .list-container {
     @extend .self-scroll-list;
+    padding-right: 0;
+    background-color: green;
     md-list {
-      padding-top: 4px;
+      padding-top: 0;
     }
   }
   .detail-container {
@@ -36,9 +38,7 @@ div[md-list-item] {
     margin-top: 3px;
   }
   .focused, &:hover {
-    width: calc(100% + 8px);
     background-color: $primary-shallow-hover;
-    border-radius: $normal-border-radius;
     box-shadow:  $layer-one;
     z-index: 1;
   }

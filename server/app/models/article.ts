@@ -99,7 +99,8 @@ const constructBody = (_id: string, body: any, createBy?: string): ArticleDocume
       url: image.url && image.url.trim(),
     })).filter(image => !!image.label);
   }
-  articleBody.coverUrl = body.coverUrl.trim() || '';
+  articleBody.belongToLabel = body.belongToLabel || '未分类';
+  articleBody.coverUrl = (body.coverUrl && body.coverUrl.trim()) || '';
   articleBody.catalog = Utils.generateCatalog(articleBody.content);
   articleBody.createBy = createBy || 'no-name';
   articleBody.viewCategory = parseInt(body.viewCategory, 10);

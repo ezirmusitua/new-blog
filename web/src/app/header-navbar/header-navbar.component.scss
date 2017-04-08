@@ -8,7 +8,6 @@
   right: 0;
   display: flex;
   z-index: 2;
-  padding-bottom: 4px;
 }
 .container {
   @extend .toolbar-container;
@@ -42,6 +41,7 @@
     }
   }
   .profile-container {
+    display: none;
     .profile-menu-toggle {
       margin-right: 4px;
     }

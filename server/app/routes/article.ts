@@ -11,7 +11,8 @@ const router = new Router({ prefix: '/article' });
 router.get('list', '/', async (ctx: ExtendCtx, next) => {
   const condition = { viewCategory: ArticleModel.Enum.ViewCategory.PUBLISHED } as any;
   const projection = { title: true, updateAt: true, belongToLabel: true } as any;
-  if (ctx.isAdmin) {
+  console.log(ctx.isAdmin);
+  if (!ctx.isVisitor) {
     condition.viewCategory = { $in: [ArticleModel.Enum.ViewCategory.DRAFT, ArticleModel.Enum.ViewCategory.PUBLISHED] };
   } else {
     projection.description = true;

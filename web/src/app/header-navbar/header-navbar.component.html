@@ -16,7 +16,7 @@
         <md-icon svgIcon="more_vert"></md-icon>
       </button>
       <md-menu #profileMenu="mdMenu">
-        <div routerLink="/dashboard" class="menu-button-container" md-menu-item>
+        <div [routerLink]="['dashboard']" class="menu-button-container" md-menu-item>
           <button md-button>
             <span>控制台</span>
           </button>

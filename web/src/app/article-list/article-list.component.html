@@ -4,7 +4,7 @@
       <div md-list-item fxFlex fxLayout="column" fxLayoutAlign="space-artound start" *ngFor="let item of articles; let i = index;"
         (click)="chooseArticleByClick(i)">
         <h3 fxFlex md-line>{{ item.title }}</h3>
-        <p fxFlex md-line>{{ item.description.slice(0, 20) }} ~ </p>
+        <p fxFlex md-line>{{ item.description ? item.description.slice(0, 20) : '' }} ~ </p>
       </div>
     </md-list>
   </section>

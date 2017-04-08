@@ -23,18 +23,24 @@
           </md-list>
         </div>
       </md-list>
-      <button class="new-article-btn" md-button><md-icon svgIcon="add"></md-icon></button>
+      <button (click)="addNewArticle()" class="new-article-btn" md-button><md-icon svgIcon="add"></md-icon></button>
     </section>
   </article>
   <article *ngIf="article" fxFlex fxLayout="row" class="editor-container">
-    <section fxFlex="75" class="editor">
+    <section fxFlex="75%" class="editor">
       <form fxFlex fxLayout="column" class="editor-form" #editorForm="ngForm">
         <div fxLayout="row" fxFlex="7%" class="basic-info-input">
-          <md-input-container fxFlex="75%" class="title">
+          <md-input-container fxFlex="85%" class="title">
             <input mdInput placeholder="文章标题" name="articleTitle" [(ngModel)]="article.title">
           </md-input-container>
-          <button md-button (click)="openCoverEditDialog()">添加封面</button>
-          <button md-button (click)="openTitleEditDialog()">添加文章描述</button>
+          <button md-button (click)="openBelongToEditDialog()">类别</button>
+          <button md-button (click)="openCoverEditDialog()">封面</button>
+          <button md-button (click)="openTitleEditDialog()">描述</button>
+          <md-select [(ngModel)]="this.article.viewCategory" name="view-category">
+            <md-option *ngFor="let viewCategory of viewCategoryOptions" [value]="viewCategory.value">
+              {{viewCategory.key}}
+            </md-option>
+          </md-select>
         </div>
         <div class="content" fxFlex>
           <textarea name="markdownContent" [(ngModel)]="article.content" fxFlex placeholder="文章正文">

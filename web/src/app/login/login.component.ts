@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { Session } from '../models/session';
+import { LocalStorage } from '../localStorage.service';
 import { UserService } from '../user.service';
 import { RxSubjectService } from '../shared/rx-subject.service';
 import { ErrorCategory } from '../shared/error';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'jfb-login',
@@ -15,10 +18,16 @@ export class LoginComponent implements OnInit {
   constructor(
     private userService: UserService,
     private subjects: RxSubjectService,
+    private ls: LocalStorage,
     private router: Router
   ) { }
 
   ngOnInit() {
+    let authStr = this.ls.getSession();
+    if (authStr) {
+      this.userService.validateSession(Session.constructFromLcStr(authStr));
+    }
+
   }
 
   private login() {

@@ -11,6 +11,7 @@ router.put('updateOrcreate', '/article/:articleId', async (ctx: ExtendCtx, next)
   const body = ctx.request.body;
   let article;
   if (_id === 'new') {
+    console.log(body);
     article = await ArticleModel.createNew(ctx.session.userId, body);
   } else {
     article = await ArticleModel.updateOldById(_id, body);

@@ -18,8 +18,8 @@ export class Article {
   likeCount?: number;
   commentCount?: number;
   constructor(body?: any) {
-    this._id = body ? body._id.toString() : '';
-    this.title = body ? body.title : '';
+    this._id = body._id ? body._id : '';
+    this.title = body.title ? body.title : '';
     if (body && body.updateAt) {
       this.updateAt = body.updateAt
     }
@@ -55,5 +55,16 @@ export class Article {
     this.belongToLabel = body ? body.belongToLabel : '';
     this.commentCount = parseInt(body.commentCount, 10) || 0;
     this.likeCount = parseInt(body.likeCount, 10) || 0;
+  }
+  public static isValid(body: any): boolean {
+    if (!body.title) return false;
+    if (!body.content) return false;
+    if (!body.description) return false;
+    if (!body.coverUrl) return false;
+    if (!body.viewCategory || [100, 200].indexOf(parseInt(body.viewCategory, 10)) < 0) return false;
+    return true;
+  }
+  public static isInvalid(body: any): boolean {
+    return !Article.isValid(body);
   }
 }
