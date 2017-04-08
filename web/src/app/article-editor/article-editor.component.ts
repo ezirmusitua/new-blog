@@ -170,7 +170,6 @@ export class ArticleEditorComponent implements OnInit {
       this.userService.validateSession(Session.constructFromLcStr(authStr));
     }
     this.userService.isVisitor.subscribe(res => {
-      console.log('is visitor: ', res);
       if (res) return;
       this.articleService.list().subscribe(res => {
         this.folderItems = groupArticleByBelongToLabel(res.items
