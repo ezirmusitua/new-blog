@@ -57,6 +57,7 @@ export class Article {
     this.likeCount = parseInt(body.likeCount, 10) || 0;
   }
   public static isValid(body: any): boolean {
+    if (!body._id || body._id === 'new') return false;
     if (!body.title) return false;
     if (!body.content) return false;
     if (!body.description) return false;

@@ -184,7 +184,7 @@ export class ArticleEditorComponent implements OnInit {
       };
     });
     setInterval(() => {
-      if (!this.article || Article.isValid(this.article)) {
+      if (!this.article || Article.isInvalid(this.article)) {
         console.log('nothing to save ~');
       }
       this.article.viewCategory = ArticleViewCategory.DRAFT;
