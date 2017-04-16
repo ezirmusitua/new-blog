@@ -43,7 +43,6 @@ export class ArticleContentComponent implements OnInit {
       if (this.articleId) {
         this.articleService.getArticleById(this.articleId, { mode: 'view' }).subscribe(article => {
           this.article = article;
-          console.log(this.article);
           this.content = this.markdownService.toHtml(article.content)
             .sanitize().end() as SafeHtml;
         });
