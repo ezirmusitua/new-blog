@@ -11,6 +11,13 @@
 }
 
 .container {
+  .empty-alert-container {
+    p {
+      font-size: 48px;
+      font-weight: 600;
+      color: $light-text-secondary;
+    }
+  }
   .list-container {
     @extend .self-scroll-list;
     padding-right: 0;

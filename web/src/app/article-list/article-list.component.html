@@ -1,4 +1,7 @@
 <div class="container" fxFlex="100%" fxLayout="row">
+  <section *ngIf="!articles || !articles.length" fxFlex fxLayout="row" fxLayoutAlign="center center" class="empty-alert-container">
+    <p>主人很懒，这里空空如也 ╮(╯_╰)╭ ~ </p>
+  </section>
   <section *ngIf="articles.length" fxFlex="21%" class="list-container">
     <md-list>
       <div md-list-item fxFlex fxLayout="column" fxLayoutAlign="space-artound start" *ngFor="let item of articles; let i = index;"
@@ -10,7 +13,7 @@
   </section>
   <section *ngIf="currentArticle" fxFlex fxLayout="column" fxLayoutAlign="space-between center" class="detail-container">
     <article class="desc-container" fxLayout="column" fxFlex="94%">
-      <div class="cover-container" [routerLink]="['article', currentArticle._id.toString()]">
+      <div class="cover-container">
         <img [ngStyle]="{'background-image': 'url(' + currentArticle.coverUrl + ')'}">
       </div>
       <div class="desc-container">

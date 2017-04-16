@@ -1,6 +1,9 @@
 <div class="container">
-  <section *ngIf="archives.length" class="archive-container">
-    <md-tab-group class="tab-group">
+  <section class="archive-container">
+    <article *ngIf="!archives || !archives.length" class="empty-alert-container">
+      <p>主人很懒，这里空空如也 ╮(╯_╰)╭ ~ </p>
+    </article>
+    <md-tab-group *ngIf="archives.length" class="tab-group">
       <md-tab label="系列">
         <archive-list [archives]="archives" [archiveCategory]="100"></archive-list>
       </md-tab>
