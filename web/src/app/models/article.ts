@@ -57,7 +57,6 @@ export class Article {
     this.likeCount = parseInt(body.likeCount, 10) || 0;
   }
   public static isValid(body: any): boolean {
-    if (!body._id || body._id === 'new') return false;
     if (!body.title) return false;
     if (!body.content) return false;
     if (!body.description) return false;
@@ -65,7 +64,12 @@ export class Article {
     if (!body.viewCategory || [100, 200].indexOf(parseInt(body.viewCategory, 10)) < 0) return false;
     return true;
   }
-  public static isInvalid(body: any): boolean {
+  public static isInvalidNew(body: any): boolean {
     return !Article.isValid(body);
+  }
+
+  public static isInvalid(body: any): boolean {
+    const invalidIdToSave = !body._id || body._id === 'new';
+    return invalidIdToSave || !Article.isValid(body);
   }
 }

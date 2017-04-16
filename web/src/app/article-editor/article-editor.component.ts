@@ -186,12 +186,13 @@ export class ArticleEditorComponent implements OnInit {
     setInterval(() => {
       if (!this.article || Article.isInvalid(this.article)) {
         console.log('nothing to save ~');
+      } else {
+        this.article.viewCategory = ArticleViewCategory.DRAFT;
+        const articleId = this.article._id;
+        this.articleService.updateOrCreate(this.article._id, this.article).subscribe((res) => {
+          console.log(`article: ${articleId} auto saved ~`);
+        });
       }
-      this.article.viewCategory = ArticleViewCategory.DRAFT;
-      const articleId = this.article._id;
-      this.articleService.updateOrCreate(this.article._id, this.article).subscribe((res) => {
-        console.log(`article: ${articleId} auto saved ~`);
-      });
     }, 1 * TIME.MINUTE);
   }
 
@@ -203,7 +204,7 @@ export class ArticleEditorComponent implements OnInit {
   }
 
   publish() {
-    if (Article.isInvalid(this.article)) {
+    if (Article.isInvalidNew(this.article)) {
       this.subjects.toastSubject.next({ id: 3099 });
     } else {
       this.article.viewCategory = ArticleViewCategory.PUBLISHED;
