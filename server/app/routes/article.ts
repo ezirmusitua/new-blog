@@ -5,6 +5,7 @@ import { ExtendCtx } from '../models/ctx';
 import { ArticleModel } from '../models/article';
 import { CommentModel } from '../models/comment';
 import { LikeModel } from '../models/like';
+import { ArticleError, APIError } from '../error';
 
 const router = new Router({ prefix: '/article' });
 
@@ -37,6 +38,7 @@ router.get('fetchById', '/:articleId', async (ctx: ExtendCtx, next) => {
     projection.images = true;
   }
   const article = await ArticleModel.fetchById(_id);
+  if (!article) throw new APIError(ArticleError.notFound);
   let data = { article };
   if (mode === 'view' || mode === 'list') {
     const [likeCount, commentCount] = await Promise.all<number>([

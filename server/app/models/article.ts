@@ -115,22 +115,20 @@ const updateOldById = async (_id: string, body: any) => {
 }
 
 const listImmutableDocs = async (condition?: Object, projection?: Object, options?: FindOptions, callback?: Callback,
-  execCallback?: Callback) => {
+                                 execCallback?: Callback) => {
   return await _listImmutableDocs<ArticleDocument>(articleModel, condition, projection, options, callback,
     execCallback);
 }
 
 const findImmutableOne = async (condition: Object, projection?: Object, callback?: Callback,
-  execCallback?: Callback): Promise<ArticleDocument> => {
+                                execCallback?: Callback): Promise<ArticleDocument> => {
   const docs = await listImmutableDocs(condition, projection, { limit: 1 }, callback, execCallback);
   return ((docs && docs.length) ? docs[0] : null) as ArticleDocument;
 }
 
 const findImmutableById = async (_id: string, projection?: Object, callback?: Callback,
-  execCallback?: Callback): Promise<ArticleDocument> => {
-  const doc = await findImmutableOne({ _id }, projection, callback, execCallback);
-  if (!doc) throw new APIError(MongoError.notFound);
-  return doc;
+                                 execCallback?: Callback): Promise<ArticleDocument> => {
+  return await findImmutableOne({ _id }, projection, callback, execCallback);
 }
 
 export const ArticleModel = Object.assign(articleModel, {

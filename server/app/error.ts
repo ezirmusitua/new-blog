@@ -29,6 +29,7 @@ export const MongoError = {
 export const ArticleError = {
   needTitle: { id: 3000, status: 400, message: 'create article must have title' },
   needContent: { id: 3001, status: 400, message: 'update article must have content' },
+  notFound: { id: 3002, status: 404, message: 'article not found' },
 }
 
 export const CommentError = {

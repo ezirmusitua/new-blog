@@ -19,6 +19,15 @@
     height: 100%;
     padding-bottom: 32px;
   }
+  .empty-alert-container {
+    padding-top: 256px;
+    a {
+      font-size: 48px;
+      font-weight: 600;
+      color: $light-text-secondary;
+      text-decoration: underline;
+    }
+  }
   .content {
     padding: 16px 0;
   }

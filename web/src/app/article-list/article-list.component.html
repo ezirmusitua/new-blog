@@ -13,7 +13,7 @@
   </section>
   <section *ngIf="currentArticle" fxFlex fxLayout="column" fxLayoutAlign="space-between center" class="detail-container">
     <article class="desc-container" fxLayout="column" fxFlex="94%">
-      <div class="cover-container">
+      <div class="cover-container" [routerLink]="['article', currentArticle._id.toString()]">
         <img [ngStyle]="{'background-image': 'url(' + currentArticle.coverUrl + ')'}">
       </div>
       <div class="desc-container">

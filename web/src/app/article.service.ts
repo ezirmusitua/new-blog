@@ -15,7 +15,7 @@ export class ArticleService {
 
   getArticleById(id: string, query: Object = {}) {
     return this.resource.get('/article/' + id, query).map(res => {
-      return new Article(res.data.article)
+      return new Article(res.data.article);
     });
   }
 
