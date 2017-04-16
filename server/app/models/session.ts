@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import { Schema, Document, model } from 'mongoose';
 import { Utils } from '../utils/index';
 import { UserDocument } from './user';
 
@@ -11,7 +11,7 @@ export interface SessionDocument {
   role: number;
 }
 
-const sessionSchema = new mongoose.Schema({
+const sessionSchema = new Schema({
   userId: {
     type: String,
     index: true,
@@ -25,19 +25,19 @@ const sessionSchema = new mongoose.Schema({
   role: Number,
 });
 
-type MongoSessionDocument = SessionDocument & mongoose.Document;
+type MongoSessionDocument = SessionDocument & Document;
 
-const sessionModel = mongoose.model<MongoSessionDocument>('Session', sessionSchema, 'Session');
+const sessionModel = model<MongoSessionDocument>('Session', sessionSchema, 'Session');
 
-const findOneByUserId = async (userId: string): Promise<SessionDocument> => {
-  if (!userId) return null;
+const findOneByUserId = async (userId: string): Promise<SessionDocument | undefined> => {
+  if (!userId) return undefined;
   const sessions = await sessionModel.find({ userId, updateAt: { $gt: Date.now() - 24 * 60 * 60 * 1000 } })
     .limit(1).lean().exec() as SessionDocument[];
-  return sessions.length ? sessions[0] : null;
+  return sessions.length ? sessions[0] : undefined;
 };
 
-const updateOrCreateSession = async (user: UserDocument): Promise<SessionDocument> => {
-  if (!user) return null;
+const updateOrCreateSession = async (user: UserDocument): Promise<SessionDocument | undefined> => {
+  if (!user) return undefined;
   const clientCategory = 100;
   const token = Utils.generateRandomBytes();
   const sessionBody = {
@@ -54,13 +54,13 @@ const updateOrCreateSession = async (user: UserDocument): Promise<SessionDocumen
   return session;
 };
 
-const activateSession = async (token: string, userId: string): Promise<MongoSessionDocument> => {
-  if (!userId || !token) return null;
+const activateSession = async (token: string, userId: string): Promise<MongoSessionDocument | undefined> => {
+  if (!userId || !token) return undefined;
   const now = Date.now();
   const sessions = await sessionModel.find({ userId, token })
     .limit(1).exec() as MongoSessionDocument[];
-  if (!sessions || !sessions.length) return;
-  if (sessions[0].updateAt < now - 24 * 60 * 60 * 1000) return;
+  if (!sessions || !sessions.length) return undefined;
+  if (sessions[0].updateAt < now - 24 * 60 * 60 * 1000) return undefined;
   sessions[0].updateAt = now;
   return await sessions[0].save() as MongoSessionDocument;
 };

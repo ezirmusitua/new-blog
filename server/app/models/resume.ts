@@ -1,14 +1,14 @@
-import mongoose from 'mongoose';
+import { Schema, Document, model } from 'mongoose';
 
 export interface Location {
   country: string; state: string; city?: string; address?: string;
-};
+}
 
 export interface Experience {
   desc: string;
   from: number;
   to?: number;
-};
+}
 
 export interface ResumeDocument {
   nickName: string;
@@ -24,7 +24,7 @@ export interface ResumeDocument {
   projections: { name: string; desc: string; link: string; }[];
 }
 
-const resumeSchema = new mongoose.Schema({
+const resumeSchema = new Schema({
   nickName: {
     type: String,
     index: true,
@@ -63,9 +63,8 @@ const resumeSchema = new mongoose.Schema({
   projections: [{ name: String, desc: String, link: String, }],
 });
 
-type MongoResumeDocument = ResumeDocument & mongoose.Document;
+type MongoResumeDocument = ResumeDocument & Document;
 
-const resumeModel = mongoose.model<MongoResumeDocument>('Resume', resumeSchema, 'Resume');
+const resumeModel = model<MongoResumeDocument>('Resume', resumeSchema, 'Resume');
 
 export const ResumeModel = Object.assign(resumeModel, {});
-

@@ -1,6 +1,6 @@
-import Router from 'koa-router';
+import * as Router from 'koa-router';
 import { ExtendCtx } from '../models/ctx';
-import { UserModel } from '../models/user';
+import { UserModel, UserDocument } from '../models/user';
 import { SessionModel } from '../models/session';
 import { AdminError, APIError } from '../error';
 
@@ -17,19 +17,26 @@ router.post('login', '/login', async (ctx: ExtendCtx, next) => {
   const email = ctx.request.body.email as string;
   const password = ctx.request.body.password as string;
   const user = await UserModel.findUserByEmailAndPassword(email, password);
-  const session = await SessionModel.updateOrCreateSession(user)
+  const session = await SessionModel.updateOrCreateSession(user as UserDocument)
   ctx.body = session;
   await next();
 });
 
 router.delete('logout', '/logout', async (ctx: ExtendCtx, next) => {
   if (ctx.isVisitor) throw new APIError(AdminError.sessionNotFound);
-  SessionModel.removeSession(ctx.session.token, ctx.session.userId);
-});
-
-router.put('activate', '/activate', async (ctx: ExtendCtx, next) => {
-  await SessionModel.activateSession(ctx.session.token, ctx.session.userId);
+  const ctxSession = ctx.session;
+  if (ctxSession) {
+    SessionModel.removeSession(ctxSession.token, ctxSession.userId);
+  }
   await next();
 });
 
-export default router;
+router.put('activate', '/activate', async (ctx: ExtendCtx, next) => {
+  const ctxSession = ctx.session;
+  if (ctxSession) {
+    await SessionModel.activateSession(ctxSession.token, ctxSession.userId);
+  }
+  await next();
+});
+
+export const userRouter = router;

@@ -1,5 +1,5 @@
 
-import Router from 'koa-router';
+import * as Router from 'koa-router';
 
 import { ExtendCtx } from '../models/ctx';
 import { ArticleModel } from '../models/article';
@@ -20,7 +20,7 @@ router.get('list', '/', async (ctx: ExtendCtx, next) => {
   const options = {
     limit: ctx.params.latest ? 20 : null,
     sort: { updateAt: -1 },
-  }
+  } as any;
   const articles = await ArticleModel.list(condition, projection, options);
   const data = { count: articles.length, items: articles, };
   ctx.body = { data };
@@ -72,16 +72,21 @@ router.post('postComment', '/:article/comment', async (ctx: ExtendCtx, next) => 
 
 router.post('likeArticle', '/:article/like', async (ctx: ExtendCtx, next) => {
   const _id = ctx.params.articleId;
-  const userId = ctx.session.userId;
-  await LikeModel.like(_id, userId);
+  const ctxSession = ctx.session;
+  if (ctxSession) {
+    await LikeModel.like(_id, ctxSession.userId);
+  }
+
   await next();
 });
 
 router.delete('unlikeArticle', '/:article/like', async (ctx: ExtendCtx, next) => {
   const _id = ctx.params.articleId;
-  const userId = ctx.session.userId;
-  await LikeModel.unlike(_id, userId);
+  const ctxSession = ctx.session;
+  if (ctxSession) {
+    await LikeModel.unlike(_id, ctxSession.userId);
+  }
   await next();
 });
 
-export default router;
+export const articleRouter = router;

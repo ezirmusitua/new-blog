@@ -1,7 +1,7 @@
-import Router from 'koa-router';
-import adminRouter from './admin';
-import articleRouter from './article';
-import userRouter from './user';
+import * as Router from 'koa-router';
+import { adminRouter } from './admin';
+import { articleRouter } from './article';
+import { userRouter } from './user';
 
 const router = new Router();
 

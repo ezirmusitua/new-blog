@@ -1,13 +1,13 @@
-import mongoose from 'mongoose';
+import { Schema, Document, model } from 'mongoose';
 import { APIError, LikeError } from '../error';
 
 export interface LikeDocument {
   _id?: any;
   createBy: string;
   entityId: string;
-};
+}
 
-const likeSchema = new mongoose.Schema({
+const likeSchema = new Schema({
   createBy: {
     type: String,
     required: true,
@@ -19,9 +19,9 @@ const likeSchema = new mongoose.Schema({
   },
 });
 
-type MongoLikeDocument = LikeDocument & mongoose.Document;
+type MongoLikeDocument = LikeDocument & Document;
 
-const likeModel = mongoose.model<MongoLikeDocument>('Like', likeSchema, 'Like');
+const likeModel = model<MongoLikeDocument>('Like', likeSchema, 'Like');
 
 const likeForEntity = async (entityId: string, createBy: string): Promise<void> => {
   if (!entityId) throw new APIError(LikeError.needEntityId);

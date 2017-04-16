@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import * as mongoose from 'mongoose';
 import { _listImmutableDocs } from './basic-methods';
 import { APIError, CommentError } from '../error';
 
@@ -48,7 +48,7 @@ const postCommentForEntity = async (body: CommentDocument): Promise<void> => {
 }
 
 const listEntityComment = async (entityId: string): Promise<CommentDocument[]> => {
-  return await _listImmutableDocs(commentModel, { entityId }, {}, { sort: { _id: -1 } }) as CommentDocument[];
+  return await _listImmutableDocs(commentModel, { entityId } as object, {}, { sort: { _id: -1 } }) as CommentDocument[];
 
 };
 

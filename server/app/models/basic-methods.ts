@@ -6,8 +6,8 @@ export interface FindOptions {
 
 export type Callback = (err: any, res: any) => void
 
-export const _listImmutableDocs = async <T>(Model: any, condition?: Object, projection?: Object, options?: FindOptions,
-  callback?: Callback, execCallback?: Callback): Promise<T[]> => {
+export const _listImmutableDocs = async <T>(Model: any, condition?: object, projection?: Object, options?: FindOptions,
+                                            callback?: Callback, execCallback?: Callback): Promise<T[]> => {
   const { limit, sort } = options || { limit: null, sort: { _id: -1 } };
   try {
     return await Model.find(condition, projection, callback)

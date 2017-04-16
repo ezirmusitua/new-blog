@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import { APIError, ArticleError, MongoError } from '../error';
+import { Schema, Document, model } from 'mongoose';
+import { APIError, ArticleError } from '../error';
 import { Utils } from '../utils/index';
 import { _listImmutableDocs, FindOptions, Callback } from './basic-methods';
 
@@ -30,7 +30,7 @@ export interface ArticleDocument {
   commentCount?: number;
 }
 
-const articleSchema = new mongoose.Schema({
+const articleSchema = new Schema({
   title: {
     type: String,
     index: true,
@@ -74,9 +74,9 @@ const articleSchema = new mongoose.Schema({
   createBy: String,
 });
 
-type MongoArticleDocument = ArticleDocument & mongoose.Document;
+type MongoArticleDocument = ArticleDocument & Document;
 
-const articleModel = mongoose.model<MongoArticleDocument>('Article', articleSchema, 'Article');
+const articleModel = model<MongoArticleDocument>('Article', articleSchema, 'Article');
 
 const constructBody = (_id: string, body: any, createBy?: string): ArticleDocument => {
   const articleBody = {} as ArticleDocument;
@@ -90,13 +90,14 @@ const constructBody = (_id: string, body: any, createBy?: string): ArticleDocume
     articleBody.tags = body.tags.split('#').splice(1);
   }
   if (Array.isArray(body.tags)) {
-    articleBody.tags = body.tags.map(tag => ({ label: tag.label && tag.label.trim() })).filter(tag => !!tag.label);
+    articleBody.tags = body.tags.map((tag: any) =>
+      ({ label: tag.label && tag.label.trim() })).filter((tag: any) => !!tag.label);
   }
   if (Array.isArray(body.images)) {
-    articleBody.images = body.images.map(image => ({
+    articleBody.images = body.images.map((image: any) => ({
       label: image.label && image.label.trim(),
       url: image.url && image.url.trim(),
-    })).filter(image => !!image.label);
+    })).filter((image: any) => !!image.label);
   }
   articleBody.belongToLabel = body.belongToLabel || '未分类';
   articleBody.coverUrl = (body.coverUrl && body.coverUrl.trim()) || '';
@@ -107,7 +108,7 @@ const constructBody = (_id: string, body: any, createBy?: string): ArticleDocume
 }
 
 const createNew = async (createBy: string, body: any) => {
-  return await articleModel.create(constructBody(null, body, createBy));
+  return await articleModel.create(constructBody('', body, createBy));
 }
 
 const updateOldById = async (_id: string, body: any) => {

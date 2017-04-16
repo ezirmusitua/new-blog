@@ -1,4 +1,4 @@
-import Router from 'koa-router';
+import * as Router from 'koa-router';
 import { ExtendCtx } from '../models/ctx';
 import { ArticleModel } from '../models/article';
 import { APIError, AdminError } from '../error';
@@ -11,8 +11,10 @@ router.put('updateOrcreate', '/article/:articleId', async (ctx: ExtendCtx, next)
   const body = ctx.request.body;
   let article;
   if (_id === 'new') {
-    console.log(body);
-    article = await ArticleModel.createNew(ctx.session.userId, body);
+    const ctxSession = ctx.session;
+    if (ctxSession) {
+      article = await ArticleModel.createNew(ctxSession.userId, body);
+    }
   } else {
     article = await ArticleModel.updateOldById(_id, body);
   }
@@ -20,4 +22,4 @@ router.put('updateOrcreate', '/article/:articleId', async (ctx: ExtendCtx, next)
   await next();
 });
 
-export default router;
+export const adminRouter = router;

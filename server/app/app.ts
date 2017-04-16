@@ -1,6 +1,6 @@
-import Koa from 'koa';
-import cors from 'kcors';
-import bodyParser from 'koa-bodyparser';
+import * as Koa from 'koa';
+import * as cors from 'kcors';
+import * as bodyParser from 'koa-bodyparser';
 import router from './routes/index';
 import { errorHandler } from './middlewares/error-handler';
 import { sessionHandler } from './middlewares/session-handler';
@@ -27,7 +27,7 @@ koa.use(sessionHandler);
 koa.use(router.routes());
 koa.use(router.allowedMethods());
 
-const app = {
+export const app = {
   koa,
   start: (config: any) => {
     koa.listen(config.port, () => {
@@ -40,5 +40,3 @@ const app = {
     });
   }
 }
-
-export default app;

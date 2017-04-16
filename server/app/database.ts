@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+/* tslint:disable no-var-requires no-require-imports */
+const mongoose = require('mongoose');
 
 mongoose.Promise = Promise;
 
@@ -6,10 +7,10 @@ export class Database {
   public static alreadyRetryTimes: number = 0;
 
   public static connect(config: any): void {
-    mongoose.connect(config.db, config.db_options, (error) => {
+    mongoose.connect(config.db, config.db_options, (error: any) => {
       console.error('mongoose connect error: \n\x1b[31m', error);
     });
-    mongoose.connection.on('error', (error) => {
+    mongoose.connection.on('error', (error: any) => {
       console.error('mongoose error: \n\x1b[31m', error);
       mongoose.disconnect();
     });

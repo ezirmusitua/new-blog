@@ -1,5 +1,6 @@
-import crypto from 'crypto';
+import * as crypto from 'crypto';
 import { generateCatalog } from './catalog';
+import { CatalogItem } from '../models/article';
 
 export class Utils {
   public static generateHash(sentence: string): string {
@@ -11,7 +12,7 @@ export class Utils {
     return crypto.randomBytes(length).toString('hex');
   }
 
-  public static generateCatalog(markdownContent: string) {
+  public static generateCatalog(markdownContent: string): CatalogItem[] {
     return generateCatalog(markdownContent);
   }
 }

@@ -1,6 +1,7 @@
 import { APIError } from '../error';
+import { ExtendCtx } from '../models/ctx';
 
-export const errorHandler = async (ctx, next) => {
+export const errorHandler = async (ctx: ExtendCtx, next: any) => {
   try {
     await next();
   } catch (error) {

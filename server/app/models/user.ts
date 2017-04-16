@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import { Schema, Document, model } from 'mongoose';
 import { Utils } from '../utils/index';
 import { APIError, MongoError } from '../error';
 
@@ -23,7 +23,7 @@ export interface UserDocument {
   lastLoginIn: string;
 }
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   email: {
     type: String,
     index: true,
@@ -46,19 +46,19 @@ const userSchema = new mongoose.Schema({
   lastLoginIn: String,
 });
 
-type MongoUserDocument = UserDocument & mongoose.Document;
+type MongoUserDocument = UserDocument & Document;
 
-const userModel = mongoose.model<MongoUserDocument>('User', userSchema, 'User');
+const userModel = model<MongoUserDocument>('User', userSchema, 'User');
 
-const findOneByEmail = async (email: string): Promise<UserDocument> => {
-  if (email) return null;
+const findOneByEmail = async (email: string): Promise<UserDocument | undefined> => {
+  if (email) return undefined;
   const users = await userModel.find({ email })
     .limit(1).lean().exec() as UserDocument[];
-  return users.length ? users[0] : null;
+  return users.length ? users[0] : undefined;
 };
 
-const findUserByEmailAndPassword = async (email: string, password: string): Promise<UserDocument> => {
-  if (!email || !password) return null;
+const findUserByEmailAndPassword = async (email: string, password: string): Promise<UserDocument | undefined> => {
+  if (!email || !password) return undefined;
   const passwordHash = Utils.generateHash(password);
   const user = await userModel.findOneAndUpdate({
     email, password: passwordHash, status: StatusCategory.ACTIVE

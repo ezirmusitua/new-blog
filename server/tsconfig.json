@@ -1,10 +1,21 @@
 {
   "compilerOptions": {
+    /* Basic Options */
     "target": "es6",
-    "rootDir": "./app",
+    "module": "commonjs",
     "outDir": "./dist",
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true
+    "rootDir": "./app",
+    "removeComments": true,
+    // "allowJs": true,
+    /* Strict Type-Checking Options */
+    "strict": true,
+    /* Additional Checks */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    /* Module Resolution Options */
+    "moduleResolution": "node",
+    /* Experimental Options */
+    "experimentalDecorators": true
   },
   "exclude": [
     "node_modules",

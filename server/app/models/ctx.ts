@@ -1,4 +1,4 @@
-import Router from 'koa-router';
+import * as Router from 'koa-router';
 import { SessionDocument } from './session';
 
 export interface ExtendCtx extends Router.IRouterContext {
