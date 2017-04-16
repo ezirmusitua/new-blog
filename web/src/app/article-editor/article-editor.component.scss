@@ -38,7 +38,12 @@
   .list {
     width: calc(100% - 68px);
     padding-left: 24px;
+    height: calc(100vh - 64px);
+    overflow-y: scroll;
     background-color: $primary-shallow;
+    &::-webkit-scrollbar {
+      width: 0;
+    }
     .folder-container {
       padding-bottom: 12px;
       h3 {
