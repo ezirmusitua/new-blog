@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "start": "tsc & babel -d ./dist ./dist & node ./dist/index.js",
-    "build": "./node_modules/typescript/bin/tsc & ./node_modules/babel-cli/bin/babel.js -d ./dist ./dist"
+    "build": "tsc"
   },
   "dependencies": {
     "kcors": "^2.2.0",
@@ -16,7 +16,6 @@
     "mongoose": "^4.7.6"
   },
   "devDependencies": {
-    "babel-cli": "^6.23.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-nodemon": "^2.1.0",
@@ -31,9 +30,6 @@
     "@types/koa-bodyparser": "^3.0.22",
     "@types/koa-router": "^7.0.21",
     "@types/mongoose": "^4.7.2",
-    "babel-core": "^6.14.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.14.0",
-    "babel-polyfill": "^6.20.0",
     "typescript": "2.2.1"
   },
   "keywords": [

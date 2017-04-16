@@ -1,5 +1,4 @@
 const gulp = require('gulp');
-const babel = require('gulp-babel');
 const nodemon = require('gulp-nodemon');
 const ts = require('gulp-typescript');
 const tsProject = ts.createProject('./tsconfig.json');
@@ -10,9 +9,6 @@ const argv = require('yargs').argv;
 gulp.task('compile', () => {
     return tsProject.src()
         .pipe(tsProject(ts.reporter.defaultReporter())).js
-        .pipe(babel({
-            plugins: ['transform-es2015-modules-commonjs']
-        }))
         .pipe(gulp.dest('./dist'));
 });
 
